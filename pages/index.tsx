@@ -50,6 +50,15 @@ export default function Home() {
       selectedJobTypeTags
     });
     
+    // デバッグ: サービスデータの最初の2件を確認
+    if (services.length > 0) {
+      console.log('サービスデータサンプル:', services.slice(0, 2).map(s => ({
+        name: s.name,
+        motiveTags: s.motiveTags,
+        jobTypeTags: s.jobTypeTags
+      })));
+    }
+    
     if ((selectedMotiveTags.length > 0 || selectedJobTypeTags.length > 0) && services.length > 0) {
       const result = recommendServices(services, selectedMotiveTags, selectedJobTypeTags);
       console.log('レコメンド結果:', {
@@ -110,10 +119,12 @@ export default function Home() {
 
           {recommendation ? (
             <div>
-              <ServiceList
-                title="🎯 あなたにぴったりのサービス"
-                services={recommendation.exactMatch}
-              />
+              {selectedMotiveTags.length > 0 && selectedJobTypeTags.length > 0 && (
+                <ServiceList
+                  title="🎯 あなたにぴったりのサービス"
+                  services={recommendation.exactMatch}
+                />
+              )}
               
               <ServiceList
                 title="💡 こちらもおすすめ"
