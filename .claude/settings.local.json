@@ -16,7 +16,8 @@
       "Bash(npm:*)",
       "Bash(npx:*)",
       "Bash(pkill:*)",
-      "Bash(npm run dev:*)"
+      "Bash(npm run dev:*)",
+      "Bash(npm uninstall:*)"
     ],
     "deny": [
       "Bash(rm:*)"
