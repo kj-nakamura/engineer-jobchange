@@ -1,0 +1,98 @@
+[
+  {
+    "id": "paiza",
+    "name": "paiza転職",
+    "description": "ITエンジニア特化のプログラミングスキル重視の転職サービス",
+    "url": "https://paiza.jp/career",
+    "motiveTags": ["high_salary", "career_up"],
+    "jobTypeTags": ["frontend", "backend", "generalist"]
+  },
+  {
+    "id": "green",
+    "name": "Green",
+    "description": "IT/Web業界の求人情報サイト。企業の詳細情報が豊富",
+    "url": "https://www.green-japan.com/",
+    "motiveTags": ["career_up", "change_domain"],
+    "jobTypeTags": ["frontend", "backend", "pm", "generalist"]
+  },
+  {
+    "id": "findy",
+    "name": "Findy",
+    "description": "GitHubと連携したエンジニア向けの転職サービス",
+    "url": "https://findy-code.io/",
+    "motiveTags": ["high_salary", "career_up"],
+    "jobTypeTags": ["frontend", "backend", "mobile", "infra"]
+  },
+  {
+    "id": "levtech",
+    "name": "レバテックキャリア",
+    "description": "IT・Web業界のエンジニア・クリエイター専門の転職エージェント",
+    "url": "https://career.levtech.jp/",
+    "motiveTags": ["high_salary", "career_up", "management"],
+    "jobTypeTags": ["frontend", "backend", "mobile", "infra", "pm"]
+  },
+  {
+    "id": "geekly",
+    "name": "Geekly",
+    "description": "IT・Web・ゲーム業界専門の転職エージェント",
+    "url": "https://www.geekly.co.jp/",
+    "motiveTags": ["high_salary", "career_up", "change_domain"],
+    "jobTypeTags": ["frontend", "backend", "mobile", "pm", "generalist"]
+  },
+  {
+    "id": "bizreach",
+    "name": "ビズリーチ",
+    "description": "ハイクラス転職サイト。年収600万円以上の求人が豊富",
+    "url": "https://www.bizreach.jp/",
+    "motiveTags": ["high_salary", "management", "stable_env"],
+    "jobTypeTags": ["pm", "infra", "generalist"]
+  },
+  {
+    "id": "rikunabi",
+    "name": "リクナビNEXT",
+    "description": "業界最大級の転職サイト。未経験歓迎の求人も多数",
+    "url": "https://next.rikunabi.com/",
+    "motiveTags": ["change_domain", "restart", "stable_env"],
+    "jobTypeTags": ["unexp", "generalist", "pm"]
+  },
+  {
+    "id": "lapras",
+    "name": "LAPRAS SCOUT",
+    "description": "AI技術でエンジニアのスキルを可視化する転職サービス",
+    "url": "https://scout.lapras.com/",
+    "motiveTags": ["high_salary", "career_up"],
+    "jobTypeTags": ["ml", "backend", "infra"]
+  },
+  {
+    "id": "wantedly",
+    "name": "Wantedly",
+    "description": "「やりがい」でつながる転職サービス。スタートアップ企業が多い",
+    "url": "https://www.wantedly.com/",
+    "motiveTags": ["career_up", "change_domain", "side_project"],
+    "jobTypeTags": ["frontend", "backend", "mobile", "generalist"]
+  },
+  {
+    "id": "forkwell",
+    "name": "Forkwell Jobs",
+    "description": "エンジニア向けの求人サービス。技術記事の投稿でスカウトを受けられる",
+    "url": "https://jobs.forkwell.com/",
+    "motiveTags": ["career_up", "high_salary"],
+    "jobTypeTags": ["frontend", "backend", "mobile", "infra"]
+  },
+  {
+    "id": "remote",
+    "name": "ReWorks",
+    "description": "フルリモート専門の転職サービス",
+    "url": "https://reworks.co.jp/",
+    "motiveTags": ["remote_work", "side_project"],
+    "jobTypeTags": ["frontend", "backend", "generalist"]
+  },
+  {
+    "id": "ml-engineer",
+    "name": "AI転職",
+    "description": "AI・機械学習エンジニア専門の転職サービス",
+    "url": "https://ai-tenshoku.com/",
+    "motiveTags": ["high_salary", "career_up", "change_domain"],
+    "jobTypeTags": ["ml"]
+  }
+]

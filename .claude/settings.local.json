@@ -1,0 +1,24 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(find:*)",
+      "Bash(ls:*)",
+      "Bash(python3:*)",
+      "Bash(printenv)",
+      "Bash(env)",
+      "Bash(printenv)",
+      "Bash(touch:*)",
+      "Bash(python3:*)",
+      "Bash(mkdir:*)",
+      "Bash(iconv:*)",
+      "Bash(python:*)",
+      "Bash(find:*)",
+      "Bash(npm:*)",
+      "Bash(npx:*)",
+      "Bash(pkill:*)"
+    ],
+    "deny": [
+      "Bash(rm:*)"
+    ]
+  }
+}

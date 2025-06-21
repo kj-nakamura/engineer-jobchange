@@ -1,0 +1,22 @@
+{
+  "motiveTags": [
+    { "id": "high_salary", "label": "年収アップ" },
+    { "id": "remote_work", "label": "フルリモート希望" },
+    { "id": "career_up", "label": "キャリアアップ" },
+    { "id": "management", "label": "マネジメント志向" },
+    { "id": "change_domain", "label": "業界・職種を変えたい" },
+    { "id": "restart", "label": "キャリア再出発" },
+    { "id": "stable_env", "label": "安定した環境を求める" },
+    { "id": "side_project", "label": "副業・複業と両立したい" }
+  ],
+  "jobTypeTags": [
+    { "id": "frontend", "label": "フロントエンドエンジニア" },
+    { "id": "backend", "label": "バックエンドエンジニア" },
+    { "id": "mobile", "label": "モバイルアプリエンジニア" },
+    { "id": "infra", "label": "インフラ・SRE・DevOps" },
+    { "id": "pm", "label": "プロジェクトマネージャー" },
+    { "id": "ml", "label": "機械学習・AIエンジニア" },
+    { "id": "generalist", "label": "フルスタック" },
+    { "id": "unexp", "label": "未経験・実務なし" }
+  ]
+}
