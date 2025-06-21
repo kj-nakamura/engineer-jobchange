@@ -89,19 +89,25 @@ export default function Home() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      <div className="container mx-auto px-4 py-8">
-        <header className="text-center mb-12">
-          <h1 className="text-4xl font-bold text-gray-900 mb-4">
-            エンジニア転職サービス比較
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50">
+      <div className="container mx-auto px-4 py-8 sm:py-12 lg:py-16">
+        <header className="text-center mb-16">
+          <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-r from-blue-600 to-indigo-600 rounded-2xl mb-6 shadow-lg">
+            <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2-2v2m8 0V6a2 2 0 012 2v6a2 2 0 01-2 2H8a2 2 0 01-2-2V8a2 2 0 012-2h8z" />
+            </svg>
+          </div>
+          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold bg-gradient-to-r from-gray-900 via-blue-800 to-indigo-800 bg-clip-text text-transparent mb-6">
+            エンジニア転職ナビ
           </h1>
-          <p className="text-lg text-gray-600">
-            あなたの転職動機と職種から、最適な転職サービスを見つけましょう
+          <p className="text-lg sm:text-xl text-gray-600 max-w-2xl mx-auto leading-relaxed">
+            あなたの転職動機と職種から、<br className="sm:hidden"/>
+            <span className="font-semibold text-blue-700">最適な転職サービス</span>を見つけましょう
           </p>
         </header>
 
-        <div className="max-w-6xl mx-auto">
-          <div className="bg-white rounded-lg shadow-md p-8 mb-8">
+        <div className="max-w-7xl mx-auto">
+          <div className="bg-white/70 backdrop-blur-sm rounded-3xl border border-white/20 shadow-xl p-8 sm:p-10 lg:p-12 mb-12">
             <TagSelector
               title="転職動機を選んでください（複数選択可）"
               tags={tags.motiveTags}
