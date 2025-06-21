@@ -19,13 +19,24 @@ export default function Home() {
           fetch('/data/tags.json')
         ]);
         
+        if (!servicesRes.ok || !tagsRes.ok) {
+          throw new Error('データの取得に失敗しました');
+        }
+        
         const servicesData = await servicesRes.json();
         const tagsData = await tagsRes.json();
+        
+        console.log('データ読み込み完了:', {
+          servicesCount: servicesData.length,
+          motiveTagsCount: tagsData.motiveTags.length,
+          jobTypeTagsCount: tagsData.jobTypeTags.length
+        });
         
         setServices(servicesData);
         setTags(tagsData);
       } catch (error) {
         console.error('データの読み込みに失敗しました:', error);
+        alert('データの読み込みに失敗しました。ページを再読み込みしてください。');
       }
     };
 
@@ -33,8 +44,19 @@ export default function Home() {
   }, []);
 
   useEffect(() => {
-    if (selectedMotiveTags.length > 0 || selectedJobTypeTags.length > 0) {
+    console.log('レコメンド処理開始:', {
+      servicesCount: services.length,
+      selectedMotiveTags,
+      selectedJobTypeTags
+    });
+    
+    if ((selectedMotiveTags.length > 0 || selectedJobTypeTags.length > 0) && services.length > 0) {
       const result = recommendServices(services, selectedMotiveTags, selectedJobTypeTags);
+      console.log('レコメンド結果:', {
+        exactMatch: result.exactMatch.length,
+        partialMatch: result.partialMatch.length,
+        others: result.others.length
+      });
       setRecommendation(result);
     } else {
       setRecommendation(null);
