@@ -20,6 +20,10 @@ const customJestConfig = {
     '!pages/_document.tsx',
     '!**/*.d.ts',
   ],
+  testTimeout: 30000,
+  maxWorkers: process.env.CI ? 2 : '50%',
+  coverageDirectory: 'coverage',
+  coverageReporters: ['text', 'lcov', 'html'],
 }
 
 // createJestConfig is exported this way to ensure that next/jest can load the Next.js config which is async

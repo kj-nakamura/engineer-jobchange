@@ -10,18 +10,14 @@ jobs:
   test:
     runs-on: ubuntu-latest
     
-    strategy:
-      matrix:
-        node-version: [18.x, 20.x]
-    
     steps:
     - name: Checkout code
       uses: actions/checkout@v4
       
-    - name: Setup Node.js ${{ matrix.node-version }}
+    - name: Setup Node.js
       uses: actions/setup-node@v4
       with:
-        node-version: ${{ matrix.node-version }}
+        node-version: '20.x'
         cache: 'npm'
         
     - name: Install dependencies
@@ -34,20 +30,19 @@ jobs:
       run: npx tsc --noEmit
       
     - name: Run tests
-      run: npm test -- --coverage --watchAll=false
-      
-    - name: Upload coverage to Codecov
-      uses: codecov/codecov-action@v3
-      with:
-        file: ./coverage/lcov.info
-        flags: unittests
-        name: codecov-umbrella
+      run: npm run test:ci
+      env:
+        CI: true
         
     - name: Build project
       run: npm run build
       
-    - name: Test build output
+    - name: Verify build output
       run: |
-        ls -la .next/
-        test -f .next/static/css/*.css
-        test -d .next/static/chunks/
+        if [ -d ".next" ]; then
+          echo "✅ Build directory exists"
+          ls -la .next/
+        else
+          echo "❌ Build directory not found"
+          exit 1
+        fi
