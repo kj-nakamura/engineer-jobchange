@@ -3,6 +3,7 @@ export interface Service {
   name: string;
   description: string;
   url: string;
+  imageUrl: string;
   motiveTags: string[];
   jobTypeTags: string[];
 }

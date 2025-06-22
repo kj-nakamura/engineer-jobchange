@@ -9,6 +9,7 @@ const mockServices = [
     name: 'テストサービス1',
     description: '説明1',
     url: 'https://example1.com',
+    imageUrl: 'https://example1.com/favicon.ico',
     motiveTags: ['high_salary', 'career_up'],
     jobTypeTags: ['frontend', 'backend']
   },
@@ -17,6 +18,7 @@ const mockServices = [
     name: 'テストサービス2',
     description: '説明2',
     url: 'https://example2.com',
+    imageUrl: 'https://example2.com/favicon.ico',
     motiveTags: ['remote_work'],
     jobTypeTags: ['generalist']
   }

@@ -13,6 +13,7 @@ describe('データ検証テスト', () => {
         expect(typeof service.name).toBe('string')
         expect(typeof service.description).toBe('string')
         expect(typeof service.url).toBe('string')
+        expect(typeof service.imageUrl).toBe('string')
         expect(Array.isArray(service.motiveTags)).toBe(true)
         expect(Array.isArray(service.jobTypeTags)).toBe(true)
         
@@ -27,7 +28,7 @@ describe('データ検証テスト', () => {
     })
 
     it('必須フィールドが全て存在する', () => {
-      const requiredFields = ['id', 'name', 'description', 'url', 'motiveTags', 'jobTypeTags']
+      const requiredFields = ['id', 'name', 'description', 'url', 'imageUrl', 'motiveTags', 'jobTypeTags']
       
       servicesData.forEach((service: any, index) => {
         requiredFields.forEach(field => {
@@ -50,6 +51,7 @@ describe('データ検証テスト', () => {
       
       servicesData.forEach((service: any) => {
         expect(service.url).toMatch(urlPattern)
+        expect(service.imageUrl).toMatch(urlPattern)
       })
     })
 

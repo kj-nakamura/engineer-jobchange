@@ -8,6 +8,7 @@ describe('recommendServices', () => {
       name: 'テストサービス1',
       description: 'フロントエンド・年収アップに特化',
       url: 'https://example1.com',
+      imageUrl: 'https://example1.com/favicon.ico',
       motiveTags: ['high_salary', 'career_up'],
       jobTypeTags: ['frontend', 'backend']
     },
@@ -16,6 +17,7 @@ describe('recommendServices', () => {
       name: 'テストサービス2',
       description: 'リモートワーク・フルスタック向け',
       url: 'https://example2.com',
+      imageUrl: 'https://example2.com/favicon.ico',
       motiveTags: ['remote_work'],
       jobTypeTags: ['generalist']
     },
@@ -24,6 +26,7 @@ describe('recommendServices', () => {
       name: 'テストサービス3',
       description: '管理職・マネジメント向け',
       url: 'https://example3.com',
+      imageUrl: 'https://example3.com/favicon.ico',
       motiveTags: ['management'],
       jobTypeTags: ['pm']
     },
@@ -32,6 +35,7 @@ describe('recommendServices', () => {
       name: 'テストサービス4',
       description: 'マッチしないサービス',
       url: 'https://example4.com',
+      imageUrl: 'https://example4.com/favicon.ico',
       motiveTags: ['stable_env'],
       jobTypeTags: ['infra']
     }

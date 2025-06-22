@@ -4,6 +4,7 @@
     "name": "paiza転職",
     "description": "ITエンジニア特化のプログラミングスキル重視の転職サービス",
     "url": "https://paiza.jp/career",
+    "imageUrl": "https://paiza.jp/favicon.ico",
     "motiveTags": ["high_salary", "career_up"],
     "jobTypeTags": ["frontend", "backend", "generalist"]
   },
@@ -12,6 +13,7 @@
     "name": "Green",
     "description": "IT/Web業界の求人情報サイト。企業の詳細情報が豊富",
     "url": "https://www.green-japan.com/",
+    "imageUrl": "https://www.green-japan.com/favicon.ico",
     "motiveTags": ["career_up", "change_domain"],
     "jobTypeTags": ["frontend", "backend", "pm", "generalist"]
   },
@@ -20,6 +22,7 @@
     "name": "Findy",
     "description": "GitHubと連携したエンジニア向けの転職サービス",
     "url": "https://findy-code.io/",
+    "imageUrl": "https://findy-code.io/favicon.ico",
     "motiveTags": ["high_salary", "career_up"],
     "jobTypeTags": ["frontend", "backend", "mobile", "infra"]
   },
@@ -28,6 +31,7 @@
     "name": "レバテックキャリア",
     "description": "IT・Web業界のエンジニア・クリエイター専門の転職エージェント",
     "url": "https://career.levtech.jp/",
+    "imageUrl": "https://career.levtech.jp/favicon.ico",
     "motiveTags": ["high_salary", "career_up", "management"],
     "jobTypeTags": ["frontend", "backend", "mobile", "infra", "pm"]
   },
@@ -36,6 +40,7 @@
     "name": "Geekly",
     "description": "IT・Web・ゲーム業界専門の転職エージェント",
     "url": "https://www.geekly.co.jp/",
+    "imageUrl": "https://www.geekly.co.jp/favicon.ico",
     "motiveTags": ["high_salary", "career_up", "change_domain"],
     "jobTypeTags": ["frontend", "backend", "mobile", "pm", "generalist"]
   },
@@ -44,6 +49,7 @@
     "name": "ビズリーチ",
     "description": "ハイクラス転職サイト。年収600万円以上の求人が豊富",
     "url": "https://www.bizreach.jp/",
+    "imageUrl": "https://www.bizreach.jp/favicon.ico",
     "motiveTags": ["high_salary", "management", "stable_env"],
     "jobTypeTags": ["pm", "infra", "generalist"]
   },
@@ -52,6 +58,7 @@
     "name": "リクナビNEXT",
     "description": "業界最大級の転職サイト。未経験歓迎の求人も多数",
     "url": "https://next.rikunabi.com/",
+    "imageUrl": "https://next.rikunabi.com/favicon.ico",
     "motiveTags": ["change_domain", "restart", "stable_env"],
     "jobTypeTags": ["unexp", "generalist", "pm"]
   },
@@ -60,6 +67,7 @@
     "name": "LAPRAS SCOUT",
     "description": "AI技術でエンジニアのスキルを可視化する転職サービス",
     "url": "https://scout.lapras.com/",
+    "imageUrl": "https://scout.lapras.com/favicon.ico",
     "motiveTags": ["high_salary", "career_up"],
     "jobTypeTags": ["ml", "backend", "infra"]
   },
@@ -68,6 +76,7 @@
     "name": "Wantedly",
     "description": "「やりがい」でつながる転職サービス。スタートアップ企業が多い",
     "url": "https://www.wantedly.com/",
+    "imageUrl": "https://www.wantedly.com/favicon.ico",
     "motiveTags": ["career_up", "change_domain", "side_project"],
     "jobTypeTags": ["frontend", "backend", "mobile", "generalist"]
   },
@@ -76,23 +85,8 @@
     "name": "Forkwell Jobs",
     "description": "エンジニア向けの求人サービス。技術記事の投稿でスカウトを受けられる",
     "url": "https://jobs.forkwell.com/",
+    "imageUrl": "https://jobs.forkwell.com/favicon.ico",
     "motiveTags": ["career_up", "high_salary"],
     "jobTypeTags": ["frontend", "backend", "mobile", "infra"]
-  },
-  {
-    "id": "remote",
-    "name": "ReWorks",
-    "description": "フルリモート専門の転職サービス",
-    "url": "https://reworks.co.jp/",
-    "motiveTags": ["remote_work", "side_project"],
-    "jobTypeTags": ["frontend", "backend", "generalist"]
-  },
-  {
-    "id": "ml-engineer",
-    "name": "AI転職",
-    "description": "AI・機械学習エンジニア専門の転職サービス",
-    "url": "https://ai-tenshoku.com/",
-    "motiveTags": ["high_salary", "career_up", "change_domain"],
-    "jobTypeTags": ["ml"]
   }
 ]

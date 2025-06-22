@@ -24,7 +24,9 @@
       "Bash(gh repo create:*)",
       "Bash(git remote add:*)",
       "Bash(npm run test:ci:*)",
-      "Bash(npx tsc:*)"
+      "Bash(npx tsc:*)",
+      "WebFetch(domain:paiza.jp)",
+      "WebFetch(domain:www.green-japan.com)"
     ],
     "deny": [
       "Bash(rm:*)"

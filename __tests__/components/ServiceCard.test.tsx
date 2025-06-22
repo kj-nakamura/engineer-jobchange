@@ -1,4 +1,4 @@
-import { render, screen } from '@testing-library/react'
+import { render, screen, fireEvent } from '@testing-library/react'
 import ServiceCard from '../../components/ServiceCard'
 import { Service } from '../../types'
 
@@ -8,6 +8,7 @@ describe('ServiceCard', () => {
     name: 'テスト転職サービス',
     description: 'これはテスト用の転職サービスの説明文です。エンジニア向けの求人を多数扱っています。',
     url: 'https://example.com',
+    imageUrl: 'https://example.com/favicon.ico',
     motiveTags: ['high_salary', 'career_up'],
     jobTypeTags: ['frontend', 'backend']
   }
@@ -34,10 +35,24 @@ describe('ServiceCard', () => {
       expect(link).toHaveAttribute('rel', 'noopener noreferrer')
     })
 
-    it('アイコンが表示される', () => {
+    it('サービス画像が表示される', () => {
       render(<ServiceCard service={mockService} />)
       
-      // SVGアイコンを検証
+      const image = screen.getByRole('img', { name: /テスト転職サービス logo/ })
+      expect(image).toBeInTheDocument()
+      expect(image).toHaveAttribute('src', 'https://example.com/favicon.ico')
+      expect(image).toHaveAttribute('alt', 'テスト転職サービス logo')
+    })
+
+    it('画像読み込みエラー時にフォールバックSVGが表示される', () => {
+      render(<ServiceCard service={mockService} />)
+      
+      const image = screen.getByRole('img', { name: /テスト転職サービス logo/ })
+      
+      // 画像エラーをシミュレート
+      fireEvent.error(image)
+      
+      // SVGフォールバックが表示されることを確認
       const svgElements = document.querySelectorAll('svg')
       expect(svgElements.length).toBeGreaterThan(0)
     })
