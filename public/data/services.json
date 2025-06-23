@@ -77,7 +77,7 @@
     "description": "「やりがい」でつながる転職サービス。スタートアップ企業が多い",
     "url": "https://www.wantedly.com/",
     "imageUrl": "https://www.wantedly.com/favicon.ico",
-    "motiveTags": ["career_up", "change_domain", "side_project"],
+    "motiveTags": ["career_up", "change_domain", "side_project", "remote_work"],
     "jobTypeTags": ["frontend", "backend", "mobile", "generalist"]
   },
   {

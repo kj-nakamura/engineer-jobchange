@@ -26,7 +26,8 @@
       "Bash(npm run test:ci:*)",
       "Bash(npx tsc:*)",
       "WebFetch(domain:paiza.jp)",
-      "WebFetch(domain:www.green-japan.com)"
+      "WebFetch(domain:www.green-japan.com)",
+      "Bash(node:*)"
     ],
     "deny": [
       "Bash(rm:*)"

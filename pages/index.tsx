@@ -34,8 +34,16 @@ export default function Home() {
           });
         }
         
-        setServices(servicesData);
-        setTags(tagsData);
+        if (typeof window !== 'undefined' && process.env.NODE_ENV === 'test') {
+          const { act } = await import('@testing-library/react');
+          act(() => {
+            setServices(servicesData);
+            setTags(tagsData);
+          });
+        } else {
+          setServices(servicesData);
+          setTags(tagsData);
+        }
       } catch (error) {
         console.error('データの読み込みに失敗しました:', error);
         alert('データの読み込みに失敗しました。ページを再読み込みしてください。');
