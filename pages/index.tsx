@@ -2,8 +2,10 @@ import { useState, useEffect } from 'react';
 import Head from 'next/head';
 import { Service, TagData, RecommendationResult } from '../types';
 import { recommendServices } from '../utils/recommend';
+import { generateArticles, Article } from '../utils/articles';
 import TagSelector from '../components/TagSelector';
 import ServiceList from '../components/ServiceList';
+import ArticleList from '../components/ArticleList';
 
 export default function Home() {
   const [services, setServices] = useState<Service[]>([]);
@@ -11,6 +13,7 @@ export default function Home() {
   const [selectedMotiveTags, setSelectedMotiveTags] = useState<string[]>([]);
   const [selectedJobTypeTags, setSelectedJobTypeTags] = useState<string[]>([]);
   const [recommendation, setRecommendation] = useState<RecommendationResult | null>(null);
+  const [articles, setArticles] = useState<Article[]>([]);
 
   useEffect(() => {
     const loadData = async () => {
@@ -45,6 +48,10 @@ export default function Home() {
           setServices(servicesData);
           setTags(tagsData);
         }
+        
+        // 記事データを生成
+        const articlesData = generateArticles(servicesData);
+        setArticles(articlesData);
       } catch (error) {
         console.error('データの読み込みに失敗しました:', error);
         alert('データの読み込みに失敗しました。ページを再読み込みしてください。');
@@ -170,6 +177,11 @@ export default function Home() {
               title="全ての転職サービス"
               services={services}
             />
+          )}
+
+          {/* 記事リスト */}
+          {articles.length > 0 && (
+            <ArticleList articles={articles} />
           )}
         </div>
       </div>

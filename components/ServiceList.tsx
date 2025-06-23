@@ -12,8 +12,10 @@ export default function ServiceList({ title, services, showWhenEmpty = true }: S
     return null;
   }
 
+  const isAllServices = title === "全ての転職サービス";
+  
   return (
-    <div className="mb-12">
+    <div id={isAllServices ? "services" : undefined} className="mb-12">
       <div className="flex items-center mb-8">
         <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 flex items-center">
           <span className="mr-3">{title}</span>

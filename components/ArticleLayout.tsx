@@ -39,6 +39,9 @@ export default function ArticleLayout({ service, title, publishDate, content }: 
               <Link href="/#services" className="text-gray-600 hover:text-blue-600 transition-colors duration-200 font-medium">
                 サービス一覧
               </Link>
+              <Link href="/#articles" className="text-gray-600 hover:text-blue-600 transition-colors duration-200 font-medium">
+                記事一覧
+              </Link>
             </nav>
             
             {/* Mobile menu button */}
