@@ -53,12 +53,13 @@ export default function ArticleLayout({ service, title, publishDate, content }: 
             className="prose prose-lg max-w-none 
               prose-headings:text-gray-900 prose-headings:font-bold prose-headings:tracking-tight
               prose-h1:text-3xl prose-h1:mb-8 prose-h1:mt-0 prose-h1:border-b prose-h1:border-gray-200 prose-h1:pb-4
-              prose-h2:text-2xl prose-h2:mb-6 prose-h2:mt-10 prose-h2:text-blue-800 prose-h2:border-l-4 prose-h2:border-blue-500 prose-h2:pl-4 prose-h2:bg-blue-50 prose-h2:py-3 prose-h2:rounded-r-lg
-              prose-h3:text-xl prose-h3:mb-4 prose-h3:mt-8 prose-h3:text-gray-800 prose-h3:font-semibold
+              prose-h2:text-2xl prose-h2:mb-6 prose-h2:mt-10 prose-h2:text-gray-800 prose-h2:border-l-4 prose-h2:border-gray-500 prose-h2:pl-4 prose-h2:bg-gray-50 prose-h2:py-3 prose-h2:rounded-r-lg
+              prose-h3:text-2xl prose-h3:mb-4 prose-h3:mt-8 prose-h3:text-slate-700 prose-h3:font-bold prose-h3:border-b-2 prose-h3:border-slate-300 prose-h3:pb-2
               prose-p:text-gray-700 prose-p:leading-relaxed prose-p:mb-6
-              prose-a:text-blue-600 prose-a:font-medium prose-a:no-underline hover:prose-a:text-blue-800 hover:prose-a:underline
+              prose-a:text-blue-600 prose-a:font-medium prose-a:no-underline prose-a:transition-all prose-a:duration-200 prose-a:border-b prose-a:border-blue-200 hover:prose-a:text-blue-800 hover:prose-a:border-blue-400 hover:prose-a:bg-blue-50 hover:prose-a:px-1 hover:prose-a:rounded
               prose-strong:text-gray-900 prose-strong:font-semibold
-              prose-ul:mb-6 prose-li:mb-2 prose-li:text-gray-700
+              prose-ul:mb-6 prose-ul:space-y-2 prose-li:mb-0 prose-li:text-gray-700 prose-li:relative prose-li:pl-2 marker:prose-li:text-blue-500 marker:prose-li:text-lg
+              prose-ol:mb-6 prose-ol:space-y-2
               prose-blockquote:border-l-4 prose-blockquote:border-gray-300 prose-blockquote:pl-4 prose-blockquote:italic prose-blockquote:text-gray-600"
             dangerouslySetInnerHTML={{ __html: content }}
           />
