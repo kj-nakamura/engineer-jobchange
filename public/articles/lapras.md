@@ -1,7 +1,7 @@
 ---
 title: "LAPRAS SCOUTを徹底解説"
 description: "AI技術でエンジニアのスキルを可視化する転職サービス"
-publishDate: "2024-01-01"
+publishDate: "2025-06-23"
 ---
 
 # LAPRAS SCOUTについて

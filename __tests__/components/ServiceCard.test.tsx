@@ -26,13 +26,20 @@ describe('ServiceCard', () => {
       expect(screen.getByText(mockService.description)).toBeInTheDocument()
     })
 
-    it('詳細リンクが正しく設定される', () => {
+    it('公式サイトリンクが正しく設定される', () => {
       render(<ServiceCard service={mockService} />)
       
-      const link = screen.getByRole('link', { name: /詳細を見る/ })
+      const link = screen.getByRole('link', { name: /公式サイトへ/ })
       expect(link).toHaveAttribute('href', 'https://example.com')
       expect(link).toHaveAttribute('target', '_blank')
       expect(link).toHaveAttribute('rel', 'noopener noreferrer')
+    })
+
+    it('詳細記事リンクが正しく設定される', () => {
+      render(<ServiceCard service={mockService} />)
+      
+      const link = screen.getByRole('link', { name: /詳細を見る/ })
+      expect(link).toHaveAttribute('href', '/articles/test-service')
     })
 
     it('サービス画像が表示される', () => {
@@ -67,11 +74,18 @@ describe('ServiceCard', () => {
       expect(card).toBeInTheDocument()
     })
 
-    it('ボタンに適切なCSSクラスが適用される', () => {
+    it('詳細ボタンに適切なCSSクラスが適用される', () => {
       render(<ServiceCard service={mockService} />)
       
       const button = screen.getByRole('link', { name: /詳細を見る/ })
       expect(button).toHaveClass('bg-gradient-to-br', 'from-blue-500')
+    })
+
+    it('公式サイトボタンに適切なCSSクラスが適用される', () => {
+      render(<ServiceCard service={mockService} />)
+      
+      const button = screen.getByRole('link', { name: /公式サイトへ/ })
+      expect(button).toHaveClass('bg-gradient-to-br', 'from-green-500')
     })
   })
 
@@ -86,8 +100,11 @@ describe('ServiceCard', () => {
     it('フォーカス可能な要素が存在する', () => {
       render(<ServiceCard service={mockService} />)
       
-      const link = screen.getByRole('link')
-      expect(link).toBeVisible()
+      const links = screen.getAllByRole('link')
+      expect(links).toHaveLength(2) // 公式サイトと詳細の2つのリンク
+      links.forEach(link => {
+        expect(link).toBeVisible()
+      })
     })
   })
 
@@ -135,8 +152,8 @@ describe('ServiceCard', () => {
         render(<ServiceCard service={invalidUrlService} />)
       }).not.toThrow()
       
-      const link = screen.getByRole('link')
-      expect(link).toHaveAttribute('href', 'invalid-url')
+      const officialLink = screen.getByRole('link', { name: /公式サイトへ/ })
+      expect(officialLink).toHaveAttribute('href', 'invalid-url')
     })
   })
 

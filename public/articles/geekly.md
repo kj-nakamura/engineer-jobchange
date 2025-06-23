@@ -1,7 +1,7 @@
 ---
 title: "Geeklyを徹底解説"
 description: "IT・Web・ゲーム業界専門の転職エージェント"
-publishDate: "2024-01-01"
+publishDate: "2025-06-23"
 ---
 
 # Geeklyについて

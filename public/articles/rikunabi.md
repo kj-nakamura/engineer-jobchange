@@ -1,7 +1,7 @@
 ---
 title: "リクナビNEXTを徹底解説"
 description: "業界最大級の転職サイト。未経験歓迎の求人も多数"
-publishDate: "2024-01-01"
+publishDate: "2025-06-23"
 ---
 
 # リクナビNEXTについて

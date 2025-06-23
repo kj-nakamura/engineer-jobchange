@@ -1,7 +1,7 @@
 ---
 title: "Forkwell Jobsを徹底解説"
 description: "エンジニア向けの求人サービス。技術記事の投稿でスカウトを受けられる"
-publishDate: "2024-01-01"
+publishDate: "2025-06-23"
 ---
 
 # Forkwell Jobsについて

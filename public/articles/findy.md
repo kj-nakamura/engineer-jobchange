@@ -1,7 +1,7 @@
 ---
 title: "Findyを徹底解説"
 description: "GitHubと連携したエンジニア向けの転職サービス"
-publishDate: "2024-01-01"
+publishDate: "2025-06-23"
 ---
 
 # Findyについて

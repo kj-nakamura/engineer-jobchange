@@ -1,7 +1,7 @@
 ---
 title: "Greenを徹底解説"
 description: "IT/Web業界の求人情報サイト。企業の詳細情報が豊富"
-publishDate: "2024-01-01"
+publishDate: "2025-06-23"
 ---
 
 # Greenについて

@@ -76,7 +76,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
       service,
       title: data.title || service.name,
       description: data.description || service.description,
-      publishDate: data.publishDate || '2024-01-01',
+      publishDate: data.publishDate || '2025-06-23',
       content: htmlContent,
     },
   };

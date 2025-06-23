@@ -1,7 +1,7 @@
 ---
 title: "Wantedlyを徹底解説"
 description: "「やりがい」でつながる転職サービス。スタートアップ企業が多い"
-publishDate: "2024-01-01"
+publishDate: "2025-06-23"
 ---
 
 # Wantedlyについて
