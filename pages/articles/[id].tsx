@@ -88,6 +88,11 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
   const { data, content } = matter(markdownContent);
 
   // MarkdownをHTMLに変換
+  marked.setOptions({
+    breaks: true,
+    gfm: true,
+  });
+  
   const htmlContent = await marked(content);
 
   return {
