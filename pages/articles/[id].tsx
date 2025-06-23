@@ -1,4 +1,5 @@
 import { GetStaticPaths, GetStaticProps } from 'next';
+import Head from 'next/head';
 import { Service } from '../../types';
 import ArticleLayout from '../../components/ArticleLayout';
 import fs from 'fs';
@@ -15,13 +16,31 @@ interface ArticlePageProps {
 }
 
 export default function ArticlePage({ service, title, description, publishDate, content }: ArticlePageProps) {
+  const pageTitle = `${title} | エンジニア転職ナビ`;
+  
   return (
-    <ArticleLayout
-      service={service}
-      title={title}
-      publishDate={publishDate}
-      content={content}
-    />
+    <>
+      <Head>
+        <title>{pageTitle}</title>
+        <meta name="description" content={description} />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta property="og:title" content={pageTitle} />
+        <meta property="og:description" content={description} />
+        <meta property="og:type" content="article" />
+        <meta property="article:published_time" content={publishDate} />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content={pageTitle} />
+        <meta name="twitter:description" content={description} />
+        <link rel="icon" href="/favicon.ico" />
+        <link rel="canonical" href={`https://engineer-jobchange.vercel.app/articles/${service.id}`} />
+      </Head>
+      <ArticleLayout
+        service={service}
+        title={title}
+        publishDate={publishDate}
+        content={content}
+      />
+    </>
   );
 }
 
