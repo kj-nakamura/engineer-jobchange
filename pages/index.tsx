@@ -141,7 +141,6 @@ export default function Home() {
         <meta name="twitter:description" content="転職動機と職種から最適なエンジニア転職サービスを推薦。paiza転職、Green、Findy、レバテックキャリアなど主要な転職サイトを比較検討できます。" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50">
       <div className="container mx-auto px-4 py-8 sm:py-12 lg:py-16">
         <header className="text-center mb-16">
           <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-r from-blue-600 to-indigo-600 rounded-2xl mb-6 shadow-lg">
@@ -209,7 +208,6 @@ export default function Home() {
             />
           )}
         </div>
-      </div>
       </div>
     </>
   );

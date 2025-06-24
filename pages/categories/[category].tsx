@@ -50,8 +50,7 @@ export default function CategoryPage({ category, articles, totalCount }: Categor
         <link rel="canonical" href={`https://engineer-jobchange.vercel.app/categories/${category.id}`} />
       </Head>
 
-      <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50">
-        <div className="container mx-auto px-4 py-8">
+      <div className="container mx-auto px-4 py-8">
           {/* パンくずナビゲーション */}
           <nav className="mb-8">
             <ol className="flex items-center space-x-2 text-sm text-gray-600">
@@ -219,7 +218,6 @@ export default function CategoryPage({ category, articles, totalCount }: Categor
             </div>
           )}
         </div>
-      </div>
     </>
   );
 }

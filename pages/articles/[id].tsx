@@ -13,9 +13,10 @@ interface ArticlePageProps {
   description: string;
   publishDate: string;
   content: string;
+  articleCategory?: string;
 }
 
-export default function ArticlePage({ service, title, description, publishDate, content }: ArticlePageProps) {
+export default function ArticlePage({ service, title, description, publishDate, content, articleCategory }: ArticlePageProps) {
   const pageTitle = `${title} | エンジニア転職ナビ`;
   
   return (
@@ -39,6 +40,7 @@ export default function ArticlePage({ service, title, description, publishDate, 
         title={title}
         publishDate={publishDate}
         content={content}
+        articleCategory={articleCategory}
       />
     </>
   );
@@ -144,6 +146,9 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
   
   const htmlContent = await marked(content);
 
+  // 記事カテゴリを推定（記事データがある場合はそのカテゴリ、ない場合は'services'）
+  const category = article ? article.category : 'services';
+
   return {
     props: {
       service,
@@ -151,6 +156,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
       description: data.description || service.description,
       publishDate: data.publishDate || '2025-06-23',
       content: htmlContent,
+      articleCategory: category,
     },
   };
 };

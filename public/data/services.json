@@ -22,7 +22,7 @@
     "name": "Findy",
     "description": "GitHubと連携したエンジニア向けの転職サービス",
     "url": "https://findy-code.io/",
-    "imageUrl": "https://findy-code.io/favicon.ico",
+    "imageUrl": "",
     "motiveTags": ["high_salary", "career_up"],
     "jobTypeTags": ["frontend", "backend", "mobile", "infra"]
   },

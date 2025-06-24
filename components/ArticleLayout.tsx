@@ -1,65 +1,30 @@
 import { Service } from '../types';
 import { useState } from 'react';
 import Link from 'next/link';
+import { Article } from '../utils/articles-client';
 
 interface ArticleLayoutProps {
   service: Service;
   title: string;
   publishDate: string;
   content: string;
+  articleCategory?: string;
 }
 
-export default function ArticleLayout({ service, title, publishDate, content }: ArticleLayoutProps) {
+export default function ArticleLayout({ service, title, publishDate, content, articleCategory }: ArticleLayoutProps) {
   const [imageError, setImageError] = useState(false);
+  const [defaultImageError, setDefaultImageError] = useState(false);
+
+  // カテゴリに基づいてデフォルト画像URLを取得
+  const getDefaultImageUrl = (category?: string) => {
+    if (!category) return '/images/defaults/general.svg';
+    return `/images/defaults/${category}.svg`;
+  };
+
+  const defaultImageUrl = getDefaultImageUrl(articleCategory);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50">
-      {/* Header Navigation */}
-      <header className="bg-white shadow-sm border-b border-gray-200">
-        <div className="container mx-auto px-4 py-4 max-w-6xl">
-          <div className="flex items-center justify-between">
-            <Link href="/" className="flex items-center space-x-3 group">
-              <div className="w-10 h-10 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-lg flex items-center justify-center group-hover:scale-105 transition-transform duration-200">
-                <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
-                </svg>
-              </div>
-              <div>
-                <h1 className="text-xl font-bold text-gray-900 group-hover:text-blue-600 transition-colors duration-200">
-                  エンジニア転職ナビ
-                </h1>
-                <p className="text-sm text-gray-500">最適な転職サービスを見つけよう</p>
-              </div>
-            </Link>
-            
-            <nav className="hidden md:flex items-center space-x-6">
-              <Link href="/" className="text-gray-600 hover:text-blue-600 transition-colors duration-200 font-medium">
-                ホーム
-              </Link>
-              <Link href="/#services" className="text-gray-600 hover:text-blue-600 transition-colors duration-200 font-medium">
-                サービス一覧
-              </Link>
-              <Link href="/#articles" className="text-gray-600 hover:text-blue-600 transition-colors duration-200 font-medium">
-                記事一覧
-              </Link>
-            </nav>
-            
-            {/* Mobile menu button */}
-            <div className="md:hidden">
-              <Link 
-                href="/"
-                className="inline-flex items-center px-3 py-2 rounded-md text-gray-600 hover:text-blue-600 hover:bg-gray-100 transition-colors duration-200"
-              >
-                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
-                </svg>
-              </Link>
-            </div>
-          </div>
-        </div>
-      </header>
-
-      <div className="container mx-auto px-4 py-8 max-w-4xl">
+    <div className="container mx-auto px-4 py-8 max-w-4xl">
         {/* Header */}
         <div className="bg-white rounded-2xl shadow-xl p-8 mb-8">
           <div className="flex items-start justify-between mb-6">
@@ -76,16 +41,23 @@ export default function ArticleLayout({ service, title, publishDate, content }: 
               </div>
             </div>
             <div className="flex-shrink-0 w-16 h-16 bg-gradient-to-br from-blue-100 to-indigo-100 rounded-xl flex items-center justify-center ml-6">
-              {!imageError ? (
+              {!imageError && service.imageUrl ? (
                 <img 
                   src={service.imageUrl} 
                   alt={`${service.name} logo`}
                   className="w-12 h-12 object-contain"
                   onError={() => setImageError(true)}
                 />
+              ) : !defaultImageError ? (
+                <img 
+                  src={defaultImageUrl}
+                  alt={`${articleCategory || 'general'} category icon`}
+                  className="w-12 h-12 object-contain"
+                  onError={() => setDefaultImageError(true)}
+                />
               ) : (
                 <svg className="w-8 h-8 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" />
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
                 </svg>
               )}
             </div>
@@ -148,6 +120,5 @@ export default function ArticleLayout({ service, title, publishDate, content }: 
           </Link>
         </div>
       </div>
-    </div>
   );
 }
