@@ -92,9 +92,13 @@ describe('ArticleLayout', () => {
     it('適切なCSSクラスが適用される', () => {
       render(<ArticleLayout {...mockProps} />)
       
-      // 背景グラデーションクラスをチェック
-      const container = document.querySelector('.bg-gradient-to-br.from-blue-50')
+      // メインコンテナのクラスをチェック
+      const container = document.querySelector('.container.mx-auto')
       expect(container).toBeInTheDocument()
+      
+      // 白い背景のカードクラスをチェック
+      const cardContainer = document.querySelector('.bg-white.rounded-2xl')
+      expect(cardContainer).toBeInTheDocument()
     })
 
     it('公式サイトボタンに緑色のグラデーションが適用される', () => {

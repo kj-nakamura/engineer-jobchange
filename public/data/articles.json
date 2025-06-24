@@ -646,6 +646,66 @@
     ]
   },
   {
+    "id": "engineer-resume-writing-guide",
+    "title": "エンジニア転職で勝つ履歴書・職務経歴書の書き方【通過率95%テンプレート】",
+    "description": "エンジニア転職の書類選考通過率を95%にする履歴書・職務経歴書の書き方を徹底解説。技術スキルの効果的なアピール方法、プロジェクト経験の表現術、テンプレート付き完全ガイドです。",
+    "publishDate": "2025-06-24",
+    "category": "guides",
+    "tags": [
+      "履歴書",
+      "職務経歴書",
+      "書類選考",
+      "転職",
+      "テンプレート"
+    ],
+    "relatedArticles": [
+      "portfolio-best-practices-guide",
+      "advanced-technical-interview-guide",
+      "unexperienced-engineer-career",
+      "20s-engineer-career-strategy"
+    ]
+  },
+  {
+    "id": "salary-negotiation-complete-guide",
+    "title": "エンジニア転職の年収交渉術【成功率90%のテクニック大全】",
+    "description": "エンジニア転職で年収アップを実現する交渉術を徹底解説。適正年収の調べ方、交渉タイミング、具体的な交渉文例から心理学的アプローチまで成功ノウハウを完全網羅します。",
+    "publishDate": "2025-06-24",
+    "category": "guides",
+    "tags": [
+      "年収交渉",
+      "年収アップ",
+      "転職交渉",
+      "給与交渉",
+      "エンジニア転職"
+    ],
+    "relatedArticles": [
+      "engineer-salary-up-methods",
+      "20s-engineer-career-strategy",
+      "30s-engineer-career-strategy",
+      "freelance-engineer-guide"
+    ]
+  },
+  {
+    "id": "career-change-to-engineer-guide",
+    "title": "異業種からエンジニア転職の完全ガイド【成功事例と実践的ステップ】",
+    "description": "異業種からエンジニアへのキャリアチェンジを成功させる完全ガイド。営業、事務、製造業などの経験を活かしたエンジニア転職の戦略、学習方法、面接対策まで詳しく解説します。",
+    "publishDate": "2025-06-24",
+    "category": "guides",
+    "tags": [
+      "異業種転職",
+      "キャリアチェンジ",
+      "エンジニア転職",
+      "未経験",
+      "学習方法"
+    ],
+    "relatedArticles": [
+      "unexperienced-engineer-career",
+      "20s-engineer-career-strategy",
+      "portfolio-best-practices-guide",
+      "engineer-resume-writing-guide"
+    ]
+  },
+  {
     "id": "react-native-market-trend",
     "title": "React Native開発者の市場動向と転職戦略【2025年最新】",
     "description": "React Native開発者の転職市場を徹底分析。需要動向、年収相場、必要スキル、キャリアパス、おすすめ転職サイトまで詳しく解説します。",

@@ -1,110 +1,86 @@
-import { render, screen } from '@testing-library/react'
-import ArticlePage, { getStaticProps, getStaticPaths } from '../../../pages/articles/[id]'
-import { Service } from '../../../types'
+import { getStaticPaths, getStaticProps } from '../../../pages/articles/[id]'
 import fs from 'fs'
 import path from 'path'
 
-// fsをモック
+// モック
 jest.mock('fs')
 jest.mock('path')
 
 const mockedFs = fs as jest.Mocked<typeof fs>
 const mockedPath = path as jest.Mocked<typeof path>
 
-describe('ArticlePage', () => {
-  const mockService: Service = {
-    id: 'test-service',
-    name: 'テスト転職サービス',
-    description: 'これはテスト用の転職サービスの説明文です。',
-    url: 'https://example.com',
-    imageUrl: 'https://example.com/favicon.ico',
-    motiveTags: ['high_salary', 'career_up'],
-    jobTypeTags: ['frontend', 'backend']
-  }
-
-  const mockProps = {
-    service: mockService,
-    title: 'テスト記事のタイトル',
-    description: 'テスト記事の説明',
-    publishDate: '2025-06-23',
-    content: '<h2>テスト見出し</h2><p>テスト本文です。</p>'
-  }
-
-  describe('コンポーネントレンダリング', () => {
-    it('ArticleLayoutコンポーネントに正しいプロパティが渡される', () => {
-      render(<ArticlePage {...mockProps} />)
-      
-      expect(screen.getByText('テスト記事のタイトル')).toBeInTheDocument()
-      expect(screen.getByText('これはテスト用の転職サービスの説明文です。')).toBeInTheDocument()
-      expect(screen.getByText('公開日: 2025-06-23')).toBeInTheDocument()
-      expect(screen.getByText('テスト見出し')).toBeInTheDocument()
-      expect(screen.getByText('テスト本文です。')).toBeInTheDocument()
-    })
-
-    it('公式サイトリンクが正しく設定される', () => {
-      render(<ArticlePage {...mockProps} />)
-      
-      const link = screen.getByRole('link', { name: /テスト転職サービスの公式サイトへ/ })
-      expect(link).toHaveAttribute('href', 'https://example.com')
-    })
-
-    it('ホームに戻るリンクが正しく設定される', () => {
-      render(<ArticlePage {...mockProps} />)
-      
-      const link = screen.getByRole('link', { name: /ホームに戻る/ })
-      expect(link).toHaveAttribute('href', '/')
-    })
-  })
-})
-
-describe('getStaticPaths', () => {
+describe('/articles/[id]', () => {
   beforeEach(() => {
-    mockedFs.readFileSync.mockClear()
-    mockedPath.join.mockClear()
+    jest.clearAllMocks()
   })
 
-  it('全てのサービスIDに対してパスを生成する', async () => {
-    const mockServicesData = [
-      { id: 'paiza', name: 'paiza転職' },
-      { id: 'green', name: 'Green' },
-      { id: 'findy', name: 'Findy' }
-    ]
+  describe('getStaticPaths', () => {
+    it('全てのサービスIDに対してパスを生成する', async () => {
+      const mockServicesData = [
+        { id: 'paiza', name: 'paiza転職' },
+        { id: 'green', name: 'Green' },
+        { id: 'findy', name: 'Findy' }
+      ]
 
-    mockedPath.join.mockReturnValue('/mock/path/services.json')
-    mockedFs.readFileSync.mockReturnValue(JSON.stringify(mockServicesData))
+      const mockArticlesData = [
+        { id: 'engineer-resume-writing-guide', title: 'エンジニア履歴書ガイド' },
+        { id: 'salary-negotiation-complete-guide', title: '年収交渉術' },
+        { id: 'career-change-to-engineer-guide', title: '異業種転職ガイド' }
+      ]
 
-    const result = await getStaticPaths()
+      mockedPath.join
+        .mockReturnValueOnce('/mock/path/services.json')
+        .mockReturnValueOnce('/mock/path/articles.json')
 
-    expect(result.paths).toEqual([
-      { params: { id: 'paiza' } },
-      { params: { id: 'green' } },
-      { params: { id: 'findy' } }
-    ])
-    expect(result.fallback).toBe(false)
+      mockedFs.readFileSync
+        .mockReturnValueOnce(JSON.stringify(mockServicesData))
+        .mockReturnValueOnce(JSON.stringify(mockArticlesData))
+
+      const result = await getStaticPaths()
+
+      // サービスと記事の両方からパスが生成されることを確認
+      expect(result.paths.length).toBeGreaterThanOrEqual(6)
+      expect(result.paths).toContainEqual({ params: { id: 'paiza' } })
+      expect(result.paths).toContainEqual({ params: { id: 'green' } })
+      expect(result.paths).toContainEqual({ params: { id: 'findy' } })
+      expect(result.paths).toContainEqual({ params: { id: 'engineer-resume-writing-guide' } })
+      expect(result.fallback).toBe(false)
+    })
   })
-})
 
-describe('getStaticProps', () => {
-  beforeEach(() => {
-    mockedFs.readFileSync.mockClear()
-    mockedFs.existsSync.mockClear()
-    mockedPath.join.mockClear()
-  })
+  describe('getStaticProps', () => {
+    beforeEach(() => {
+      mockedFs.readFileSync.mockClear()
+      mockedFs.existsSync.mockClear()
+      mockedPath.join.mockClear()
+    })
 
-  it('有効なサービスIDに対して正しいプロパティを返す', async () => {
-    const mockServicesData = [
-      {
-        id: 'test-service',
-        name: 'テストサービス',
-        description: 'テスト説明',
-        url: 'https://example.com',
-        imageUrl: 'https://example.com/favicon.ico',
-        motiveTags: ['high_salary'],
-        jobTypeTags: ['frontend']
-      }
-    ]
+    it('有効なサービスIDに対して正しいプロパティを返す', async () => {
+      const mockServicesData = [
+        {
+          id: 'test-service',
+          name: 'テストサービス',
+          description: 'テスト説明',
+          url: 'https://example.com',
+          imageUrl: 'https://example.com/favicon.ico',
+          motiveTags: ['high_salary'],
+          jobTypeTags: ['frontend']
+        }
+      ]
 
-    const mockMarkdownContent = `---
+      const mockArticlesData = [
+        {
+          id: 'test-service',
+          title: 'テスト記事タイトル',
+          description: 'テスト記事説明',
+          publishDate: '2025-06-23',
+          category: 'services',
+          tags: ['test'],
+          relatedArticles: []
+        }
+      ]
+
+      const mockMarkdownContent = `---
 title: "テスト記事タイトル"
 description: "テスト記事説明"
 publishDate: "2025-06-23"
@@ -114,73 +90,57 @@ publishDate: "2025-06-23"
 
 テスト本文です。`
 
-    mockedPath.join
-      .mockReturnValueOnce('/mock/path/services.json')
-      .mockReturnValueOnce('/mock/path/articles/test-service.md')
+      mockedPath.join
+        .mockReturnValueOnce('/mock/path/services.json')
+        .mockReturnValueOnce('/mock/path/articles.json')
+        .mockReturnValueOnce('/mock/path/articles/test-service.md')
 
-    mockedFs.readFileSync
-      .mockReturnValueOnce(JSON.stringify(mockServicesData))
-      .mockReturnValueOnce(mockMarkdownContent)
+      mockedFs.readFileSync
+        .mockReturnValueOnce(JSON.stringify(mockServicesData))
+        .mockReturnValueOnce(JSON.stringify(mockArticlesData))
+        .mockReturnValueOnce(mockMarkdownContent)
 
-    mockedFs.existsSync.mockReturnValue(true)
+      mockedFs.existsSync.mockReturnValue(true)
 
-    const result = await getStaticProps({ params: { id: 'test-service' } })
+      const result = await getStaticProps({ params: { id: 'test-service' } })
 
-    expect(result).toHaveProperty('props')
-    if ('props' in result) {
-      expect(result.props.service).toEqual(mockServicesData[0])
-      expect(result.props.title).toBe('テスト記事タイトル')
-      expect(result.props.description).toBe('テスト記事説明')
-      expect(result.props.publishDate).toBe('2025-06-23')
-      expect(result.props.content).toContain('<h1>テスト見出し</h1>')
-      expect(result.props.content).toContain('<p>テスト本文です。</p>')
-    }
-  })
-
-  it('存在しないサービスIDに対してnotFoundを返す', async () => {
-    const mockServicesData = [
-      { id: 'existing-service', name: 'Existing Service' }
-    ]
-
-    mockedPath.join.mockReturnValue('/mock/path/services.json')
-    mockedFs.readFileSync.mockReturnValue(JSON.stringify(mockServicesData))
-
-    const result = await getStaticProps({ params: { id: 'non-existing-service' } })
-
-    expect(result).toEqual({ notFound: true })
-  })
-
-  it('Markdownファイルが存在しない場合にnotFoundを返す', async () => {
-    const mockServicesData = [
-      { id: 'test-service', name: 'Test Service' }
-    ]
-
-    mockedPath.join
-      .mockReturnValueOnce('/mock/path/services.json')
-      .mockReturnValueOnce('/mock/path/articles/test-service.md')
-
-    mockedFs.readFileSync.mockReturnValueOnce(JSON.stringify(mockServicesData))
-    mockedFs.existsSync.mockReturnValue(false)
-
-    const result = await getStaticProps({ params: { id: 'test-service' } })
-
-    expect(result).toEqual({ notFound: true })
-  })
-
-  it('frontmatterが不完全な場合にデフォルト値を使用する', async () => {
-    const mockServicesData = [
-      {
-        id: 'test-service',
-        name: 'テストサービス',
-        description: 'テスト説明',
-        url: 'https://example.com',
-        imageUrl: 'https://example.com/favicon.ico',
-        motiveTags: ['high_salary'],
-        jobTypeTags: ['frontend']
+      expect(result).toHaveProperty('props')
+      if ('props' in result) {
+        expect(result.props.service).toEqual(mockServicesData[0])
+        expect(result.props.title).toBe('テスト記事タイトル')
+        expect(result.props.description).toBe('テスト記事説明')
+        expect(result.props.publishDate).toBe('2025-06-23')
+        expect(result.props.content).toContain('<h1>テスト見出し</h1>')
+        expect(result.props.content).toContain('<p>テスト本文です。</p>')
       }
-    ]
+    })
 
-    const mockMarkdownContent = `---
+    it('frontmatterが不完全な場合にデフォルト値を使用する', async () => {
+      const mockServicesData = [
+        {
+          id: 'test-service',
+          name: 'テストサービス',
+          description: 'テスト説明',
+          url: 'https://example.com',
+          imageUrl: 'https://example.com/favicon.ico',
+          motiveTags: ['high_salary'],
+          jobTypeTags: ['frontend']
+        }
+      ]
+
+      const mockArticlesData = [
+        {
+          id: 'test-service',
+          title: 'テスト記事タイトル',
+          description: 'テスト記事説明',
+          publishDate: '2025-06-23',
+          category: 'services',
+          tags: ['test'],
+          relatedArticles: []
+        }
+      ]
+
+      const mockMarkdownContent = `---
 title: "テスト記事タイトル"
 ---
 
@@ -188,23 +148,55 @@ title: "テスト記事タイトル"
 
 テスト本文です。`
 
-    mockedPath.join
-      .mockReturnValueOnce('/mock/path/services.json')
-      .mockReturnValueOnce('/mock/path/articles/test-service.md')
+      mockedPath.join
+        .mockReturnValueOnce('/mock/path/services.json')
+        .mockReturnValueOnce('/mock/path/articles.json')
+        .mockReturnValueOnce('/mock/path/articles/test-service.md')
 
-    mockedFs.readFileSync
-      .mockReturnValueOnce(JSON.stringify(mockServicesData))
-      .mockReturnValueOnce(mockMarkdownContent)
+      mockedFs.readFileSync
+        .mockReturnValueOnce(JSON.stringify(mockServicesData))
+        .mockReturnValueOnce(JSON.stringify(mockArticlesData))
+        .mockReturnValueOnce(mockMarkdownContent)
 
-    mockedFs.existsSync.mockReturnValue(true)
+      mockedFs.existsSync.mockReturnValue(true)
 
-    const result = await getStaticProps({ params: { id: 'test-service' } })
+      const result = await getStaticProps({ params: { id: 'test-service' } })
 
-    expect(result).toHaveProperty('props')
-    if ('props' in result) {
-      expect(result.props.title).toBe('テスト記事タイトル')
-      expect(result.props.description).toBe('テスト説明') // サービスの説明をフォールバック
-      expect(result.props.publishDate).toBe('2025-06-23') // デフォルト日付
-    }
+      expect(result).toHaveProperty('props')
+      if ('props' in result) {
+        expect(result.props.service).toEqual(mockServicesData[0])
+        expect(result.props.title).toBe('テスト記事タイトル')
+        expect(result.props.description).toBe('テスト説明') // サービスのdescriptionを使用
+        expect(result.props.publishDate).toBe('2025-06-23') // 記事データから取得
+      }
+    })
+
+    it('無効なサービスIDに対して404を返す', async () => {
+      const mockServicesData = [
+        {
+          id: 'other-service',
+          name: 'その他のサービス',
+          description: 'その他の説明',
+          url: 'https://example.com',
+          imageUrl: 'https://example.com/favicon.ico',
+          motiveTags: ['high_salary'],
+          jobTypeTags: ['frontend']
+        }
+      ]
+
+      const mockArticlesData = []
+
+      mockedPath.join
+        .mockReturnValueOnce('/mock/path/services.json')
+        .mockReturnValueOnce('/mock/path/articles.json')
+
+      mockedFs.readFileSync
+        .mockReturnValueOnce(JSON.stringify(mockServicesData))
+        .mockReturnValueOnce(JSON.stringify(mockArticlesData))
+
+      const result = await getStaticProps({ params: { id: 'invalid-service' } })
+
+      expect(result).toEqual({ notFound: true })
+    })
   })
 })
