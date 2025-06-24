@@ -1,13 +1,28 @@
 import { Service } from '../types';
 import { useState } from 'react';
 import Link from 'next/link';
+import { trackAffiliateClick } from '../lib/analytics';
 
 interface ServiceCardProps {
   service: Service;
+  placement?: string;
+  articleCategory?: string;
+  articleId?: string;
 }
 
-export default function ServiceCard({ service }: ServiceCardProps) {
+export default function ServiceCard({ service, placement = 'service_card', articleCategory, articleId }: ServiceCardProps) {
   const [imageError, setImageError] = useState(false);
+  
+  const handleAffiliateClick = () => {
+    trackAffiliateClick({
+      affiliate_id: service.id,
+      affiliate_url: service.url,
+      service_name: service.name,
+      placement,
+      article_category: articleCategory,
+      article_id: articleId
+    });
+  };
   
   return (
     <div className="group bg-white rounded-2xl border border-gray-100 p-6 hover:shadow-2xl hover:shadow-blue-500/10 transition-all duration-300 transform hover:-translate-y-1">
@@ -41,6 +56,7 @@ export default function ServiceCard({ service }: ServiceCardProps) {
           href={service.url}
           target="_blank"
           rel="noopener noreferrer"
+          onClick={handleAffiliateClick}
           className="group/official relative inline-flex items-center justify-center w-full bg-gradient-to-br from-green-500 via-green-600 to-emerald-600 text-white px-6 py-3 rounded-xl font-semibold shadow-lg shadow-green-500/25 hover:shadow-xl hover:shadow-green-500/40 transition-all duration-300 transform hover:scale-[1.02] active:scale-[0.98] overflow-hidden"
         >
           <div className="absolute inset-0 bg-gradient-to-br from-white/20 to-transparent opacity-0 group-hover/official:opacity-100 transition-opacity duration-300"></div>

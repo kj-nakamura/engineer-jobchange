@@ -1,7 +1,9 @@
 import { GetStaticPaths, GetStaticProps } from 'next';
 import Head from 'next/head';
+import { useEffect } from 'react';
 import { Service } from '../../types';
 import ArticleLayout from '../../components/ArticleLayout';
+import { trackArticleEngagement } from '../../lib/analytics';
 import fs from 'fs';
 import path from 'path';
 import matter from 'gray-matter';
@@ -21,6 +23,27 @@ interface ArticlePageProps {
 
 export default function ArticlePage({ service, title, description, publishDate, content, articleCategory, services, articleId }: ArticlePageProps) {
   const pageTitle = `${title} | エンジニア転職ナビ`;
+  
+  useEffect(() => {
+    trackArticleEngagement(articleId, articleCategory || 'general', 'start_reading');
+    
+    const handleScroll = () => {
+      const scrollPercentage = (window.scrollY / (document.body.scrollHeight - window.innerHeight)) * 100;
+      
+      if (scrollPercentage >= 50 && !sessionStorage.getItem(`scroll_50_${articleId}`)) {
+        trackArticleEngagement(articleId, articleCategory || 'general', 'scroll_50');
+        sessionStorage.setItem(`scroll_50_${articleId}`, 'true');
+      }
+      
+      if (scrollPercentage >= 100 && !sessionStorage.getItem(`scroll_100_${articleId}`)) {
+        trackArticleEngagement(articleId, articleCategory || 'general', 'scroll_100');
+        sessionStorage.setItem(`scroll_100_${articleId}`, 'true');
+      }
+    };
+    
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, [articleId, articleCategory]);
   
   return (
     <>

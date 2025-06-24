@@ -155,19 +155,20 @@ async function sendAnalyticsData() {
     const clicks = JSON.parse(data);
     if (clicks.length === 0) return;
 
-    // In a real implementation, you would send this to your backend
-    // For now, we'll just log it
-    console.log('Sending analytics data:', clicks);
+    // Send to analytics API endpoint
+    const response = await fetch('/api/analytics', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ clicks })
+    });
     
-    // Clear the stored data after sending
-    localStorage.removeItem('affiliate_clicks');
-    
-    // You can implement the actual API call here:
-    // await fetch('/api/analytics', {
-    //   method: 'POST',
-    //   headers: { 'Content-Type': 'application/json' },
-    //   body: JSON.stringify({ clicks })
-    // });
+    if (response.ok) {
+      console.log('Analytics data sent successfully');
+      // Clear the stored data after successful sending
+      localStorage.removeItem('affiliate_clicks');
+    } else {
+      console.warn('Failed to send analytics data:', response.statusText);
+    }
     
   } catch (error) {
     console.warn('Failed to send analytics data:', error);

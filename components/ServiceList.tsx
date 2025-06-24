@@ -5,9 +5,12 @@ interface ServiceListProps {
   title: string;
   services: Service[];
   showWhenEmpty?: boolean;
+  placement?: string;
+  articleCategory?: string;
+  articleId?: string;
 }
 
-export default function ServiceList({ title, services, showWhenEmpty = true }: ServiceListProps) {
+export default function ServiceList({ title, services, showWhenEmpty = true, placement = 'service_list', articleCategory, articleId }: ServiceListProps) {
   if (!showWhenEmpty && services.length === 0) {
     return null;
   }
@@ -38,7 +41,13 @@ export default function ServiceList({ title, services, showWhenEmpty = true }: S
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6 lg:gap-8">
           {services.map(service => (
-            <ServiceCard key={service.id} service={service} />
+            <ServiceCard 
+              key={service.id} 
+              service={service} 
+              placement={placement}
+              articleCategory={articleCategory}
+              articleId={articleId}
+            />
           ))}
         </div>
       )}

@@ -1,4 +1,5 @@
 import React from 'react';
+import { trackAffiliateClick } from '../lib/analytics';
 
 interface AffiliateButtonProps {
   href: string;
@@ -9,6 +10,10 @@ interface AffiliateButtonProps {
   trackingId?: string;
   fullWidth?: boolean;
   className?: string;
+  serviceName?: string;
+  placement?: string;
+  articleCategory?: string;
+  articleId?: string;
 }
 
 const AffiliateButton: React.FC<AffiliateButtonProps> = ({
@@ -20,39 +25,20 @@ const AffiliateButton: React.FC<AffiliateButtonProps> = ({
   trackingId,
   fullWidth = false,
   className = '',
+  serviceName = text,
+  placement = 'affiliate_button',
+  articleCategory,
+  articleId,
 }) => {
   const handleClick = () => {
-    // Google Analytics tracking
-    if (typeof window !== 'undefined' && window.gtag && trackingId) {
-      window.gtag('event', 'affiliate_click', {
-        affiliate_id: trackingId,
-        affiliate_url: href,
-        event_category: 'affiliate',
-        event_label: text,
-      });
-    }
-
-    // Custom tracking (for future analytics dashboard)
-    if (typeof window !== 'undefined') {
-      try {
-        const trackingData = {
-          timestamp: new Date().toISOString(),
-          trackingId,
-          href,
-          text,
-          userAgent: navigator.userAgent,
-          referrer: document.referrer,
-        };
-        
-        // Store in localStorage for batch sending to analytics endpoint
-        const existingData = localStorage.getItem('affiliate_clicks');
-        const clicks = existingData ? JSON.parse(existingData) : [];
-        clicks.push(trackingData);
-        localStorage.setItem('affiliate_clicks', JSON.stringify(clicks));
-      } catch (error) {
-        console.warn('Failed to track affiliate click:', error);
-      }
-    }
+    trackAffiliateClick({
+      affiliate_id: trackingId || href,
+      affiliate_url: href,
+      service_name: serviceName,
+      placement,
+      article_category: articleCategory,
+      article_id: articleId
+    });
   };
 
   const baseClasses = "inline-flex items-center justify-center font-semibold rounded-lg transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 hover:transform hover:scale-105 shadow-md hover:shadow-lg";

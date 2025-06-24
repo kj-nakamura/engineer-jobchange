@@ -36,7 +36,7 @@ describe('/articles/[id]', () => {
         .mockReturnValueOnce(JSON.stringify(mockServicesData))
         .mockReturnValueOnce(JSON.stringify(mockArticlesData))
 
-      const result = await getStaticPaths()
+      const result = await getStaticPaths({})
 
       // サービスと記事の両方からパスが生成されることを確認
       expect(result.paths.length).toBeGreaterThanOrEqual(6)
@@ -184,7 +184,7 @@ title: "テスト記事タイトル"
         }
       ]
 
-      const mockArticlesData = []
+      const mockArticlesData: any[] = []
 
       mockedPath.join
         .mockReturnValueOnce('/mock/path/services.json')
