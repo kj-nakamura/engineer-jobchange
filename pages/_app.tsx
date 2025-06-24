@@ -39,6 +39,7 @@ export default function App({ Component, pageProps }: AppProps) {
             src={`https://www.googletagmanager.com/gtag/js?id=${GA_TRACKING_ID}`}
           />
           <Script
+            id="google-analytics"
             strategy="afterInteractive"
             dangerouslySetInnerHTML={{
               __html: `

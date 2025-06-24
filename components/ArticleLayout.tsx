@@ -1,8 +1,12 @@
 import { Service } from '../types';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import { Article } from '../utils/articles-client';
 import { trackAffiliateClick, trackArticleEngagement } from '../lib/analytics';
+import { extractComponentData } from '../utils/markdown-renderer';
+import AffiliateButton from './AffiliateButton';
+import ServiceCTA from './ServiceCTA';
+import { createRoot } from 'react-dom/client';
 
 interface ArticleLayoutProps {
   service: Service;
@@ -11,11 +15,42 @@ interface ArticleLayoutProps {
   content: string;
   articleCategory?: string;
   articleId?: string;
+  services?: Service[];
 }
 
-export default function ArticleLayout({ service, title, publishDate, content, articleCategory, articleId }: ArticleLayoutProps) {
+export default function ArticleLayout({ service, title, publishDate, content, articleCategory, articleId, services = [] }: ArticleLayoutProps) {
   const [imageError, setImageError] = useState(false);
   const [defaultImageError, setDefaultImageError] = useState(false);
+  const contentRef = useRef<HTMLDivElement>(null);
+
+  // Render custom components in article content
+  useEffect(() => {
+    if (contentRef.current && content) {
+      const components = extractComponentData(content);
+      
+      components.forEach(({ type, elementId, props }) => {
+        const element = document.getElementById(elementId);
+        if (element) {
+          const root = createRoot(element);
+          
+          if (type === 'affiliate-button') {
+            root.render(
+              <AffiliateButton
+                {...props}
+                trackingId={props.trackingId || service.id}
+              />
+            );
+          } else if (type === 'service-cta') {
+            root.render(
+              <ServiceCTA
+                {...props}
+              />
+            );
+          }
+        }
+      });
+    }
+  }, [content, service.id]);
 
   // Article engagement tracking
   useEffect(() => {
@@ -98,6 +133,7 @@ export default function ArticleLayout({ service, title, publishDate, content, ar
         {/* Article Content */}
         <div className="bg-white rounded-2xl shadow-xl p-8 mb-8">
           <div 
+            ref={contentRef}
             className="prose prose-lg max-w-none 
               prose-headings:text-gray-900 prose-headings:font-bold prose-headings:tracking-tight
               prose-h1:text-3xl prose-h1:mb-8 prose-h1:mt-0 prose-h1:border-b prose-h1:border-gray-200 prose-h1:pb-4

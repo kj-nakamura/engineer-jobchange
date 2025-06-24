@@ -6,6 +6,7 @@ import fs from 'fs';
 import path from 'path';
 import matter from 'gray-matter';
 import { marked } from 'marked';
+import { processMarkdownToHTML } from '../../utils/markdown-renderer';
 
 interface ArticlePageProps {
   service: Service;
@@ -14,9 +15,11 @@ interface ArticlePageProps {
   publishDate: string;
   content: string;
   articleCategory?: string;
+  services: Service[];
+  articleId: string;
 }
 
-export default function ArticlePage({ service, title, description, publishDate, content, articleCategory }: ArticlePageProps) {
+export default function ArticlePage({ service, title, description, publishDate, content, articleCategory, services, articleId }: ArticlePageProps) {
   const pageTitle = `${title} | エンジニア転職ナビ`;
   
   return (
@@ -41,6 +44,8 @@ export default function ArticlePage({ service, title, description, publishDate, 
         publishDate={publishDate}
         content={content}
         articleCategory={articleCategory}
+        articleId={articleId}
+        services={services}
       />
     </>
   );
@@ -138,16 +143,15 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
   const markdownContent = fs.readFileSync(markdownPath, 'utf8');
   const { data, content } = matter(markdownContent);
 
-  // MarkdownをHTMLに変換
-  marked.setOptions({
-    breaks: true,
-    gfm: true,
-  });
-  
-  const htmlContent = await marked(content);
-
   // 記事カテゴリを推定（記事データがある場合はそのカテゴリ、ない場合は'services'）
   const category = article ? article.category : 'services';
+
+  // カスタムマークダウンレンダラーでHTMLに変換
+  const htmlContent = await processMarkdownToHTML(content, {
+    services: servicesData,
+    articleId: id as string,
+    articleCategory: category,
+  });
 
   return {
     props: {
@@ -157,6 +161,8 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
       publishDate: data.publishDate || '2025-06-23',
       content: htmlContent,
       articleCategory: category,
+      services: servicesData,
+      articleId: id as string,
     },
   };
 };
