@@ -1,7 +1,8 @@
 import { Service } from '../types';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { Article } from '../utils/articles-client';
+import { trackAffiliateClick, trackArticleEngagement } from '../lib/analytics';
 
 interface ArticleLayoutProps {
   service: Service;
@@ -9,11 +10,41 @@ interface ArticleLayoutProps {
   publishDate: string;
   content: string;
   articleCategory?: string;
+  articleId?: string;
 }
 
-export default function ArticleLayout({ service, title, publishDate, content, articleCategory }: ArticleLayoutProps) {
+export default function ArticleLayout({ service, title, publishDate, content, articleCategory, articleId }: ArticleLayoutProps) {
   const [imageError, setImageError] = useState(false);
   const [defaultImageError, setDefaultImageError] = useState(false);
+
+  // Article engagement tracking
+  useEffect(() => {
+    if (articleId && articleCategory) {
+      // Track article start reading
+      trackArticleEngagement(articleId, articleCategory, 'start_reading');
+
+      // Track scroll depth
+      let scroll50Tracked = false;
+      let scroll100Tracked = false;
+
+      const handleScroll = () => {
+        const scrollPercentage = (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
+        
+        if (scrollPercentage >= 50 && !scroll50Tracked) {
+          trackArticleEngagement(articleId, articleCategory, 'scroll_50');
+          scroll50Tracked = true;
+        }
+        
+        if (scrollPercentage >= 90 && !scroll100Tracked) {
+          trackArticleEngagement(articleId, articleCategory, 'scroll_100');
+          scroll100Tracked = true;
+        }
+      };
+
+      window.addEventListener('scroll', handleScroll);
+      return () => window.removeEventListener('scroll', handleScroll);
+    }
+  }, [articleId, articleCategory]);
 
   // カテゴリに基づいてデフォルト画像URLを取得
   const getDefaultImageUrl = (category?: string) => {
@@ -88,6 +119,18 @@ export default function ArticleLayout({ service, title, publishDate, content, ar
             href={service.url}
             target="_blank"
             rel="noopener noreferrer"
+            onClick={() => {
+              if (articleId && articleCategory) {
+                trackAffiliateClick({
+                  affiliate_id: service.name.toLowerCase(),
+                  affiliate_url: service.url,
+                  service_name: service.name,
+                  placement: 'article_bottom_cta',
+                  article_category: articleCategory,
+                  article_id: articleId,
+                });
+              }
+            }}
             className="group/official relative inline-flex items-center justify-center bg-gradient-to-br from-green-500 via-green-600 to-emerald-600 text-white px-8 py-4 rounded-xl font-semibold shadow-lg shadow-green-500/25 hover:shadow-xl hover:shadow-green-500/40 transition-all duration-300 transform hover:scale-[1.02] active:scale-[0.98] overflow-hidden"
           >
             <div className="absolute inset-0 bg-gradient-to-br from-white/20 to-transparent opacity-0 group-hover/official:opacity-100 transition-opacity duration-300"></div>

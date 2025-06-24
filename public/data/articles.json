@@ -1,5 +1,45 @@
 [
   {
+    "id": "java-engineer-career",
+    "title": "Javaエンジニアの転職完全ガイド【年収・スキル・キャリアパス】",
+    "description": "Javaエンジニアの転職市場を徹底解説。エンタープライズ開発、Spring Boot、クラウド移行など分野別の年収相場、必要スキル、キャリアパス、おすすめ転職サイトを詳しく紹介します。",
+    "publishDate": "2025-06-24",
+    "category": "job-types",
+    "tags": [
+      "Javaエンジニア",
+      "Java転職",
+      "Spring Boot",
+      "エンタープライズ",
+      "システム開発"
+    ],
+    "relatedArticles": [
+      "backend-engineer-career-path",
+      "python-engineer-career",
+      "engineer-salary-up-methods",
+      "enterprise-engineer-guide"
+    ]
+  },
+  {
+    "id": "python-engineer-career",
+    "title": "Pythonエンジニアの転職完全ガイド【年収・スキル・キャリアパス】",
+    "description": "Pythonエンジニアの転職市場を徹底解説。Web開発、データサイエンス、AI・機械学習など分野別の年収相場、必要スキル、キャリアパス、おすすめ転職サイトを詳しく紹介します。",
+    "publishDate": "2025-06-24",
+    "category": "job-types",
+    "tags": [
+      "Pythonエンジニア",
+      "Python転職",
+      "Web開発",
+      "データサイエンス",
+      "機械学習"
+    ],
+    "relatedArticles": [
+      "data-scientist",
+      "ai-engineer-career-trend",
+      "backend-engineer-career-path",
+      "engineer-salary-up-methods"
+    ]
+  },
+  {
     "id": "bizreach",
     "title": "ビズリーチの評判は？口コミから分かる特徴とメリット・デメリット",
     "description": "ビズリーチの実際の評判と口コミを徹底調査。ハイクラス転職サイトの特徴、メリット・デメリット、おすすめな人を詳しく解説します。",
@@ -422,6 +462,127 @@
       "devops-engineer",
       "cloud-engineer-demand",
       "container-technology-trends"
+    ]
+  },
+  {
+    "id": "go-engineer-career",
+    "title": "Go言語エンジニアの転職完全ガイド【年収・スキル・キャリアパス】",
+    "description": "Go言語エンジニアの転職市場を徹底解説。マイクロサービス、クラウドネイティブ、高性能バックエンド開発の年収相場、必要スキル、キャリアパス、おすすめ転職サイトを詳しく紹介します。",
+    "publishDate": "2025-06-24",
+    "category": "job-types",
+    "tags": [
+      "Go言語",
+      "Golang",
+      "マイクロサービス",
+      "クラウドネイティブ",
+      "バックエンド"
+    ],
+    "relatedArticles": [
+      "backend-engineer-career-path",
+      "python-engineer-career",
+      "kubernetes-engineer-demand",
+      "devops-engineer"
+    ]
+  },
+  {
+    "id": "php-engineer-career",
+    "title": "PHPエンジニアの転職完全ガイド【年収・スキル・キャリアパス】",
+    "description": "PHPエンジニアの転職市場を徹底解説。Web開発、Laravel、WordPress開発など分野別の年収相場、必要スキル、キャリアパス、おすすめ転職サイトを詳しく紹介します。",
+    "publishDate": "2025-06-24",
+    "category": "job-types",
+    "tags": [
+      "PHPエンジニア",
+      "PHP転職",
+      "Laravel",
+      "WordPress",
+      "Web開発"
+    ],
+    "relatedArticles": [
+      "backend-engineer-career-path",
+      "python-engineer-career",
+      "java-engineer-career",
+      "engineer-salary-up-methods"
+    ]
+  },
+  {
+    "id": "csharp-engineer-career",
+    "title": "C#エンジニアの転職完全ガイド【年収・スキル・キャリアパス】",
+    "description": "C#エンジニアの転職市場を徹底解説。.NET、ASP.NET Core、Xamarin、ゲーム開発など分野別の年収相場、必要スキル、キャリアパス、おすすめ転職サイトを詳しく紹介します。",
+    "publishDate": "2025-06-24",
+    "category": "job-types",
+    "tags": [
+      "C#エンジニア",
+      "C#転職",
+      ".NET",
+      "ASP.NET Core",
+      "Visual Studio"
+    ],
+    "relatedArticles": [
+      "backend-engineer-career-path",
+      "java-engineer-career",
+      "unity-game-developer",
+      "engineer-salary-up-methods"
+    ]
+  },
+  {
+    "id": "infrastructure-engineer-career",
+    "title": "インフラエンジニアの転職完全ガイド【年収・スキル・キャリアパス】",
+    "description": "インフラエンジニアの転職市場を徹底解説。クラウド、オンプレミス、SRE、DevOpsなど分野別の年収相場、必要スキル、キャリアパス、おすすめ転職サイトを詳しく紹介します。",
+    "publishDate": "2025-06-24",
+    "category": "job-types",
+    "tags": [
+      "インフラエンジニア",
+      "インフラ転職",
+      "AWS",
+      "Azure",
+      "SRE",
+      "DevOps"
+    ],
+    "relatedArticles": [
+      "devops-engineer",
+      "kubernetes-engineer-demand",
+      "backend-engineer-career-path",
+      "engineer-salary-up-methods"
+    ]
+  },
+  {
+    "id": "security-engineer-career",
+    "title": "セキュリティエンジニアの転職完全ガイド【年収・スキル・キャリアパス】",
+    "description": "セキュリティエンジニアの転職市場を徹底解説。サイバーセキュリティ、ペネトレーションテスト、CSIRT、SOCなど分野別の年収相場、必要スキル、キャリアパス、おすすめ転職サイトを詳しく紹介します。",
+    "publishDate": "2025-06-24",
+    "category": "job-types",
+    "tags": [
+      "セキュリティエンジニア",
+      "サイバーセキュリティ",
+      "情報セキュリティ",
+      "CISSP",
+      "ペネトレーションテスト"
+    ],
+    "relatedArticles": [
+      "infrastructure-engineer-career",
+      "devops-engineer",
+      "backend-engineer-career-path",
+      "engineer-salary-up-methods"
+    ]
+  },
+  {
+    "id": "20s-engineer-career-strategy",
+    "title": "20代エンジニアの転職戦略【キャリア形成と年収アップの完全ガイド】",
+    "description": "20代エンジニアのキャリア戦略を徹底解説。第二新卒、ポテンシャル採用、スキルアップ転職など年代別の転職タイミング、年収相場、おすすめ転職サイトを詳しく紹介します。",
+    "publishDate": "2025-06-24",
+    "category": "career-goals",
+    "tags": [
+      "20代転職",
+      "第二新卒", 
+      "若手エンジニア",
+      "キャリア戦略",
+      "年収アップ"
+    ],
+    "relatedArticles": [
+      "engineer-salary-up-methods",
+      "salary-negotiation-tips", 
+      "job-change-timing",
+      "technical-interview-preparation"
     ]
   },
   {
