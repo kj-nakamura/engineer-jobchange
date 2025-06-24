@@ -29,7 +29,9 @@
       "WebFetch(domain:www.green-japan.com)",
       "Bash(node:*)",
       "Bash(true)",
-      "Bash(mv:*)"
+      "Bash(mv:*)",
+      "Bash(curl:*)",
+      "Bash(grep:*)"
     ],
     "deny": [
       "Bash(rm:*)"
