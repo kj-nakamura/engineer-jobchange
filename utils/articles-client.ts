@@ -1,7 +1,4 @@
 import { Service } from '../types';
-import fs from 'fs';
-import path from 'path';
-import matter from 'gray-matter';
 
 export interface Article {
   id: string;
@@ -58,39 +55,6 @@ export const articleCategories: ArticleCategory[] = [
     description: '地域別のIT転職市場と企業情報'
   }
 ];
-
-// 全記事を取得する関数
-export function getAllArticles(): Article[] {
-  const articles: Article[] = [];
-  const articlesDir = path.join(process.cwd(), 'public/articles');
-  
-  // 各カテゴリのディレクトリを走査
-  articleCategories.forEach(category => {
-    const categoryDir = path.join(articlesDir, category.id);
-    
-    if (fs.existsSync(categoryDir)) {
-      const files = fs.readdirSync(categoryDir).filter(file => file.endsWith('.md'));
-      
-      files.forEach(file => {
-        const filePath = path.join(categoryDir, file);
-        const fileContent = fs.readFileSync(filePath, 'utf8');
-        const { data } = matter(fileContent);
-        
-        articles.push({
-          id: path.basename(file, '.md'),
-          title: data.title || '',
-          description: data.description || '',
-          publishDate: data.publishDate || '2025-06-23',
-          category: category.id,
-          tags: data.tags || [],
-          relatedArticles: data.relatedArticles || []
-        });
-      });
-    }
-  });
-  
-  return articles.sort((a, b) => new Date(b.publishDate).getTime() - new Date(a.publishDate).getTime());
-}
 
 // サービス記事のみを生成する関数（後方互換性のため）
 export function generateArticles(services: Service[]): Article[] {

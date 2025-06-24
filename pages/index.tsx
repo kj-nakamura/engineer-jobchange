@@ -2,10 +2,11 @@ import { useState, useEffect } from 'react';
 import Head from 'next/head';
 import { Service, TagData, RecommendationResult } from '../types';
 import { recommendServices } from '../utils/recommend';
-import { generateArticles, Article } from '../utils/articles';
+import { generateArticles, Article, articleCategories } from '../utils/articles-client';
 import TagSelector from '../components/TagSelector';
 import ServiceList from '../components/ServiceList';
 import ArticleList from '../components/ArticleList';
+import CategoryArticleList from '../components/CategoryArticleList';
 
 export default function Home() {
   const [services, setServices] = useState<Service[]>([]);
@@ -14,6 +15,7 @@ export default function Home() {
   const [selectedJobTypeTags, setSelectedJobTypeTags] = useState<string[]>([]);
   const [recommendation, setRecommendation] = useState<RecommendationResult | null>(null);
   const [articles, setArticles] = useState<Article[]>([]);
+  const [allArticles, setAllArticles] = useState<Article[]>([]);
 
   useEffect(() => {
     const loadData = async () => {
@@ -52,6 +54,21 @@ export default function Home() {
         // 記事データを生成
         const articlesData = generateArticles(servicesData);
         setArticles(articlesData);
+        
+        // 全記事を取得（JSONファイルから）
+        try {
+          const articlesRes = await fetch('/data/articles.json');
+          if (articlesRes.ok) {
+            const allArticlesData = await articlesRes.json();
+            setAllArticles(allArticlesData);
+          } else {
+            console.log('記事データが見つかりません');
+            setAllArticles([]);
+          }
+        } catch (error) {
+          console.log('記事データの読み込みに失敗:', error);
+          setAllArticles([]);
+        }
       } catch (error) {
         console.error('データの読み込みに失敗しました:', error);
         alert('データの読み込みに失敗しました。ページを再読み込みしてください。');
@@ -179,9 +196,17 @@ export default function Home() {
             />
           )}
 
-          {/* 記事リスト */}
+          {/* サービス記事リスト */}
           {articles.length > 0 && (
             <ArticleList articles={articles} />
+          )}
+
+          {/* カテゴリ別記事リスト */}
+          {allArticles.length > 0 && (
+            <CategoryArticleList 
+              categories={articleCategories.filter(cat => cat.id !== 'services')} 
+              articles={allArticles.filter(article => article.category !== 'services')} 
+            />
           )}
         </div>
       </div>

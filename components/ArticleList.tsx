@@ -1,13 +1,5 @@
 import Link from 'next/link';
-import { Service } from '../types';
-
-interface Article {
-  id: string;
-  title: string;
-  description: string;
-  publishDate: string;
-  service: Service;
-}
+import { Article } from '../utils/articles-client';
 
 interface ArticleListProps {
   articles: Article[];
@@ -41,7 +33,7 @@ export default function ArticleList({ articles }: ArticleListProps) {
                   </svg>
                 </div>
                 <span className="text-sm font-medium text-blue-600 bg-blue-50 px-3 py-1 rounded-full">
-                  {article.service.name}
+                  {article.service?.name || article.category}
                 </span>
               </div>
 

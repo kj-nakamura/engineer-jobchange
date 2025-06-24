@@ -48,13 +48,24 @@ export const getStaticPaths: GetStaticPaths = async () => {
   const servicesData = JSON.parse(
     fs.readFileSync(path.join(process.cwd(), 'public/data/services.json'), 'utf8')
   );
+  
+  // 記事データも読み込み
+  const articlesData = JSON.parse(
+    fs.readFileSync(path.join(process.cwd(), 'public/data/articles.json'), 'utf8')
+  );
 
-  const paths = servicesData.map((service: Service) => ({
+  // サービス記事のパスを追加
+  const servicePaths = servicesData.map((service: Service) => ({
     params: { id: service.id },
+  }));
+  
+  // 記事のパスを追加
+  const articlePaths = articlesData.map((article: any) => ({
+    params: { id: article.id },
   }));
 
   return {
-    paths,
+    paths: [...servicePaths, ...articlePaths],
     fallback: false,
   };
 };
@@ -67,7 +78,33 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
     fs.readFileSync(path.join(process.cwd(), 'public/data/services.json'), 'utf8')
   );
 
-  const service = servicesData.find((s: Service) => s.id === id);
+  // 記事データを取得
+  const articlesData = JSON.parse(
+    fs.readFileSync(path.join(process.cwd(), 'public/data/articles.json'), 'utf8')
+  );
+
+  // サービスまたは記事データを取得
+  let service = servicesData.find((s: Service) => s.id === id);
+  const article = articlesData.find((a: any) => a.id === id);
+
+  // 記事データがある場合、サービスデータがなくてもダミーのサービスを作成
+  if (article && !service) {
+    service = {
+      id: article.id,
+      name: article.category,
+      description: article.description,
+      tags: [],
+      motiveTags: [],
+      jobTypeTags: [],
+      url: '#',
+      features: [],
+      pros: [],
+      cons: [],
+      suitableFor: [],
+      pricing: '',
+      registration: ''
+    };
+  }
 
   if (!service) {
     return {
@@ -75,8 +112,20 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
     };
   }
 
-  // Markdownファイルを読み込み
-  const markdownPath = path.join(process.cwd(), 'public/articles', `${id}.md`);
+  // Markdownファイルを読み込み（サービス記事の場合はservicesフォルダから）
+  let markdownPath = path.join(process.cwd(), 'public/articles/services', `${id}.md`);
+  
+  // サービス記事が見つからない場合は、他のカテゴリを確認
+  if (!fs.existsSync(markdownPath)) {
+    const categories = ['job-types', 'career-goals', 'comparisons', 'guides', 'trends', 'regions'];
+    for (const category of categories) {
+      const categoryPath = path.join(process.cwd(), 'public/articles', category, `${id}.md`);
+      if (fs.existsSync(categoryPath)) {
+        markdownPath = categoryPath;
+        break;
+      }
+    }
+  }
   
   if (!fs.existsSync(markdownPath)) {
     return {

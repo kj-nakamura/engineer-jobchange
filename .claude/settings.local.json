@@ -28,7 +28,8 @@
       "WebFetch(domain:paiza.jp)",
       "WebFetch(domain:www.green-japan.com)",
       "Bash(node:*)",
-      "Bash(true)"
+      "Bash(true)",
+      "Bash(mv:*)"
     ],
     "deny": [
       "Bash(rm:*)"
