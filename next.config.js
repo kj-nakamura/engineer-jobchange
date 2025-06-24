@@ -1,6 +1,9 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
+  experimental: {
+    scrollRestoration: true,
+  },
   webpack: (config, { isServer }) => {
     // クライアントサイドで Node.js モジュールを使用しないように設定
     if (!isServer) {
