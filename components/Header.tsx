@@ -23,10 +23,10 @@ export default function Header() {
             <Link href="/" className="text-gray-600 hover:text-blue-600 transition-colors duration-200 font-medium">
               ホーム
             </Link>
-            <Link href="/#services" className="text-gray-600 hover:text-blue-600 transition-colors duration-200 font-medium">
+            <Link href="/services" className="text-gray-600 hover:text-blue-600 transition-colors duration-200 font-medium">
               サービス一覧
             </Link>
-            <Link href="/#articles" className="text-gray-600 hover:text-blue-600 transition-colors duration-200 font-medium">
+            <Link href="/articles" className="text-gray-600 hover:text-blue-600 transition-colors duration-200 font-medium">
               記事一覧
             </Link>
           </nav>
