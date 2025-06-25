@@ -85,6 +85,10 @@ describe('Home Page', () => {
         ok: true,
         json: () => Promise.resolve(mockTags)
       })
+      .mockResolvedValue({
+        ok: false,
+        status: 404
+      })
   })
 
   afterEach(() => {
