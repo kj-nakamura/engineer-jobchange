@@ -89,6 +89,9 @@ describe('Home Page', () => {
         ok: false,
         status: 404
       })
+    
+    // scrollIntoViewをモック
+    Element.prototype.scrollIntoView = jest.fn()
   })
 
   afterEach(() => {
@@ -108,19 +111,19 @@ describe('Home Page', () => {
       expect(screen.getByText(/あなたの転職動機と職種から/)).toBeInTheDocument()
     })
 
-    it('データ読み込み後にタグセレクターが表示される', async () => {
+    it('データ読み込み後にメインCTAボタンが表示される', async () => {
       render(<Home />)
       
       await waitFor(() => {
-        expect(screen.getAllByTestId('tag-selector')).toHaveLength(2)
+        expect(screen.getByText('条件から探す')).toBeInTheDocument()
       })
     })
 
-    it('初期状態では全てのサービスが表示される', async () => {
+    it('初期状態では人気サービスプレビューが表示される', async () => {
       render(<Home />)
       
       await waitFor(() => {
-        expect(screen.getByText('全ての転職サービス (2件)')).toBeInTheDocument()
+        expect(screen.getByText('人気の転職サービス')).toBeInTheDocument()
       })
     })
   })
@@ -163,133 +166,32 @@ describe('Home Page', () => {
     })
   })
 
-  describe('タグ選択機能', () => {
-    it('動機タグを選択できる', async () => {
-      const user = userEvent.setup()
+  describe('UI操作', () => {
+    it('CTAボタンが表示される', async () => {
       render(<Home />)
       
-      await waitFor(() => {
-        expect(screen.getByTestId('tag-high_salary')).toBeInTheDocument()
-      })
-      
-      await user.click(screen.getByTestId('tag-high_salary'))
-      
-      expect(screen.getByTestId('tag-high_salary')).toHaveClass('selected')
-    })
-
-    it('職種タグを選択できる', async () => {
-      const user = userEvent.setup()
-      render(<Home />)
-      
-      await waitFor(() => {
-        expect(screen.getByTestId('tag-frontend')).toBeInTheDocument()
-      })
-      
-      await user.click(screen.getByTestId('tag-frontend'))
-      
-      expect(screen.getByTestId('tag-frontend')).toHaveClass('selected')
-    })
-
-    it('選択したタグを解除できる', async () => {
-      const user = userEvent.setup()
-      render(<Home />)
-      
-      await waitFor(() => {
-        expect(screen.getByTestId('tag-high_salary')).toBeInTheDocument()
-      })
-      
-      // 選択
-      await user.click(screen.getByTestId('tag-high_salary'))
-      expect(screen.getByTestId('tag-high_salary')).toHaveClass('selected')
-      
-      // 解除
-      await user.click(screen.getByTestId('tag-high_salary'))
-      expect(screen.getByTestId('tag-high_salary')).not.toHaveClass('selected')
+      expect(screen.getByText('条件から探す')).toBeInTheDocument()
+      expect(screen.getByText('全サービス一覧')).toBeInTheDocument()
     })
   })
 
-  describe('レコメンド機能', () => {
-    it('動機のみ選択時は部分マッチのみ表示される', async () => {
-      const user = userEvent.setup()
+  describe('基本機能', () => {
+    it('データ読み込み後に人気サービスが表示される', async () => {
       render(<Home />)
       
       await waitFor(() => {
-        expect(screen.getByTestId('tag-high_salary')).toBeInTheDocument()
-      })
-      
-      await user.click(screen.getByTestId('tag-high_salary'))
-      
-      await waitFor(() => {
-        expect(screen.getByText(/こちらもおすすめ/)).toBeInTheDocument()
-        expect(screen.queryByText(/あなたにぴったりのサービス/)).not.toBeInTheDocument()
-      })
-    })
-
-    it('職種のみ選択時は部分マッチのみ表示される', async () => {
-      const user = userEvent.setup()
-      render(<Home />)
-      
-      await waitFor(() => {
-        expect(screen.getByTestId('tag-frontend')).toBeInTheDocument()
-      })
-      
-      await user.click(screen.getByTestId('tag-frontend'))
-      
-      await waitFor(() => {
-        expect(screen.getByText(/こちらもおすすめ/)).toBeInTheDocument()
-        expect(screen.queryByText(/あなたにぴったりのサービス/)).not.toBeInTheDocument()
-      })
-    })
-
-    it('動機と職種の両方選択時は完全マッチと部分マッチが表示される', async () => {
-      const user = userEvent.setup()
-      render(<Home />)
-      
-      await waitFor(() => {
-        expect(screen.getByTestId('tag-high_salary')).toBeInTheDocument()
-        expect(screen.getByTestId('tag-frontend')).toBeInTheDocument()
-      })
-      
-      await user.click(screen.getByTestId('tag-high_salary'))
-      await user.click(screen.getByTestId('tag-frontend'))
-      
-      await waitFor(() => {
-        expect(screen.getByText(/あなたにぴったりのサービス/)).toBeInTheDocument()
-        expect(screen.getByText(/こちらもおすすめ/)).toBeInTheDocument()
-      })
-    })
-
-    it('タグを全て解除すると全サービス表示に戻る', async () => {
-      const user = userEvent.setup()
-      render(<Home />)
-      
-      await waitFor(() => {
-        expect(screen.getByTestId('tag-high_salary')).toBeInTheDocument()
-      })
-      
-      // タグを選択
-      await user.click(screen.getByTestId('tag-high_salary'))
-      
-      await waitFor(() => {
-        expect(screen.getByText(/こちらもおすすめ/)).toBeInTheDocument()
-      })
-      
-      // タグを解除
-      await user.click(screen.getByTestId('tag-high_salary'))
-      
-      await waitFor(() => {
-        expect(screen.getByText('全ての転職サービス (2件)')).toBeInTheDocument()
+        expect(screen.getByText('人気の転職サービス')).toBeInTheDocument()
       })
     })
   })
 
   describe('レスポンシブデザイン', () => {
-    it('モバイル用のブレークポイントクラスが含まれる', async () => {
+    it('レスポンシブクラスが適用されている', async () => {
       render(<Home />)
       
-      // レスポンシブクラスをチェック（background-gradientは最上位のdivにある）
-      const mainContainer = screen.getByText('エンジニア転職ナビ').closest('[class*="bg-gradient"]')
-      expect(mainContainer).toBeInTheDocument()
+      // コンテナにレスポンシブクラスが適用されているかチェック
+      const container = screen.getByText('エンジニア転職ナビ').closest('.container')
+      expect(container).toBeInTheDocument()
     })
   })
 
