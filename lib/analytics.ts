@@ -1,6 +1,9 @@
 // Google Analytics 4 configuration
 export const GA_TRACKING_ID = process.env.NEXT_PUBLIC_GA_ID || '';
 
+// Check if analytics should be enabled (only in Vercel production)
+export const ANALYTICS_ENABLED = process.env.VERCEL_ENV === 'production' && GA_TRACKING_ID;
+
 // Custom event types for tracking
 export interface AnalyticsEvent {
   action: string;
@@ -32,6 +35,8 @@ declare global {
 
 // Log the pageview with Google Analytics
 export const pageview = (url: string) => {
+  if (!ANALYTICS_ENABLED) return;
+  
   if (typeof window !== 'undefined' && window.gtag) {
     window.gtag('config', GA_TRACKING_ID, {
       page_location: url,
@@ -41,6 +46,8 @@ export const pageview = (url: string) => {
 
 // Log specific events happening on the page
 export const event = ({ action, category, label, value, custom_parameters }: AnalyticsEvent) => {
+  if (!ANALYTICS_ENABLED) return;
+  
   if (typeof window !== 'undefined' && window.gtag) {
     window.gtag('event', action, {
       event_category: category,
@@ -53,6 +60,8 @@ export const event = ({ action, category, label, value, custom_parameters }: Ana
 
 // Specific affiliate click tracking
 export const trackAffiliateClick = (data: AffiliateEvent) => {
+  if (!ANALYTICS_ENABLED) return;
+  
   // Google Analytics event
   event({
     action: 'affiliate_click',
@@ -97,6 +106,8 @@ export const trackAffiliateClick = (data: AffiliateEvent) => {
 
 // Track article engagement
 export const trackArticleEngagement = (articleId: string, category: string, action: 'start_reading' | 'scroll_50' | 'scroll_100' | 'cta_view') => {
+  if (!ANALYTICS_ENABLED) return;
+  
   event({
     action: `article_${action}`,
     category: 'engagement',
@@ -110,6 +121,8 @@ export const trackArticleEngagement = (articleId: string, category: string, acti
 
 // Track search behavior
 export const trackSearch = (query: string, results_count: number, category?: string) => {
+  if (!ANALYTICS_ENABLED) return;
+  
   event({
     action: 'search',
     category: 'site_search',
@@ -146,7 +159,7 @@ function getUserId(): string {
 
 // Send accumulated analytics data to our endpoint
 async function sendAnalyticsData() {
-  if (typeof window === 'undefined') return;
+  if (!ANALYTICS_ENABLED || typeof window === 'undefined') return;
 
   try {
     const data = localStorage.getItem('affiliate_clicks');
@@ -176,7 +189,7 @@ async function sendAnalyticsData() {
 }
 
 // Set up periodic sending of analytics data
-if (typeof window !== 'undefined') {
+if (typeof window !== 'undefined' && ANALYTICS_ENABLED) {
   // Send data every 5 minutes
   setInterval(sendAnalyticsData, 5 * 60 * 1000);
   

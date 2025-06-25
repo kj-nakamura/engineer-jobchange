@@ -6,7 +6,7 @@ import Script from 'next/script'
 import '../styles/globals.css'
 import { useScrollRestoration } from '../hooks/useScrollRestoration'
 import Header from '../components/Header'
-import { GA_TRACKING_ID, pageview } from '../lib/analytics'
+import { GA_TRACKING_ID, ANALYTICS_ENABLED, pageview } from '../lib/analytics'
 
 export default function App({ Component, pageProps }: AppProps) {
   const router = useRouter()
@@ -31,8 +31,8 @@ export default function App({ Component, pageProps }: AppProps) {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
       
-      {/* Google Analytics 4 */}
-      {GA_TRACKING_ID && (
+      {/* Google Analytics 4 - Only in Vercel production */}
+      {ANALYTICS_ENABLED && (
         <>
           <Script
             strategy="afterInteractive"

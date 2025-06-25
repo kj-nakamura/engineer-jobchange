@@ -59,11 +59,29 @@ cd engineer-jobchange
 # 依存関係をインストール
 npm install
 
+# 環境変数設定（オプション）
+cp .env.example .env.local
+# .env.localでGoogle Analytics IDを設定
+
 # 開発サーバーを起動
 npm run dev
 ```
 
 http://localhost:3000 でアプリケーションが起動します。
+
+### 環境変数
+
+アナリティクス機能は**Vercelの本番環境でのみ**有効になります：
+
+```bash
+# .env.local (開発環境では無効)
+NEXT_PUBLIC_GA_ID=G-XXXXXXXXXX
+```
+
+**Vercelデプロイ時の設定:**
+1. Vercelダッシュボードで環境変数を設定
+2. `NEXT_PUBLIC_GA_ID` にGoogle Analytics 4のトラッキングIDを設定
+3. `VERCEL_ENV=production`で自動的にアナリティクスが有効化
 
 ### 利用可能なスクリプト
 
