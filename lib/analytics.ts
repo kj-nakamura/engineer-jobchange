@@ -1,18 +1,8 @@
 // Google Analytics 4 configuration
 export const GA_TRACKING_ID = process.env.NEXT_PUBLIC_GA_ID || '';
 
-// Check if analytics should be enabled (production or development with debug flag)
-export const ANALYTICS_ENABLED = GA_TRACKING_ID && (
-  process.env.VERCEL_ENV === 'production' || 
-  process.env.NODE_ENV === 'development' && (
-    process.env.NEXT_PUBLIC_ANALYTICS_DEBUG === 'true' || 
-    process.env.NEXT_PUBLIC_ANALYTICS_DEBUG === 'mock'
-  )
-);
-
-// Check if we should use mock analytics in development
-export const ANALYTICS_MOCK_MODE = process.env.NODE_ENV === 'development' && 
-  process.env.NEXT_PUBLIC_ANALYTICS_DEBUG === 'mock';
+// Check if analytics should be enabled (always enabled when GA_TRACKING_ID is present)
+export const ANALYTICS_ENABLED = !!GA_TRACKING_ID;
 
 // Custom event types for tracking
 export interface AnalyticsEvent {
@@ -45,24 +35,12 @@ declare global {
 
 // Log the pageview with Google Analytics
 export const pageview = (url: string) => {
-  if (!ANALYTICS_ENABLED) {
-    console.debug('Analytics disabled, skipping pageview');
-    return;
-  }
+  if (!ANALYTICS_ENABLED) return;
   
   if (typeof window !== 'undefined' && window.gtag) {
-    try {
-      window.gtag('config', GA_TRACKING_ID, {
-        page_location: url,
-      });
-      if (ANALYTICS_MOCK_MODE) {
-        console.log(`📊 Mock Analytics: Pageview tracked for ${url}`);
-      }
-    } catch (error) {
-      console.error('Failed to track pageview:', error);
-    }
-  } else {
-    console.warn('gtag function not available for pageview tracking');
+    window.gtag('config', GA_TRACKING_ID, {
+      page_location: url,
+    });
   }
 };
 
@@ -162,7 +140,7 @@ function getSessionId(): string {
   
   let sessionId = sessionStorage.getItem('session_id');
   if (!sessionId) {
-    sessionId = `session_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
+    sessionId = `session_${Date.now()}_${Math.random().toString(36).substring(2, 11)}`;
     sessionStorage.setItem('session_id', sessionId);
   }
   return sessionId;
@@ -173,7 +151,7 @@ function getUserId(): string {
   
   let userId = localStorage.getItem('user_id');
   if (!userId) {
-    userId = `user_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
+    userId = `user_${Date.now()}_${Math.random().toString(36).substring(2, 11)}`;
     localStorage.setItem('user_id', userId);
   }
   return userId;

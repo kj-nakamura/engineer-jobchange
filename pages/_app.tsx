@@ -1,31 +1,42 @@
 import type { AppProps } from 'next/app'
 import Head from 'next/head'
-import { useRouter } from 'next/router'
 import { useEffect } from 'react'
-import Script from 'next/script'
 import '../styles/globals.css'
 import { useScrollRestoration } from '../hooks/useScrollRestoration'
 import Header from '../components/Header'
-import { GA_TRACKING_ID, ANALYTICS_ENABLED, ANALYTICS_MOCK_MODE, pageview } from '../lib/analytics'
-import { logAnalyticsEnvironment } from '../lib/analytics-validation'
+import { GoogleAnalytics } from '@next/third-parties/google'
+import { GA_TRACKING_ID, ANALYTICS_ENABLED } from '../lib/analytics'
 
 export default function App({ Component, pageProps }: AppProps) {
-  const router = useRouter()
   useScrollRestoration()
   
   useEffect(() => {
-    // Log analytics environment on app initialization
-    logAnalyticsEnvironment()
+    console.log('🔍 Analytics Environment:', {
+      enabled: ANALYTICS_ENABLED,
+      trackingId: GA_TRACKING_ID,
+      trackingIdLength: GA_TRACKING_ID.length,
+      trackingIdValid: /^G-[A-Z0-9]{10}$/.test(GA_TRACKING_ID),
+      environment: process.env.NODE_ENV,
+      vercelEnv: process.env.VERCEL_ENV
+    })
     
-    const handleRouteChange = (url: string) => {
-      pageview(url)
+    // Validate Google Analytics ID format
+    if (GA_TRACKING_ID && !/^G-[A-Z0-9]{10}$/.test(GA_TRACKING_ID)) {
+      console.error('❌ Invalid Google Analytics ID format:', GA_TRACKING_ID)
+      console.log('Expected format: G-XXXXXXXXXX (where X is alphanumeric)')
     }
     
-    router.events.on('routeChangeComplete', handleRouteChange)
-    return () => {
-      router.events.off('routeChangeComplete', handleRouteChange)
-    }
-  }, [router.events])
+    // Test analytics functionality after initialization
+    setTimeout(() => {
+      if (typeof window !== 'undefined' && window.gtag) {
+        console.log('✅ Google Analytics gtag function is available')
+        console.log('📊 Google Analytics successfully loaded')
+      } else {
+        console.warn('❌ Google Analytics gtag function not available - likely due to 500 error')
+        console.log('🔄 This is expected if there are server issues with Google Tag Manager')
+      }
+    }, 3000)
+  }, [])
   
   return (
     <>
@@ -35,79 +46,8 @@ export default function App({ Component, pageProps }: AppProps) {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
       
-      {/* Google Analytics 4 - Development debug or Vercel production */}
-      {ANALYTICS_ENABLED && !ANALYTICS_MOCK_MODE && (
-        <>
-          <Script
-            strategy="afterInteractive"
-            src={`https://www.googletagmanager.com/gtag/js?id=${GA_TRACKING_ID}`}
-            onLoad={() => {
-              console.log('Google Analytics script loaded successfully')
-            }}
-            onError={(error) => {
-              console.error('❌ Failed to load Google Analytics script:', error)
-              console.error('GA_TRACKING_ID:', GA_TRACKING_ID)
-              console.error('Script URL:', `https://www.googletagmanager.com/gtag/js?id=${GA_TRACKING_ID}`)
-              console.error('Environment:', process.env.NODE_ENV)
-              console.error('Vercel Environment:', process.env.VERCEL_ENV)
-              
-              // Track the error for debugging
-              if (typeof window !== 'undefined') {
-                window.gtag = window.gtag || function() {
-                  console.warn('Google Analytics not loaded - using fallback function');
-                };
-              }
-            }}
-          />
-          <Script
-            id="google-analytics"
-            strategy="afterInteractive"
-            onLoad={() => {
-              console.log('Google Analytics configured')
-            }}
-            dangerouslySetInnerHTML={{
-              __html: `
-                window.dataLayer = window.dataLayer || [];
-                function gtag(){dataLayer.push(arguments);}
-                gtag('js', new Date());
-                gtag('config', '${GA_TRACKING_ID}', {
-                  page_location: window.location.href,
-                  page_title: document.title,
-                  send_page_view: true,
-                  debug_mode: ${process.env.NODE_ENV === 'development'}
-                });
-                console.log('Analytics initialized with ID: ${GA_TRACKING_ID}');
-              `,
-            }}
-          />
-        </>
-      )}
-      
-      {/* Mock Analytics for Development */}
-      {ANALYTICS_ENABLED && ANALYTICS_MOCK_MODE && (
-        <Script
-          id="mock-analytics"
-          strategy="afterInteractive"
-          dangerouslySetInnerHTML={{
-            __html: `
-              // Mock Google Analytics for development
-              window.dataLayer = window.dataLayer || [];
-              window.gtag = function gtag(){
-                console.log('Mock Analytics Event:', arguments);
-                window.dataLayer.push(arguments);
-              };
-              window.gtag('js', new Date());
-              window.gtag('config', '${GA_TRACKING_ID}', {
-                page_location: window.location.href,
-                page_title: document.title,
-                send_page_view: true,
-                debug_mode: true
-              });
-              console.log('Mock Analytics initialized with ID: ${GA_TRACKING_ID}');
-            `,
-          }}
-        />
-      )}
+      {/* Google Analytics - Using Next.js third-parties */}
+      {ANALYTICS_ENABLED && <GoogleAnalytics gaId={GA_TRACKING_ID} />}
       
       <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50">
         <Header />
