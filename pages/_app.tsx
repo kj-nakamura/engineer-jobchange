@@ -28,7 +28,7 @@ export default function App({ Component, pageProps }: AppProps) {
     
     // Test analytics functionality after initialization
     setTimeout(() => {
-      if (typeof window !== 'undefined' && window.gtag) {
+      if (typeof window !== 'undefined' && typeof window.gtag === 'function') {
         console.log('✅ Google Analytics gtag function is available')
         console.log('📊 Google Analytics successfully loaded')
       } else {
