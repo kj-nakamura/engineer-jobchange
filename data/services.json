@@ -94,5 +94,21 @@
     "url": "https://ai-tenshoku.com/",
     "motiveTags": ["high_salary", "career_up", "change_domain"],
     "jobTypeTags": ["ml"]
+  },
+  {
+    "id": "doda",
+    "name": "doda",
+    "description": "豊富な求人数を誇る大手転職サイト。ITエンジニア向けの専門サイトも用意されている。",
+    "url": "https://doda.jp/",
+    "motiveTags": ["career_up", "stable_env", "change_domain"],
+    "jobTypeTags": ["frontend", "backend", "pm", "generalist", "unexp"]
+  },
+  {
+    "id": "mynavi-it",
+    "name": "マイナビIT AGENT",
+    "description": "大手マイナビが運営するIT・Web業界専門の転職エージェント。",
+    "url": "https://mynavi-agent.jp/it/",
+    "motiveTags": ["career_up", "stable_env", "restart"],
+    "jobTypeTags": ["frontend", "backend", "mobile", "infra", "pm"]
   }
 ]
