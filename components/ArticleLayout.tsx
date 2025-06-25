@@ -7,6 +7,7 @@ import { extractComponentData } from '../utils/markdown-renderer';
 import AffiliateButton from './AffiliateButton';
 import ServiceCTA from './ServiceCTA';
 import TableOfContents from './TableOfContents';
+import RelatedArticles from './RelatedArticles';
 import { createRoot } from 'react-dom/client';
 
 interface ArticleLayoutProps {
@@ -17,9 +18,10 @@ interface ArticleLayoutProps {
   articleCategory?: string;
   articleId?: string;
   services?: Service[];
+  relatedArticles?: Article[];
 }
 
-export default function ArticleLayout({ service, title, publishDate, content, articleCategory, articleId, services = [] }: ArticleLayoutProps) {
+export default function ArticleLayout({ service, title, publishDate, content, articleCategory, articleId, services = [], relatedArticles = [] }: ArticleLayoutProps) {
   const [imageError, setImageError] = useState(false);
   const [defaultImageError, setDefaultImageError] = useState(false);
   const contentRef = useRef<HTMLDivElement>(null);
@@ -257,6 +259,13 @@ export default function ArticleLayout({ service, title, publishDate, content, ar
             </div>
           </div>
         </div>
+
+        {/* Related Articles */}
+        {relatedArticles.length > 0 && (
+          <div className="mt-12">
+            <RelatedArticles relatedArticles={relatedArticles} />
+          </div>
+        )}
     </div>
   );
 }
