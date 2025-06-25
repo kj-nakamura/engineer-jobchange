@@ -181,6 +181,26 @@
     ]
   },
   {
+    "id": "freelance-engineer-guide",
+    "title": "フリーランスエンジニア転向完全ガイド【案件獲得・年収・税務】",
+    "description": "フリーランスエンジニアへの転向を成功させる完全ガイド。案件獲得方法、年収相場、必要スキル、税務・法務知識、おすすめエージェントまで詳しく解説します。",
+    "publishDate": "2025-06-24",
+    "category": "career-goals",
+    "tags": [
+      "フリーランス",
+      "業務委託",
+      "案件獲得",
+      "個人事業主",
+      "働き方改革"
+    ],
+    "relatedArticles": [
+      "remote-work-engineering-jobs",
+      "engineer-salary-up-methods",
+      "30s-engineer-career-strategy",
+      "salary-negotiation-tips"
+    ]
+  },
+  {
     "id": "unexperienced-engineer-career",
     "title": "未経験からエンジニア転職の完全ロードマップ【成功率90%の戦略】",
     "description": "未経験からエンジニア転職を成功させる完全ガイド。学習方法、ポートフォリオ作成、転職活動の進め方、おすすめプログラミングスクール、転職サイトまで詳しく解説します。",
@@ -201,23 +221,103 @@
     ]
   },
   {
-    "id": "freelance-engineer-guide",
-    "title": "フリーランスエンジニア転向完全ガイド【案件獲得・年収・税務】",
-    "description": "フリーランスエンジニアへの転向を成功させる完全ガイド。案件獲得方法、年収相場、必要スキル、税務・法務知識、おすすめエージェントまで詳しく解説します。",
+    "id": "advanced-technical-interview-guide",
+    "title": "エンジニア技術面接完全攻略ガイド【2025年最新版】",
+    "description": "エンジニア技術面接で問われる質問と回答例、対策方法を徹底解説。コーディングテスト、システム設計、アルゴリズム問題から面接官の評価ポイントまで網羅的に紹介します。",
     "publishDate": "2025-06-24",
-    "category": "career-goals",
+    "category": "guides",
     "tags": [
-      "フリーランス",
-      "業務委託",
-      "案件獲得",
-      "個人事業主",
-      "働き方改革"
+      "技術面接",
+      "コーディングテスト",
+      "システム設計",
+      "アルゴリズム",
+      "面接対策"
     ],
     "relatedArticles": [
-      "remote-work-engineering-jobs",
+      "portfolio-creation-guide",
+      "engineer-resume-template",
+      "20s-engineer-career-strategy",
+      "30s-engineer-career-strategy"
+    ]
+  },
+  {
+    "id": "career-change-to-engineer-guide",
+    "title": "異業種からエンジニア転職の完全ガイド【成功事例と実践的ステップ】",
+    "description": "異業種からエンジニアへのキャリアチェンジを成功させる完全ガイド。営業、事務、製造業などの経験を活かしたエンジニア転職の戦略、学習方法、面接対策まで詳しく解説します。",
+    "publishDate": "2025-06-24",
+    "category": "guides",
+    "tags": [
+      "異業種転職",
+      "キャリアチェンジ",
+      "エンジニア転職",
+      "未経験",
+      "学習方法"
+    ],
+    "relatedArticles": [
+      "unexperienced-engineer-career",
+      "20s-engineer-career-strategy",
+      "portfolio-best-practices-guide",
+      "engineer-resume-writing-guide"
+    ]
+  },
+  {
+    "id": "engineer-resume-writing-guide",
+    "title": "エンジニア転職で勝つ履歴書・職務経歴書の書き方【通過率95%テンプレート】",
+    "description": "エンジニア転職の書類選考通過率を95%にする履歴書・職務経歴書の書き方を徹底解説。技術スキルの効果的なアピール方法、プロジェクト経験の表現術、テンプレート付き完全ガイドです。",
+    "publishDate": "2025-06-24",
+    "category": "guides",
+    "tags": [
+      "履歴書",
+      "職務経歴書",
+      "書類選考",
+      "転職",
+      "テンプレート"
+    ],
+    "relatedArticles": [
+      "portfolio-best-practices-guide",
+      "advanced-technical-interview-guide",
+      "unexperienced-engineer-career",
+      "20s-engineer-career-strategy"
+    ]
+  },
+  {
+    "id": "portfolio-best-practices-guide",
+    "title": "エンジニア転職で差がつくポートフォリオ作成完全ガイド【採用確率90%アップ】",
+    "description": "転職で採用される強力なポートフォリオの作成方法を詳しく解説。GitHub活用法、プロジェクト選定、技術スタック、デモサイト構築から面接でのアピール方法まで完全ガイドです。",
+    "publishDate": "2025-06-24",
+    "category": "guides",
+    "tags": [
+      "ポートフォリオ",
+      "GitHub",
+      "転職",
+      "プロジェクト",
+      "実績アピール"
+    ],
+    "relatedArticles": [
+      "advanced-technical-interview-guide",
+      "engineer-resume-template",
+      "unexperienced-engineer-career",
+      "20s-engineer-career-strategy"
+    ]
+  },
+  {
+    "id": "salary-negotiation-complete-guide",
+    "title": "エンジニア転職の年収交渉術【成功率90%のテクニック大全】",
+    "description": "エンジニア転職で年収アップを実現する交渉術を徹底解説。適正年収の調べ方、交渉タイミング、具体的な交渉文例から心理学的アプローチまで成功ノウハウを完全網羅します。",
+    "publishDate": "2025-06-24",
+    "category": "guides",
+    "tags": [
+      "年収交渉",
+      "年収アップ",
+      "転職交渉",
+      "給与交渉",
+      "エンジニア転職"
+    ],
+    "relatedArticles": [
       "engineer-salary-up-methods",
+      "20s-engineer-career-strategy",
       "30s-engineer-career-strategy",
-      "salary-negotiation-tips"
+      "freelance-engineer-guide"
     ]
   },
   {
@@ -643,66 +743,6 @@
       "devops-engineer",
       "cloud-engineer-demand",
       "container-technology-trends"
-    ]
-  },
-  {
-    "id": "engineer-resume-writing-guide",
-    "title": "エンジニア転職で勝つ履歴書・職務経歴書の書き方【通過率95%テンプレート】",
-    "description": "エンジニア転職の書類選考通過率を95%にする履歴書・職務経歴書の書き方を徹底解説。技術スキルの効果的なアピール方法、プロジェクト経験の表現術、テンプレート付き完全ガイドです。",
-    "publishDate": "2025-06-24",
-    "category": "guides",
-    "tags": [
-      "履歴書",
-      "職務経歴書",
-      "書類選考",
-      "転職",
-      "テンプレート"
-    ],
-    "relatedArticles": [
-      "portfolio-best-practices-guide",
-      "advanced-technical-interview-guide",
-      "unexperienced-engineer-career",
-      "20s-engineer-career-strategy"
-    ]
-  },
-  {
-    "id": "salary-negotiation-complete-guide",
-    "title": "エンジニア転職の年収交渉術【成功率90%のテクニック大全】",
-    "description": "エンジニア転職で年収アップを実現する交渉術を徹底解説。適正年収の調べ方、交渉タイミング、具体的な交渉文例から心理学的アプローチまで成功ノウハウを完全網羅します。",
-    "publishDate": "2025-06-24",
-    "category": "guides",
-    "tags": [
-      "年収交渉",
-      "年収アップ",
-      "転職交渉",
-      "給与交渉",
-      "エンジニア転職"
-    ],
-    "relatedArticles": [
-      "engineer-salary-up-methods",
-      "20s-engineer-career-strategy",
-      "30s-engineer-career-strategy",
-      "freelance-engineer-guide"
-    ]
-  },
-  {
-    "id": "career-change-to-engineer-guide",
-    "title": "異業種からエンジニア転職の完全ガイド【成功事例と実践的ステップ】",
-    "description": "異業種からエンジニアへのキャリアチェンジを成功させる完全ガイド。営業、事務、製造業などの経験を活かしたエンジニア転職の戦略、学習方法、面接対策まで詳しく解説します。",
-    "publishDate": "2025-06-24",
-    "category": "guides",
-    "tags": [
-      "異業種転職",
-      "キャリアチェンジ",
-      "エンジニア転職",
-      "未経験",
-      "学習方法"
-    ],
-    "relatedArticles": [
-      "unexperienced-engineer-career",
-      "20s-engineer-career-strategy",
-      "portfolio-best-practices-guide",
-      "engineer-resume-writing-guide"
     ]
   },
   {
