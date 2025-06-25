@@ -1,8 +1,18 @@
 // Google Analytics 4 configuration
 export const GA_TRACKING_ID = process.env.NEXT_PUBLIC_GA_ID || '';
 
-// Check if analytics should be enabled (only in Vercel production)
-export const ANALYTICS_ENABLED = process.env.VERCEL_ENV === 'production' && GA_TRACKING_ID;
+// Check if analytics should be enabled (production or development with debug flag)
+export const ANALYTICS_ENABLED = GA_TRACKING_ID && (
+  process.env.VERCEL_ENV === 'production' || 
+  process.env.NODE_ENV === 'development' && (
+    process.env.NEXT_PUBLIC_ANALYTICS_DEBUG === 'true' || 
+    process.env.NEXT_PUBLIC_ANALYTICS_DEBUG === 'mock'
+  )
+);
+
+// Check if we should use mock analytics in development
+export const ANALYTICS_MOCK_MODE = process.env.NODE_ENV === 'development' && 
+  process.env.NEXT_PUBLIC_ANALYTICS_DEBUG === 'mock';
 
 // Custom event types for tracking
 export interface AnalyticsEvent {
@@ -35,12 +45,24 @@ declare global {
 
 // Log the pageview with Google Analytics
 export const pageview = (url: string) => {
-  if (!ANALYTICS_ENABLED) return;
+  if (!ANALYTICS_ENABLED) {
+    console.debug('Analytics disabled, skipping pageview');
+    return;
+  }
   
   if (typeof window !== 'undefined' && window.gtag) {
-    window.gtag('config', GA_TRACKING_ID, {
-      page_location: url,
-    });
+    try {
+      window.gtag('config', GA_TRACKING_ID, {
+        page_location: url,
+      });
+      if (ANALYTICS_MOCK_MODE) {
+        console.log(`📊 Mock Analytics: Pageview tracked for ${url}`);
+      }
+    } catch (error) {
+      console.error('Failed to track pageview:', error);
+    }
+  } else {
+    console.warn('gtag function not available for pageview tracking');
   }
 };
 

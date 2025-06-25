@@ -32,7 +32,8 @@
       "Bash(mv:*)",
       "Bash(curl:*)",
       "Bash(grep:*)",
-      "Bash(rg:*)"
+      "Bash(rg:*)",
+      "Bash(echo:*)"
     ],
     "deny": [
       "Bash(rm:*)"
