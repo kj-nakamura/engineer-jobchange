@@ -98,7 +98,15 @@ export async function processMarkdownToHTML(markdown: string, data: ComponentDat
   
   const htmlContent = await marked(processedMarkdown);
   
-  return htmlContent;
+  // 3. h1タグを削除（記事レイアウトのh1タグと重複を避けるため）
+  const htmlWithoutH1 = removeH1Tags(htmlContent);
+  
+  return htmlWithoutH1;
+}
+
+// HTMLからh1タグを削除する関数
+function removeH1Tags(htmlContent: string): string {
+  return htmlContent.replace(/<h1[^>]*>.*?<\/h1>/gi, '');
 }
 
 // クライアントサイドでのコンポーネント描画用

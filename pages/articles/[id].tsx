@@ -4,6 +4,7 @@ import { useEffect } from 'react';
 import { Service } from '../../types';
 import ArticleLayout from '../../components/ArticleLayout';
 import { trackArticleEngagement } from '../../lib/analytics';
+import { Article } from '../../utils/articles-client';
 import fs from 'fs';
 import path from 'path';
 import matter from 'gray-matter';
@@ -19,9 +20,10 @@ interface ArticlePageProps {
   articleCategory?: string;
   services: Service[];
   articleId: string;
+  relatedArticles: Article[];
 }
 
-export default function ArticlePage({ service, title, description, publishDate, content, articleCategory, services, articleId }: ArticlePageProps) {
+export default function ArticlePage({ service, title, description, publishDate, content, articleCategory, services, articleId, relatedArticles }: ArticlePageProps) {
   const pageTitle = `${title} | エンジニア転職ナビ`;
   
   useEffect(() => {
@@ -69,6 +71,7 @@ export default function ArticlePage({ service, title, description, publishDate, 
         articleCategory={articleCategory}
         articleId={articleId}
         services={services}
+        relatedArticles={relatedArticles}
       />
     </>
   );
@@ -176,6 +179,13 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
     articleCategory: category,
   });
 
+  // 関連記事を取得
+  const relatedArticleIds = article?.relatedArticles || [];
+  const relatedArticles = relatedArticleIds
+    .map((relatedId: string) => articlesData.find((a: any) => a.id === relatedId))
+    .filter(Boolean) // 存在しない記事IDを除外
+    .slice(0, 4); // 最大4件まで
+
   return {
     props: {
       service,
@@ -186,6 +196,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
       articleCategory: category,
       services: servicesData,
       articleId: id as string,
+      relatedArticles,
     },
   };
 };

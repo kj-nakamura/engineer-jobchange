@@ -72,15 +72,15 @@ export default function CategoryArticleList({ categories, articles }: CategoryAr
                         )}
                       </div>
 
-                      {/* 記事タイトル */}
-                      <h4 className="text-lg font-semibold text-gray-900 mb-2 group-hover:text-blue-700 transition-colors duration-200 line-clamp-2">
-                        {article.title}
-                      </h4>
-
-                      {/* 記事説明 */}
-                      <p className="text-gray-600 text-sm mb-4 line-clamp-2 leading-relaxed">
-                        {article.description}
-                      </p>
+                      {/* 記事タイトル・説明統合ブロック */}
+                      <div className="mb-4">
+                        <h4 className="text-base font-semibold text-gray-800 mb-1.5 group-hover:text-blue-700 transition-colors duration-200 line-clamp-2">
+                          {article.title}
+                        </h4>
+                        <p className="text-gray-700 text-sm line-clamp-2 leading-relaxed">
+                          {article.description}
+                        </p>
+                      </div>
 
                       {/* 公開日とCTA */}
                       <div className="flex items-center justify-between">
@@ -104,14 +104,17 @@ export default function CategoryArticleList({ categories, articles }: CategoryAr
 
               {/* もっと見るリンク */}
               {categoryArticles.length > 6 && (
-                <div className="text-center mt-6">
+                <div className="text-center mt-8">
                   <Link
                     href={`/categories/${category.id}`}
-                    className="inline-flex items-center text-blue-600 hover:text-blue-700 font-medium"
+                    className="inline-flex items-center px-6 py-3 bg-gradient-to-r from-slate-50 to-gray-50 hover:from-blue-50 hover:to-indigo-50 text-gray-700 hover:text-blue-700 font-semibold rounded-xl border border-gray-200 hover:border-blue-300 transition-all duration-300 hover:shadow-md hover:shadow-gray-200/50 hover:-translate-y-0.5 group"
                   >
+                    <svg className="w-4 h-4 mr-2 transition-all duration-300 group-hover:scale-110 group-hover:text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C20.168 18.477 18.582 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+                    </svg>
                     {category.name}の記事をもっと見る
-                    <svg className="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                    <svg className="w-4 h-4 ml-2 transition-transform duration-300 group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                     </svg>
                   </Link>
                 </div>

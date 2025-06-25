@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import Head from 'next/head';
+import { useRouter } from 'next/router';
 import { Service, TagData, RecommendationResult } from '../types';
 import { recommendServices } from '../utils/recommend';
 import { generateArticles, Article, articleCategories } from '../utils/articles-client';
@@ -9,9 +10,9 @@ import ArticleList from '../components/ArticleList';
 import CategoryArticleList from '../components/CategoryArticleList';
 import TagSelectionModal from '../components/TagSelectionModal';
 import PopularServicesPreview from '../components/PopularServicesPreview';
-import FeaturedArticlesPreview from '../components/FeaturedArticlesPreview';
 
 export default function Home() {
+  const router = useRouter();
   const [services, setServices] = useState<Service[]>([]);
   const [tags, setTags] = useState<TagData>({ motiveTags: [], jobTypeTags: [] });
   const [selectedMotiveTags, setSelectedMotiveTags] = useState<string[]>([]);
@@ -20,10 +21,6 @@ export default function Home() {
   const [articles, setArticles] = useState<Article[]>([]);
   const [allArticles, setAllArticles] = useState<Article[]>([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [showAllServices, setShowAllServices] = useState(false);
-  const [showAllArticles, setShowAllArticles] = useState(false);
-  const servicesRef = useRef<HTMLDivElement>(null);
-  const articlesRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const loadData = async () => {
@@ -136,25 +133,21 @@ export default function Home() {
   };
 
   const handleShowResults = () => {
-    setShowAllServices(true);
-    setTimeout(() => {
-      servicesRef.current?.scrollIntoView({ behavior: 'smooth' });
-    }, 100);
+    // 選択した条件をクエリパラメータとして渡す
+    const params = new URLSearchParams();
+    if (selectedMotiveTags.length > 0) {
+      params.set('motiveTags', selectedMotiveTags.join(','));
+    }
+    if (selectedJobTypeTags.length > 0) {
+      params.set('jobTypeTags', selectedJobTypeTags.join(','));
+    }
+    router.push(`/services?${params.toString()}`);
   };
 
   const handleViewAllServices = () => {
-    setShowAllServices(true);
-    setTimeout(() => {
-      servicesRef.current?.scrollIntoView({ behavior: 'smooth' });
-    }, 100);
+    router.push('/services');
   };
 
-  const handleViewAllArticles = () => {
-    setShowAllArticles(true);
-    setTimeout(() => {
-      articlesRef.current?.scrollIntoView({ behavior: 'smooth' });
-    }, 100);
-  };
 
   return (
     <>
@@ -214,64 +207,27 @@ export default function Home() {
 
         <div className="max-w-7xl mx-auto">
           {/* 人気サービスプレビュー */}
-          {!showAllServices && services.length > 0 && (
+          {services.length > 0 && (
             <PopularServicesPreview 
               services={services} 
-              onViewAll={handleViewAllServices}
             />
           )}
           
-          {/* 注目記事プレビュー */}
-          {!showAllArticles && articles.length > 0 && (
-            <FeaturedArticlesPreview 
-              articles={articles} 
-              onViewAllArticles={handleViewAllArticles}
-            />
-          )}
+          {/* 記事一覧 */}
+          <div>
+            {/* サービス記事リスト */}
+            {articles.length > 0 && (
+              <ArticleList articles={articles} />
+            )}
 
-          {/* サービス結果エリア */}
-          {showAllServices && (
-            <div ref={servicesRef}>
-              {recommendation ? (
-                <div>
-                  {selectedMotiveTags.length > 0 && selectedJobTypeTags.length > 0 && (
-                    <ServiceList
-                      title="🎯 あなたにぴったりのサービス"
-                      services={recommendation.exactMatch}
-                    />
-                  )}
-                  
-                  <ServiceList
-                    title="💡 こちらもおすすめ"
-                    services={recommendation.partialMatch}
-                  />
-                </div>
-              ) : (
-                <ServiceList
-                  title="全ての転職サービス"
-                  services={services}
-                />
-              )}
-            </div>
-          )}
-
-          {/* 記事エリア */}
-          {showAllArticles && (
-            <div ref={articlesRef}>
-              {/* サービス記事リスト */}
-              {articles.length > 0 && (
-                <ArticleList articles={articles} />
-              )}
-
-              {/* カテゴリ別記事リスト */}
-              {allArticles.length > 0 && (
-                <CategoryArticleList 
-                  categories={articleCategories.filter(cat => cat.id !== 'services')} 
-                  articles={allArticles.filter(article => article.category !== 'services')} 
-                />
-              )}
-            </div>
-          )}
+            {/* カテゴリ別記事リスト */}
+            {allArticles.length > 0 && (
+              <CategoryArticleList 
+                categories={articleCategories.filter(cat => cat.id !== 'services')} 
+                articles={allArticles.filter(article => article.category !== 'services')} 
+              />
+            )}
+          </div>
         </div>
         
         {/* タグ選択モーダル */}
