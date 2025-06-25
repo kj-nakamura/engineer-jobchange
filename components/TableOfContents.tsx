@@ -75,7 +75,13 @@ export default function TableOfContents({ content }: TableOfContentsProps) {
   const scrollToHeading = (id: string) => {
     const element = document.getElementById(id);
     if (element) {
-      element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      const elementPosition = element.offsetTop;
+      const offsetPosition = elementPosition - 100; // ヘッダー余白を考慮
+
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: 'smooth'
+      });
     }
   };
 
@@ -111,38 +117,54 @@ export default function TableOfContents({ content }: TableOfContentsProps) {
 
       {/* 目次リスト */}
       <div className={`transition-all duration-300 ${isCollapsed ? 'max-h-0' : 'max-h-96'} overflow-hidden`}>
-        <nav className="p-2 max-h-80 overflow-y-auto">
+        <nav className="p-4 max-h-80 overflow-y-auto">
           <ul className="space-y-1">
             {tocItems.map((item) => (
               <li key={item.id}>
                 <button
                   onClick={() => scrollToHeading(item.id)}
                   className={`
-                    w-full text-left px-3 py-2 rounded-lg transition-all duration-200 hover:bg-blue-50 group
+                    w-full text-left transition-all duration-200 hover:bg-blue-50 group rounded-lg
                     ${activeId === item.id 
-                      ? 'bg-blue-100 text-blue-700 border-l-4 border-blue-500' 
+                      ? 'bg-blue-100 text-blue-700' 
                       : 'text-gray-700 hover:text-blue-600'
                     }
+                    ${item.level === 2 ? 'py-3 px-4' : 'py-2 px-6'}
                   `}
                   style={{ 
-                    paddingLeft: `${12 + (item.level - 1) * 16}px` 
+                    marginLeft: item.level === 2 ? '0' : '16px'
                   }}
                 >
                   <div className="flex items-center">
-                    {activeId === item.id && (
-                      <div className="w-1.5 h-1.5 bg-blue-500 rounded-full mr-2 animate-pulse"></div>
+                    {/* レベル別インジケーター */}
+                    {item.level === 2 && (
+                      <div className={`w-2 h-2 rounded-full mr-3 flex-shrink-0 ${
+                        activeId === item.id ? 'bg-blue-500' : 'bg-gray-300 group-hover:bg-blue-400'
+                      }`}></div>
                     )}
-                    <span className={`text-sm leading-relaxed ${
-                      item.level === 1 ? 'font-semibold' : 
-                      item.level === 2 ? 'font-medium' : 'font-normal'
+                    {item.level === 3 && (
+                      <div className={`w-1.5 h-1.5 rounded-full mr-3 flex-shrink-0 ${
+                        activeId === item.id ? 'bg-blue-500' : 'bg-gray-400 group-hover:bg-blue-400'
+                      }`}></div>
+                    )}
+                    {item.level >= 4 && (
+                      <div className={`w-1 h-1 rounded-full mr-3 flex-shrink-0 ${
+                        activeId === item.id ? 'bg-blue-500' : 'bg-gray-500 group-hover:bg-blue-400'
+                      }`}></div>
+                    )}
+                    
+                    <span className={`leading-relaxed ${
+                      item.level === 2 ? 'text-sm font-semibold' :
+                      item.level === 3 ? 'text-sm font-medium' :
+                      'text-xs font-normal'
                     }`}>
                       {item.title}
                     </span>
                   </div>
                   
-                  {/* ホバー時のインジケーター */}
-                  {activeId !== item.id && (
-                    <div className="w-0 group-hover:w-2 h-0.5 bg-blue-400 mt-1 transition-all duration-200 rounded-full"></div>
+                  {/* アクティブ時の左ボーダー */}
+                  {activeId === item.id && (
+                    <div className="absolute left-0 top-0 bottom-0 w-1 bg-blue-500 rounded-r-full"></div>
                   )}
                 </button>
               </li>

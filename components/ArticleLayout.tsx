@@ -24,9 +24,18 @@ export default function ArticleLayout({ service, title, publishDate, content, ar
   const [defaultImageError, setDefaultImageError] = useState(false);
   const contentRef = useRef<HTMLDivElement>(null);
 
-  // Render custom components in article content
+  // Render custom components in article content and add IDs to headings
   useEffect(() => {
     if (contentRef.current && content) {
+      // Add IDs to heading elements for table of contents navigation
+      const headers = contentRef.current.querySelectorAll('h1, h2, h3, h4, h5, h6');
+      headers.forEach((header, index) => {
+        if (!header.id) {
+          header.id = `heading-${index}`;
+        }
+      });
+
+      // Render custom components
       const components = extractComponentData(content);
       
       components.forEach(({ type, elementId, props }) => {
@@ -211,38 +220,40 @@ export default function ArticleLayout({ service, title, publishDate, content, ar
               {/* Table of Contents */}
               <TableOfContents content={content} />
               
-              {/* Service Info Card */}
-              <div className="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-xl p-6 border border-blue-200">
-                <div className="flex items-center mb-4">
-                  <div className="w-12 h-12 bg-gradient-to-br from-blue-100 to-indigo-100 rounded-xl flex items-center justify-center mr-4">
-                    {!imageError && service.imageUrl ? (
-                      <img 
-                        src={service.imageUrl} 
-                        alt={`${service.name} logo`}
-                        className="w-8 h-8 object-contain"
-                        onError={() => setImageError(true)}
-                      />
-                    ) : (
-                      <svg className="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" />
-                      </svg>
-                    )}
+              {/* Service Info Card - Only show for service category articles */}
+              {articleCategory === 'services' && (
+                <div className="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-xl p-6 border border-blue-200">
+                  <div className="flex items-center mb-4">
+                    <div className="w-12 h-12 bg-gradient-to-br from-blue-100 to-indigo-100 rounded-xl flex items-center justify-center mr-4">
+                      {!imageError && service.imageUrl ? (
+                        <img 
+                          src={service.imageUrl} 
+                          alt={`${service.name} logo`}
+                          className="w-8 h-8 object-contain"
+                          onError={() => setImageError(true)}
+                        />
+                      ) : (
+                        <svg className="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" />
+                        </svg>
+                      )}
+                    </div>
+                    <h3 className="font-bold text-gray-800">{service.name}</h3>
                   </div>
-                  <h3 className="font-bold text-gray-800">{service.name}</h3>
+                  <p className="text-sm text-gray-600 mb-4">{service.description}</p>
+                  <a
+                    href={service.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center justify-center w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-4 rounded-lg transition-colors duration-200"
+                  >
+                    公式サイトを見る
+                    <svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                    </svg>
+                  </a>
                 </div>
-                <p className="text-sm text-gray-600 mb-4">{service.description}</p>
-                <a
-                  href={service.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center justify-center w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-4 rounded-lg transition-colors duration-200"
-                >
-                  公式サイトを見る
-                  <svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-                  </svg>
-                </a>
-              </div>
+              )}
             </div>
           </div>
         </div>
