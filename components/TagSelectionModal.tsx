@@ -151,23 +151,23 @@ export default function TagSelectionModal({
                   </span>
                 )}
               </div>
-              <div className="flex gap-3">
-                <button
-                  onClick={onClose}
-                  className="px-6 py-3 rounded-2xl border-2 border-gray-300 text-gray-700 font-semibold hover:bg-gray-50 transition-colors"
-                >
-                  キャンセル
-                </button>
+              <div className="flex flex-col sm:flex-row gap-3">
                 <button
                   onClick={handleShowResults}
                   disabled={selectedMotiveTags.length === 0 && selectedJobTypeTags.length === 0}
-                  className={`px-8 py-3 rounded-2xl font-semibold transition-all duration-300 ${
+                  className={`w-full px-8 py-3 rounded-2xl font-semibold transition-all duration-300 ${
                     selectedMotiveTags.length > 0 || selectedJobTypeTags.length > 0
                       ? 'bg-gradient-to-r from-blue-600 to-indigo-600 text-white shadow-lg hover:shadow-xl hover:scale-105 active:scale-95'
                       : 'bg-gray-200 text-gray-400 cursor-not-allowed'
                   }`}
                 >
                   結果を見る
+                </button>
+                <button
+                  onClick={onClose}
+                  className="w-full sm:w-auto px-6 py-3 rounded-2xl border-2 border-gray-300 text-gray-700 font-semibold hover:bg-gray-50 transition-colors"
+                >
+                  キャンセル
                 </button>
               </div>
             </div>
