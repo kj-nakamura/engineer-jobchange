@@ -27,10 +27,24 @@ describe('ArticleLayout', () => {
       expect(screen.getByText('テスト記事のタイトル')).toBeInTheDocument()
     })
 
-    it('サービス説明が正しく表示される', () => {
-      render(<ArticleLayout {...mockProps} />)
+    it('サービス説明がサイドバーに表示される（servicesカテゴリのみ）', () => {
+      const servicesProps = {
+        ...mockProps,
+        articleCategory: 'services'
+      }
+      render(<ArticleLayout {...servicesProps} />)
       
       expect(screen.getByText(mockService.description)).toBeInTheDocument()
+    })
+
+    it('サービス情報ブロックが表示されない（servicesカテゴリ以外）', () => {
+      const jobTypesProps = {
+        ...mockProps,
+        articleCategory: 'job-types'
+      }
+      render(<ArticleLayout {...jobTypesProps} />)
+      
+      expect(screen.queryByText(mockService.description)).not.toBeInTheDocument()
     })
 
     it('公開日が正しく表示される', () => {
@@ -42,7 +56,8 @@ describe('ArticleLayout', () => {
     it('記事コンテンツが正しく表示される', () => {
       render(<ArticleLayout {...mockProps} />)
       
-      expect(screen.getByText('テスト見出し')).toBeInTheDocument()
+      // h2要素として表示されているかチェック
+      expect(screen.getByRole('heading', { level: 2, name: 'テスト見出し' })).toBeInTheDocument()
       expect(screen.getByText('テスト本文です。')).toBeInTheDocument()
     })
 
@@ -57,12 +72,16 @@ describe('ArticleLayout', () => {
 
   describe('ボタン機能', () => {
     it('公式サイトボタンが正しく設定される', () => {
-      render(<ArticleLayout {...mockProps} />)
+      const servicesProps = {
+        ...mockProps,
+        articleCategory: 'services'
+      }
+      render(<ArticleLayout {...servicesProps} />)
       
-      const button = screen.getByRole('link', { name: /テスト転職サービスの公式サイトへ/ })
-      expect(button).toHaveAttribute('href', 'https://example.com')
-      expect(button).toHaveAttribute('target', '_blank')
-      expect(button).toHaveAttribute('rel', 'noopener noreferrer')
+      const buttons = screen.getAllByRole('link', { name: /テスト転職サービスの公式サイトへ/ })
+      expect(buttons[0]).toHaveAttribute('href', 'https://example.com')
+      expect(buttons[0]).toHaveAttribute('target', '_blank')
+      expect(buttons[0]).toHaveAttribute('rel', 'noopener noreferrer')
     })
 
     it('ホームに戻るボタンが正しく設定される', () => {
@@ -102,10 +121,14 @@ describe('ArticleLayout', () => {
     })
 
     it('公式サイトボタンに緑色のグラデーションが適用される', () => {
-      render(<ArticleLayout {...mockProps} />)
+      const servicesProps = {
+        ...mockProps,
+        articleCategory: 'services'
+      }
+      render(<ArticleLayout {...servicesProps} />)
       
-      const button = screen.getByRole('link', { name: /テスト転職サービスの公式サイトへ/ })
-      expect(button).toHaveClass('from-green-500')
+      const buttons = screen.getAllByRole('link', { name: /テスト転職サービスの公式サイトへ/ })
+      expect(buttons[0]).toHaveClass('from-green-500')
     })
 
     it('ホームボタンにグレーのグラデーションが適用される', () => {
@@ -164,7 +187,22 @@ describe('ArticleLayout', () => {
       render(<ArticleLayout {...mockProps} />)
       
       const links = screen.getAllByRole('link')
-      expect(links).toHaveLength(2)
+      expect(links).toHaveLength(2) // 記事下の公式サイトボタン + ホームボタン
+      
+      links.forEach(link => {
+        expect(link).toBeVisible()
+      })
+    })
+
+    it('servicesカテゴリでは複数のリンクが表示される', () => {
+      const servicesProps = {
+        ...mockProps,
+        articleCategory: 'services'
+      }
+      render(<ArticleLayout {...servicesProps} />)
+      
+      const links = screen.getAllByRole('link')
+      expect(links).toHaveLength(3) // 記事下の公式サイト + サイドバーの公式サイト + ホーム
       
       links.forEach(link => {
         expect(link).toBeVisible()

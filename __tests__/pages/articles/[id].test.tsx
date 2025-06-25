@@ -110,8 +110,10 @@ publishDate: "2025-06-23"
         expect(result.props.title).toBe('テスト記事タイトル')
         expect(result.props.description).toBe('テスト記事説明')
         expect(result.props.publishDate).toBe('2025-06-23')
-        expect(result.props.content).toContain('<h1>テスト見出し</h1>')
+        // h1タグは削除されるため、本文のみチェック
         expect(result.props.content).toContain('<p>テスト本文です。</p>')
+        // h1タグが削除されていることを確認
+        expect(result.props.content).not.toContain('<h1>')
       }
     })
 
