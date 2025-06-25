@@ -5,6 +5,7 @@ import '../styles/globals.css'
 import { useScrollRestoration } from '../hooks/useScrollRestoration'
 import Header from '../components/Header'
 import { GoogleAnalytics } from '@next/third-parties/google'
+import { Analytics } from '@vercel/analytics/next'
 import { GA_TRACKING_ID, ANALYTICS_ENABLED } from '../lib/analytics'
 
 export default function App({ Component, pageProps }: AppProps) {
@@ -46,8 +47,9 @@ export default function App({ Component, pageProps }: AppProps) {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
       
-      {/* Google Analytics - Using Next.js third-parties */}
+      {/* Analytics */}
       {ANALYTICS_ENABLED && <GoogleAnalytics gaId={GA_TRACKING_ID} />}
+      <Analytics />
       
       <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50">
         <Header />
