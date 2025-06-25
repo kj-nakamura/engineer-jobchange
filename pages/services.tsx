@@ -3,7 +3,7 @@ import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { Service, TagData, RecommendationResult } from '../types';
 import { recommendServices } from '../utils/recommend';
-import TagSelector from '../components/TagSelector';
+import TagSelectionModal from '../components/TagSelectionModal';
 import ServiceList from '../components/ServiceList';
 
 export default function Services() {
@@ -14,6 +14,7 @@ export default function Services() {
   const [selectedJobTypeTags, setSelectedJobTypeTags] = useState<string[]>([]);
   const [recommendation, setRecommendation] = useState<RecommendationResult | null>(null);
   const [isLoading, setIsLoading] = useState(true);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
     const loadData = async () => {
@@ -83,6 +84,11 @@ export default function Services() {
     setSelectedJobTypeTags([]);
   };
 
+  const handleShowResults = () => {
+    // Modal will close automatically in TagSelectionModal
+    // Results will be shown based on the selected tags
+  };
+
   if (isLoading) {
     return (
       <div className="min-h-screen flex items-center justify-center">
@@ -136,19 +142,18 @@ export default function Services() {
             )}
           </div>
           
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-            <TagSelector
-              title="転職動機"
-              tags={tags.motiveTags}
-              selectedTags={selectedMotiveTags}
-              onTagToggle={handleMotiveTagToggle}
-            />
-            <TagSelector
-              title="職種"
-              tags={tags.jobTypeTags}
-              selectedTags={selectedJobTypeTags}
-              onTagToggle={handleJobTypeTagToggle}
-            />
+          <div className="text-center">
+            <button
+              onClick={() => setIsModalOpen(true)}
+              className="w-full sm:w-auto bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-semibold px-8 py-4 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 active:scale-95"
+            >
+              <div className="flex items-center justify-center">
+                <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 100 4m0-4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 100 4m0-4v2m0-6V4" />
+                </svg>
+                条件を選択する
+              </div>
+            </button>
           </div>
         </div>
 
@@ -251,6 +256,19 @@ export default function Services() {
             services={services}
           />
         )}
+        
+        {/* タグ選択モーダル */}
+        <TagSelectionModal
+          isOpen={isModalOpen}
+          onClose={() => setIsModalOpen(false)}
+          motiveTags={tags.motiveTags}
+          jobTypeTags={tags.jobTypeTags}
+          selectedMotiveTags={selectedMotiveTags}
+          selectedJobTypeTags={selectedJobTypeTags}
+          onMotiveTagToggle={handleMotiveTagToggle}
+          onJobTypeTagToggle={handleJobTypeTagToggle}
+          onShowResults={handleShowResults}
+        />
       </div>
     </>
   );
