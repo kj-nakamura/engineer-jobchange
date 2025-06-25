@@ -4,7 +4,7 @@ import ServiceCard from './ServiceCard';
 
 interface PopularServicesPreviewProps {
   services: Service[];
-  onViewAll: () => void;
+  onViewAll?: () => void;
 }
 
 export default function PopularServicesPreview({ services, onViewAll }: PopularServicesPreviewProps) {
@@ -22,15 +22,15 @@ export default function PopularServicesPreview({ services, onViewAll }: PopularS
             多くのエンジニアに選ばれているおすすめのサービス
           </p>
         </div>
-        <button
-          onClick={onViewAll}
-          className="hidden sm:flex items-center text-blue-600 hover:text-blue-700 font-medium transition-colors"
+        <Link
+          href="/services"
+          className="hidden sm:inline-flex items-center px-4 py-2 bg-gradient-to-r from-blue-500/10 to-indigo-500/10 hover:from-blue-500/20 hover:to-indigo-500/20 text-blue-600 hover:text-blue-700 font-semibold rounded-xl border border-blue-200/50 hover:border-blue-300/70 backdrop-blur-sm transition-all duration-300 hover:shadow-lg hover:shadow-blue-500/25 hover:-translate-y-0.5 group"
         >
           すべて見る
-          <svg className="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+          <svg className="w-4 h-4 ml-2 transition-transform duration-300 group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
           </svg>
-        </button>
+        </Link>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6">
@@ -44,16 +44,19 @@ export default function PopularServicesPreview({ services, onViewAll }: PopularS
       </div>
 
       {/* モバイル用の「すべて見る」ボタン */}
-      <div className="sm:hidden text-center mt-6">
-        <button
-          onClick={onViewAll}
-          className="inline-flex items-center px-6 py-3 rounded-2xl bg-blue-600 text-white font-semibold hover:bg-blue-700 transition-colors"
+      <div className="sm:hidden text-center mt-8">
+        <Link
+          href="/services"
+          className="inline-flex items-center px-8 py-4 bg-gradient-to-r from-blue-600 via-blue-600 to-indigo-600 hover:from-blue-700 hover:via-blue-700 hover:to-indigo-700 text-white font-bold rounded-2xl shadow-lg hover:shadow-xl hover:shadow-blue-500/30 transition-all duration-300 hover:scale-105 active:scale-95 group"
         >
-          すべてのサービスを見る
-          <svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+          <svg className="w-5 h-5 mr-3 transition-transform duration-300 group-hover:rotate-12" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
           </svg>
-        </button>
+          すべてのサービスを見る
+          <svg className="w-5 h-5 ml-3 transition-transform duration-300 group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+          </svg>
+        </Link>
       </div>
     </section>
   );

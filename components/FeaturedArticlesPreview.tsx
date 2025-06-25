@@ -56,15 +56,15 @@ export default function FeaturedArticlesPreview({ articles, onViewAllArticles }:
                 </span>
               </div>
 
-              {/* 記事タイトル */}
-              <h3 className="text-lg font-bold text-gray-900 mb-3 group-hover:text-blue-700 transition-colors duration-200 line-clamp-2">
-                {article.title}
-              </h3>
-
-              {/* 記事説明 */}
-              <p className="text-gray-600 text-sm mb-4 line-clamp-3 leading-relaxed">
-                {article.description}
-              </p>
+              {/* 記事タイトル・説明統合ブロック */}
+              <div className="mb-4">
+                <h3 className="text-base font-bold text-gray-800 mb-1.5 group-hover:text-blue-700 transition-colors duration-200 line-clamp-2">
+                  {article.title}
+                </h3>
+                <p className="text-gray-700 text-sm line-clamp-3 leading-relaxed">
+                  {article.description}
+                </p>
+              </div>
 
               {/* 公開日とCTA */}
               <div className="flex items-center justify-between">

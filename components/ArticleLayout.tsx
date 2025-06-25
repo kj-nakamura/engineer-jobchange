@@ -95,13 +95,16 @@ export default function ArticleLayout({ service, title, publishDate, content, ar
         <div className="bg-white rounded-2xl shadow-xl p-8 mb-8">
           <div className="flex items-start justify-between mb-6">
             <div className="flex-1">
-              <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-                {title}
-              </h1>
-              <div className="w-20 h-1 bg-gradient-to-r from-blue-500 to-indigo-500 rounded-full mb-4"></div>
-              <p className="text-gray-600 text-lg leading-relaxed mb-4">
-                {service.description}
-              </p>
+              {/* タイトル・説明統合ブロック */}
+              <div className="mb-4">
+                <h1 className="text-3xl md:text-4xl font-bold text-gray-800 mb-2">
+                  {title}
+                </h1>
+                <div className="w-20 h-1 bg-gradient-to-r from-blue-500 to-indigo-500 rounded-full mb-3"></div>
+                <p className="text-gray-700 text-lg leading-relaxed">
+                  {service.description}
+                </p>
+              </div>
               <div className="text-sm text-gray-500">
                 公開日: {publishDate}
               </div>
