@@ -151,7 +151,7 @@ export default function TagSelectionModal({
                   </span>
                 )}
               </div>
-              <div className="flex flex-col sm:flex-row gap-3">
+              <div className="flex flex-col gap-3">
                 <button
                   onClick={handleShowResults}
                   disabled={selectedMotiveTags.length === 0 && selectedJobTypeTags.length === 0}
@@ -165,7 +165,7 @@ export default function TagSelectionModal({
                 </button>
                 <button
                   onClick={onClose}
-                  className="w-full sm:w-auto px-6 py-3 rounded-2xl border-2 border-gray-300 text-gray-700 font-semibold hover:bg-gray-50 transition-colors"
+                  className="w-full px-6 py-3 rounded-2xl border-2 border-gray-300 text-gray-700 font-semibold hover:bg-gray-50 transition-colors"
                 >
                   キャンセル
                 </button>
