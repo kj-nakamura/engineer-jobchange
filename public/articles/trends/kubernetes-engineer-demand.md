@@ -1,10 +1,18 @@
 ---
-title: "Kubernetesエンジニアの需要動向と転職市場【2025年最新】"
-description: "Kubernetesエンジニアの転職市場を徹底分析。需要急増の背景、必要スキル、年収相場、キャリアパス、おすすめ転職サイトまで詳しく解説します。"
-publishDate: "2025-06-23"
-category: "trends"
-tags: ["Kubernetes", "コンテナ", "インフラ", "クラウド", "需要動向"]
-relatedArticles: ["devops-engineer", "cloud-engineer-demand", "container-technology-trends"]
+title: Kubernetesエンジニアの需要動向と転職市場【2025年最新】
+description: Kubernetesエンジニアの転職市場を徹底分析。需要急増の背景、必要スキル、年収相場、キャリアパス、おすすめ転職サイトまで詳しく解説します。
+publishDate: '2025-06-23'
+category: trends
+tags:
+  - Kubernetes
+  - コンテナ
+  - インフラ
+  - クラウド
+  - 需要動向
+relatedArticles:
+  - devops-engineer
+  - cloud-engineer-demand
+  - container-technology-trends
 ---
 
 # Kubernetesエンジニアの需要動向と転職市場【2025年最新】

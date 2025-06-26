@@ -1,7 +1,12 @@
 ---
-title: "LAPRAS SCOUTの評判は？口コミから分かる特徴とメリット・デメリット"
-description: "LAPRAS SCOUTの実際の評判と口コミを徹底調査。AI技術でエンジニアのスキルを可視化するスカウト型転職サービスの特徴、メリット・デメリットを詳しく解説。"
-publishDate: "2025-06-23"
+title: LAPRAS SCOUTの評判は？口コミから分かる特徴とメリット・デメリット
+description: >-
+  LAPRAS
+  SCOUTの実際の評判と口コミを徹底調査。AI技術でエンジニアのスキルを可視化するスカウト型転職サービスの特徴、メリット・デメリットを詳しく解説。
+publishDate: '2025-06-23'
+category: services
+tags: []
+relatedArticles: []
 ---
 
 # LAPRAS SCOUTの評判は？実際の口コミと特徴を徹底解説

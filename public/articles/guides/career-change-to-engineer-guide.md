@@ -1,10 +1,20 @@
 ---
-title: "異業種からエンジニア転職の完全ガイド【成功事例と実践的ステップ】"
-description: "異業種からエンジニアへのキャリアチェンジを成功させる完全ガイド。営業、事務、製造業などの経験を活かしたエンジニア転職の戦略、学習方法、面接対策まで詳しく解説します。"
-publishDate: "2025-06-24"
-category: "guides"
-tags: ["異業種転職", "キャリアチェンジ", "エンジニア転職", "未経験", "学習方法"]
-relatedArticles: ["unexperienced-engineer-career", "20s-engineer-career-strategy", "portfolio-best-practices-guide", "engineer-resume-writing-guide"]
+title: 異業種からエンジニア転職の完全ガイド【成功事例と実践的ステップ】
+description: >-
+  異業種からエンジニアへのキャリアチェンジを成功させる完全ガイド。営業、事務、製造業などの経験を活かしたエンジニア転職の戦略、学習方法、面接対策まで詳しく解説します。
+publishDate: '2025-06-24'
+category: guides
+tags:
+  - 異業種転職
+  - キャリアチェンジ
+  - エンジニア転職
+  - 未経験
+  - 学習方法
+relatedArticles:
+  - unexperienced-engineer-career
+  - 20s-engineer-career-strategy
+  - portfolio-best-practices-guide
+  - engineer-resume-writing-guide
 ---
 
 # 異業種からエンジニア転職の完全ガイド【成功事例と実践的ステップ】

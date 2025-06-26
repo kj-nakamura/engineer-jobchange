@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { Article, ArticleCategory } from '../utils/articles-client';
+import { Article, ArticleCategory } from '../utils/articles';
 
 interface CategoryArticleListProps {
   categories: ArticleCategory[];

@@ -1,10 +1,17 @@
 ---
-title: "モバイルアプリエンジニアの転職完全ガイド【iOS・Android開発】"
-description: "モバイルアプリエンジニアの転職市場を徹底解説。iOS・Android開発の年収相場、必要スキル、キャリアパス、おすすめ転職サイトまで詳しく紹介します。"
-publishDate: "2025-06-23"
-category: "job-types"
-tags: ["モバイルアプリエンジニア", "iOS開発", "Android開発", "転職"]
-relatedArticles: ["frontend-engineer-job-sites", "fullstack-engineer-roadmap", "react-native-engineer-demand"]
+title: モバイルアプリエンジニアの転職完全ガイド【iOS・Android開発】
+description: モバイルアプリエンジニアの転職市場を徹底解説。iOS・Android開発の年収相場、必要スキル、キャリアパス、おすすめ転職サイトまで詳しく紹介します。
+publishDate: '2025-06-23'
+category: job-types
+tags:
+  - モバイルアプリエンジニア
+  - iOS開発
+  - Android開発
+  - 転職
+relatedArticles:
+  - frontend-engineer-job-sites
+  - fullstack-engineer-roadmap
+  - react-native-engineer-demand
 ---
 
 # モバイルアプリエンジニアの転職完全ガイド【iOS・Android開発】

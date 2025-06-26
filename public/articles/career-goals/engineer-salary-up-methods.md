@@ -1,10 +1,18 @@
 ---
-title: "エンジニア年収アップの転職戦略【平均年収データ付き】"
-description: "エンジニアが転職で年収アップする具体的な方法を解説。職種別年収ランキング、年収交渉のコツ、高年収が期待できる転職サイトを詳しく紹介します。"
-publishDate: "2025-06-23"
-category: "career-goals"
-tags: ["年収アップ", "転職戦略", "年収交渉", "キャリアアップ"]
-relatedArticles: ["bizreach", "levtech", "react-engineer-career", "tech-lead-salary-guide"]
+title: エンジニア年収アップの転職戦略【平均年収データ付き】
+description: エンジニアが転職で年収アップする具体的な方法を解説。職種別年収ランキング、年収交渉のコツ、高年収が期待できる転職サイトを詳しく紹介します。
+publishDate: '2025-06-23'
+category: career-goals
+tags:
+  - 年収アップ
+  - 転職戦略
+  - 年収交渉
+  - キャリアアップ
+relatedArticles:
+  - bizreach
+  - levtech
+  - react-engineer-career
+  - tech-lead-salary-guide
 ---
 
 # エンジニア年収アップの転職戦略【平均年収データ付き】

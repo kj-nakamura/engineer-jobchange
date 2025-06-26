@@ -1,10 +1,17 @@
 ---
-title: "エンジニア転職での年収交渉術【成功率90%の交渉テクニック】"
-description: "エンジニア転職で年収アップを実現する交渉術を徹底解説。適正年収の調べ方、交渉タイミング、具体的な交渉文例まで成功ノウハウを詳しく紹介します。"
-publishDate: "2025-06-23"
-category: "career-goals"
-tags: ["年収交渉", "年収アップ", "転職交渉", "給与交渉"]
-relatedArticles: ["engineer-salary-up-methods", "job-change-timing", "startup-vs-enterprise"]
+title: エンジニア転職での年収交渉術【成功率90%の交渉テクニック】
+description: エンジニア転職で年収アップを実現する交渉術を徹底解説。適正年収の調べ方、交渉タイミング、具体的な交渉文例まで成功ノウハウを詳しく紹介します。
+publishDate: '2025-06-23'
+category: career-goals
+tags:
+  - 年収交渉
+  - 年収アップ
+  - 転職交渉
+  - 給与交渉
+relatedArticles:
+  - engineer-salary-up-methods
+  - job-change-timing
+  - startup-vs-enterprise
 ---
 
 # エンジニア転職での年収交渉術【成功率90%の交渉テクニック】

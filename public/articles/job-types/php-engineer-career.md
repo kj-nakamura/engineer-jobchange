@@ -1,10 +1,20 @@
 ---
-title: "PHPエンジニアの転職完全ガイド【年収・スキル・キャリアパス】"
-description: "PHPエンジニアの転職市場を徹底解説。Web開発、Laravel、WordPress開発など分野別の年収相場、必要スキル、キャリアパス、おすすめ転職サイトを詳しく紹介します。"
-publishDate: "2025-06-24"
-category: "job-types"
-tags: ["PHPエンジニア", "PHP転職", "Laravel", "WordPress", "Web開発"]
-relatedArticles: ["backend-engineer-career-path", "python-engineer-career", "java-engineer-career", "engineer-salary-up-methods"]
+title: PHPエンジニアの転職完全ガイド【年収・スキル・キャリアパス】
+description: >-
+  PHPエンジニアの転職市場を徹底解説。Web開発、Laravel、WordPress開発など分野別の年収相場、必要スキル、キャリアパス、おすすめ転職サイトを詳しく紹介します。
+publishDate: '2025-06-24'
+category: job-types
+tags:
+  - PHPエンジニア
+  - PHP転職
+  - Laravel
+  - WordPress
+  - Web開発
+relatedArticles:
+  - backend-engineer-career-path
+  - python-engineer-career
+  - java-engineer-career
+  - engineer-salary-up-methods
 ---
 
 # PHPエンジニアの転職完全ガイド【年収・スキル・キャリアパス】

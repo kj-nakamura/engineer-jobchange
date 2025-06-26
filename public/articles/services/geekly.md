@@ -1,7 +1,10 @@
 ---
-title: "Geeklyの評判は？口コミから分かる特徴とメリット・デメリット"
-description: "Geeklyの実際の評判と口コミを徹底調査。IT・Web・ゲーム業界専門の転職エージェントの特徴、メリット・デメリットを詳しく解説します。"
-publishDate: "2025-06-23"
+title: Geeklyの評判は？口コミから分かる特徴とメリット・デメリット
+description: Geeklyの実際の評判と口コミを徹底調査。IT・Web・ゲーム業界専門の転職エージェントの特徴、メリット・デメリットを詳しく解説します。
+publishDate: '2025-06-23'
+category: services
+tags: []
+relatedArticles: []
 ---
 
 # Geeklyの評判は？実際の口コミと特徴を徹底解説

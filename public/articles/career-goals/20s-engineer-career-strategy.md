@@ -1,10 +1,20 @@
 ---
-title: "20代エンジニアの転職戦略【キャリア形成と年収アップの完全ガイド】"
-description: "20代エンジニアのキャリア戦略を徹底解説。第二新卒、ポテンシャル採用、スキルアップ転職など年代別の転職タイミング、年収相場、おすすめ転職サイトを詳しく紹介します。"
-publishDate: "2025-06-24"
-category: "career-goals"
-tags: ["20代転職", "第二新卒", "若手エンジニア", "キャリア戦略", "年収アップ"]
-relatedArticles: ["engineer-salary-up-methods", "salary-negotiation-tips", "job-change-timing", "technical-interview-preparation"]
+title: 20代エンジニアの転職戦略【キャリア形成と年収アップの完全ガイド】
+description: >-
+  20代エンジニアのキャリア戦略を徹底解説。第二新卒、ポテンシャル採用、スキルアップ転職など年代別の転職タイミング、年収相場、おすすめ転職サイトを詳しく紹介します。
+publishDate: '2025-06-24'
+category: career-goals
+tags:
+  - 20代転職
+  - 第二新卒
+  - 若手エンジニア
+  - キャリア戦略
+  - 年収アップ
+relatedArticles:
+  - engineer-salary-up-methods
+  - salary-negotiation-tips
+  - job-change-timing
+  - technical-interview-preparation
 ---
 
 # 20代エンジニアの転職戦略【キャリア形成と年収アップの完全ガイド】

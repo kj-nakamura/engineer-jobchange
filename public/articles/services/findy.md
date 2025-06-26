@@ -1,7 +1,10 @@
 ---
-title: "Findyの評判は？口コミから分かる特徴とメリット・デメリット"
-description: "Findyの実際の評判と口コミを徹底調査。GitHubと連携したエンジニア向け転職サービスの特徴、メリット・デメリットを詳しく解説します。"
-publishDate: "2025-06-23"
+title: Findyの評判は？口コミから分かる特徴とメリット・デメリット
+description: Findyの実際の評判と口コミを徹底調査。GitHubと連携したエンジニア向け転職サービスの特徴、メリット・デメリットを詳しく解説します。
+publishDate: '2025-06-23'
+category: services
+tags: []
+relatedArticles: []
 ---
 
 # Findyの評判は？実際の口コミと特徴を徹底解説

@@ -1,10 +1,17 @@
 ---
-title: "エンジニア履歴書の書き方テンプレート【通過率UP】"
-description: "エンジニア転職で書類選考を突破する履歴書の書き方を詳しく解説。技術スキルの効果的なアピール方法、プロジェクト経験の表現方法をテンプレート付きで紹介。"
-publishDate: "2025-06-23"
-category: "guides"
-tags: ["履歴書", "職務経歴書", "書類選考", "テンプレート"]
-relatedArticles: ["technical-skills-resume", "github-portfolio-guide", "technical-interview-questions"]
+title: エンジニア履歴書の書き方テンプレート【通過率UP】
+description: エンジニア転職で書類選考を突破する履歴書の書き方を詳しく解説。技術スキルの効果的なアピール方法、プロジェクト経験の表現方法をテンプレート付きで紹介。
+publishDate: '2025-06-23'
+category: guides
+tags:
+  - 履歴書
+  - 職務経歴書
+  - 書類選考
+  - テンプレート
+relatedArticles:
+  - technical-skills-resume
+  - github-portfolio-guide
+  - technical-interview-questions
 ---
 
 # エンジニア履歴書の書き方テンプレート【通過率UP】

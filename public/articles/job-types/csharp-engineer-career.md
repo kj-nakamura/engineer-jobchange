@@ -1,10 +1,21 @@
 ---
-title: "C#エンジニアの転職完全ガイド【年収・スキル・キャリアパス】"
-description: "C#エンジニアの転職市場を徹底解説。.NET、ASP.NET Core、Xamarin、ゲーム開発など分野別の年収相場、必要スキル、キャリアパス、おすすめ転職サイトを詳しく紹介します。"
-publishDate: "2025-06-24"
-category: "job-types"
-tags: ["C#エンジニア", "C#転職", ".NET", "ASP.NET Core", "Visual Studio"]
-relatedArticles: ["backend-engineer-career-path", "java-engineer-career", "unity-game-developer", "engineer-salary-up-methods"]
+title: C#エンジニアの転職完全ガイド【年収・スキル・キャリアパス】
+description: >-
+  C#エンジニアの転職市場を徹底解説。.NET、ASP.NET
+  Core、Xamarin、ゲーム開発など分野別の年収相場、必要スキル、キャリアパス、おすすめ転職サイトを詳しく紹介します。
+publishDate: '2025-06-24'
+category: job-types
+tags:
+  - C#エンジニア
+  - C#転職
+  - .NET
+  - ASP.NET Core
+  - Visual Studio
+relatedArticles:
+  - backend-engineer-career-path
+  - java-engineer-career
+  - unity-game-developer
+  - engineer-salary-up-methods
 ---
 
 # C#エンジニアの転職完全ガイド【年収・スキル・キャリアパス】

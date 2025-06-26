@@ -1,10 +1,19 @@
 ---
-title: "エンジニア転職サイトおすすめランキング2025【職種別比較】"
-description: "エンジニア向け転職サイトを徹底比較しランキング化。職種別・レベル別のおすすめサービス、それぞれの特徴や評判を詳しく解説します。"
-publishDate: "2025-06-23"
-category: "comparisons"
-tags: ["転職サイト", "ランキング", "比較", "おすすめ"]
-relatedArticles: ["paiza", "green", "levtech", "bizreach", "findy"]
+title: エンジニア転職サイトおすすめランキング2025【職種別比較】
+description: エンジニア向け転職サイトを徹底比較しランキング化。職種別・レベル別のおすすめサービス、それぞれの特徴や評判を詳しく解説します。
+publishDate: '2025-06-23'
+category: comparisons
+tags:
+  - 転職サイト
+  - ランキング
+  - 比較
+  - おすすめ
+relatedArticles:
+  - paiza
+  - green
+  - levtech
+  - bizreach
+  - findy
 ---
 
 # エンジニア転職サイトおすすめランキング2025【職種別比較】

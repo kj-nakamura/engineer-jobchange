@@ -4,11 +4,10 @@ import { useEffect } from 'react';
 import { Service } from '../../types';
 import ArticleLayout from '../../components/ArticleLayout';
 import { trackArticleEngagement } from '../../lib/analytics';
-import { Article } from '../../utils/articles-client';
+import { getAllArticles, Article } from '../../utils/articles';
 import fs from 'fs';
 import path from 'path';
 import matter from 'gray-matter';
-import { marked } from 'marked';
 import { processMarkdownToHTML } from '../../utils/markdown-renderer';
 
 interface ArticlePageProps {
@@ -25,28 +24,28 @@ interface ArticlePageProps {
 
 export default function ArticlePage({ service, title, description, publishDate, content, articleCategory, services, articleId, relatedArticles }: ArticlePageProps) {
   const pageTitle = `${title} | エンジニア転職ナビ`;
-  
+
   useEffect(() => {
     trackArticleEngagement(articleId, articleCategory || 'general', 'start_reading');
-    
+
     const handleScroll = () => {
       const scrollPercentage = (window.scrollY / (document.body.scrollHeight - window.innerHeight)) * 100;
-      
+
       if (scrollPercentage >= 50 && !sessionStorage.getItem(`scroll_50_${articleId}`)) {
         trackArticleEngagement(articleId, articleCategory || 'general', 'scroll_50');
         sessionStorage.setItem(`scroll_50_${articleId}`, 'true');
       }
-      
+
       if (scrollPercentage >= 100 && !sessionStorage.getItem(`scroll_100_${articleId}`)) {
         trackArticleEngagement(articleId, articleCategory || 'general', 'scroll_100');
         sessionStorage.setItem(`scroll_100_${articleId}`, 'true');
       }
     };
-    
+
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, [articleId, articleCategory]);
-  
+
   return (
     <>
       <Head>
@@ -78,53 +77,44 @@ export default function ArticlePage({ service, title, description, publishDate, 
 }
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const servicesData = JSON.parse(
-    fs.readFileSync(path.join(process.cwd(), 'public/data/services.json'), 'utf8')
-  );
-  
-  // 記事データも読み込み
-  const articlesData = JSON.parse(
-    fs.readFileSync(path.join(process.cwd(), 'public/data/articles.json'), 'utf8')
-  );
-
-  // サービス記事のパスを追加
-  const servicePaths = servicesData.map((service: Service) => ({
-    params: { id: service.id },
-  }));
-  
-  // 記事のパスを追加
-  const articlePaths = articlesData.map((article: any) => ({
+  const articles = getAllArticles();
+  const paths = articles.map(article => ({
     params: { id: article.id },
   }));
 
   return {
-    paths: [...servicePaths, ...articlePaths],
+    paths,
     fallback: false,
   };
 };
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
   const { id } = params!;
+  const allArticles = getAllArticles();
+  const article = allArticles.find(a => a.id === id as string);
 
-  // サービスデータを取得
+  if (!article) {
+    return {
+      notFound: true,
+    };
+  }
+
+  const markdownPath = path.join(process.cwd(), 'public/articles', article.category, `${article.id}.md`);
+  if (!fs.existsSync(markdownPath)) {
+    return {
+      notFound: true,
+    };
+  }
+
   const servicesData = JSON.parse(
     fs.readFileSync(path.join(process.cwd(), 'public/data/services.json'), 'utf8')
   );
 
-  // 記事データを取得
-  const articlesData = JSON.parse(
-    fs.readFileSync(path.join(process.cwd(), 'public/data/articles.json'), 'utf8')
-  );
-
-  // サービスまたは記事データを取得
   let service = servicesData.find((s: Service) => s.id === id);
-  const article = articlesData.find((a: any) => a.id === id);
-
-  // 記事データがある場合、サービスデータがなくてもダミーのサービスを作成
-  if (article && !service) {
+  if (!service) {
     service = {
       id: article.id,
-      name: article.category,
+      name: article.title,
       description: article.description,
       tags: [],
       motiveTags: [],
@@ -139,61 +129,28 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
     };
   }
 
-  if (!service) {
-    return {
-      notFound: true,
-    };
-  }
-
-  // Markdownファイルを読み込み（サービス記事の場合はservicesフォルダから）
-  let markdownPath = path.join(process.cwd(), 'public/articles/services', `${id}.md`);
-  
-  // サービス記事が見つからない場合は、他のカテゴリを確認
-  if (!fs.existsSync(markdownPath)) {
-    const categories = ['job-types', 'career-goals', 'comparisons', 'guides', 'trends', 'regions'];
-    for (const category of categories) {
-      const categoryPath = path.join(process.cwd(), 'public/articles', category, `${id}.md`);
-      if (fs.existsSync(categoryPath)) {
-        markdownPath = categoryPath;
-        break;
-      }
-    }
-  }
-  
-  if (!fs.existsSync(markdownPath)) {
-    return {
-      notFound: true,
-    };
-  }
-
   const markdownContent = fs.readFileSync(markdownPath, 'utf8');
   const { data, content } = matter(markdownContent);
 
-  // 記事カテゴリを推定（記事データがある場合はそのカテゴリ、ない場合は'services'）
-  const category = article ? article.category : 'services';
-
-  // カスタムマークダウンレンダラーでHTMLに変換
   const htmlContent = await processMarkdownToHTML(content, {
     services: servicesData,
     articleId: id as string,
-    articleCategory: category,
+    articleCategory: article.category,
   });
 
-  // 関連記事を取得
-  const relatedArticleIds = article?.relatedArticles || [];
-  const relatedArticles = relatedArticleIds
-    .map((relatedId: string) => articlesData.find((a: any) => a.id === relatedId))
-    .filter(Boolean) // 存在しない記事IDを除外
-    .slice(0, 4); // 最大4件まで
+  const relatedArticles = (article.relatedArticles || [])
+    .map((relatedId: string) => allArticles.find(a => a.id === relatedId))
+    .filter((a): a is Article => !!a)
+    .slice(0, 4);
 
   return {
     props: {
       service,
-      title: data.title || service.name,
-      description: data.description || service.description,
-      publishDate: data.publishDate || '2025-06-23',
+      title: data.title || article.title,
+      description: data.description || article.description,
+      publishDate: data.publishDate || article.publishDate,
       content: htmlContent,
-      articleCategory: category,
+      articleCategory: article.category,
       services: servicesData,
       articleId: id as string,
       relatedArticles,

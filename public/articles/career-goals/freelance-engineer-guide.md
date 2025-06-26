@@ -1,10 +1,19 @@
 ---
-title: "フリーランスエンジニア転向完全ガイド【案件獲得・年収・税務】"
-description: "フリーランスエンジニアへの転向を成功させる完全ガイド。案件獲得方法、年収相場、必要スキル、税務・法務知識、おすすめエージェントまで詳しく解説します。"
-publishDate: "2025-06-24"
-category: "career-goals"
-tags: ["フリーランス", "業務委託", "案件獲得", "個人事業主", "働き方改革"]
-relatedArticles: ["remote-work-engineering-jobs", "engineer-salary-up-methods", "30s-engineer-career-strategy", "salary-negotiation-tips"]
+title: フリーランスエンジニア転向完全ガイド【案件獲得・年収・税務】
+description: フリーランスエンジニアへの転向を成功させる完全ガイド。案件獲得方法、年収相場、必要スキル、税務・法務知識、おすすめエージェントまで詳しく解説します。
+publishDate: '2025-06-24'
+category: career-goals
+tags:
+  - フリーランス
+  - 業務委託
+  - 案件獲得
+  - 個人事業主
+  - 働き方改革
+relatedArticles:
+  - remote-work-engineering-jobs
+  - engineer-salary-up-methods
+  - 30s-engineer-career-strategy
+  - salary-negotiation-tips
 ---
 
 # フリーランスエンジニア転向完全ガイド【案件獲得・年収・税務】

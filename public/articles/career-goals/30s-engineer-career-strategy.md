@@ -1,10 +1,20 @@
 ---
-title: "30代エンジニアの転職戦略【マネジメント・専門性・年収最大化】"
-description: "30代エンジニアの転職戦略を徹底解説。テックリード、エンジニアリングマネージャー、スペシャリストなどキャリアパス別の転職タイミング、年収相場、おすすめ転職サイトを詳しく紹介します。"
-publishDate: "2025-06-24"
-category: "career-goals"
-tags: ["30代転職", "エンジニアリングマネージャー", "テックリード", "スペシャリスト", "年収最大化"]
-relatedArticles: ["20s-engineer-career-strategy", "engineer-salary-up-methods", "salary-negotiation-tips", "work-life-balance-engineer"]
+title: 30代エンジニアの転職戦略【マネジメント・専門性・年収最大化】
+description: >-
+  30代エンジニアの転職戦略を徹底解説。テックリード、エンジニアリングマネージャー、スペシャリストなどキャリアパス別の転職タイミング、年収相場、おすすめ転職サイトを詳しく紹介します。
+publishDate: '2025-06-24'
+category: career-goals
+tags:
+  - 30代転職
+  - エンジニアリングマネージャー
+  - テックリード
+  - スペシャリスト
+  - 年収最大化
+relatedArticles:
+  - 20s-engineer-career-strategy
+  - engineer-salary-up-methods
+  - salary-negotiation-tips
+  - work-life-balance-engineer
 ---
 
 # 30代エンジニアの転職戦略【マネジメント・専門性・年収最大化】

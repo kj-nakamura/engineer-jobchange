@@ -1,7 +1,10 @@
 ---
-title: "Wantedlyの評判は？口コミから分かる特徴とメリット・デメリット"
-description: "Wantedlyの実際の評判と口コミを徹底調査。「やりがい」でつながる転職サービスの特徴、メリット・デメリット、スタートアップ転職について詳しく解説。"
-publishDate: "2025-06-23"
+title: Wantedlyの評判は？口コミから分かる特徴とメリット・デメリット
+description: Wantedlyの実際の評判と口コミを徹底調査。「やりがい」でつながる転職サービスの特徴、メリット・デメリット、スタートアップ転職について詳しく解説。
+publishDate: '2025-06-23'
+category: services
+tags: []
+relatedArticles: []
 ---
 
 # Wantedlyの評判は？実際の口コミと特徴を徹底解説

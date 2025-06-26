@@ -1,10 +1,18 @@
 ---
-title: "エンジニアのワークライフバランスを実現する転職戦略"
-description: "ワークライフバランスを重視するエンジニアの転職戦略を解説。残業時間、有給取得率、リモートワークなど働きやすい企業の見極め方を詳しく紹介します。"
-publishDate: "2025-06-23"
-category: "career-goals"
-tags: ["ワークライフバランス", "働き方改革", "残業", "有給", "転職"]
-relatedArticles: ["remote-work-engineering-jobs", "startup-vs-enterprise", "job-change-timing"]
+title: エンジニアのワークライフバランスを実現する転職戦略
+description: ワークライフバランスを重視するエンジニアの転職戦略を解説。残業時間、有給取得率、リモートワークなど働きやすい企業の見極め方を詳しく紹介します。
+publishDate: '2025-06-23'
+category: career-goals
+tags:
+  - ワークライフバランス
+  - 働き方改革
+  - 残業
+  - 有給
+  - 転職
+relatedArticles:
+  - remote-work-engineering-jobs
+  - startup-vs-enterprise
+  - job-change-timing
 ---
 
 # エンジニアのワークライフバランスを実現する転職戦略

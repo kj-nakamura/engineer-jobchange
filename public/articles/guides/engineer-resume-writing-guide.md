@@ -1,10 +1,20 @@
 ---
-title: "エンジニア転職で勝つ履歴書・職務経歴書の書き方【通過率95%テンプレート】"
-description: "エンジニア転職の書類選考通過率を95%にする履歴書・職務経歴書の書き方を徹底解説。技術スキルの効果的なアピール方法、プロジェクト経験の表現術、テンプレート付き完全ガイドです。"
-publishDate: "2025-06-24"
-category: "guides"
-tags: ["履歴書", "職務経歴書", "書類選考", "転職", "テンプレート"]
-relatedArticles: ["portfolio-best-practices-guide", "advanced-technical-interview-guide", "unexperienced-engineer-career", "20s-engineer-career-strategy"]
+title: エンジニア転職で勝つ履歴書・職務経歴書の書き方【通過率95%テンプレート】
+description: >-
+  エンジニア転職の書類選考通過率を95%にする履歴書・職務経歴書の書き方を徹底解説。技術スキルの効果的なアピール方法、プロジェクト経験の表現術、テンプレート付き完全ガイドです。
+publishDate: '2025-06-24'
+category: guides
+tags:
+  - 履歴書
+  - 職務経歴書
+  - 書類選考
+  - 転職
+  - テンプレート
+relatedArticles:
+  - portfolio-best-practices-guide
+  - advanced-technical-interview-guide
+  - unexperienced-engineer-career
+  - 20s-engineer-career-strategy
 ---
 
 # エンジニア転職で勝つ履歴書・職務経歴書の書き方【通過率95%テンプレート】

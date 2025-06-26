@@ -1,10 +1,20 @@
 ---
-title: "Pythonエンジニアの転職完全ガイド【年収・スキル・キャリアパス】"
-description: "Pythonエンジニアの転職市場を徹底解説。Web開発、データサイエンス、AI・機械学習など分野別の年収相場、必要スキル、キャリアパス、おすすめ転職サイトを詳しく紹介します。"
-publishDate: "2025-06-24"
-category: "job-types"
-tags: ["Pythonエンジニア", "Python転職", "Web開発", "データサイエンス", "機械学習"]
-relatedArticles: ["data-scientist", "ai-engineer-career-trend", "backend-engineer-career-path", "engineer-salary-up-methods"]
+title: Pythonエンジニアの転職完全ガイド【年収・スキル・キャリアパス】
+description: >-
+  Pythonエンジニアの転職市場を徹底解説。Web開発、データサイエンス、AI・機械学習など分野別の年収相場、必要スキル、キャリアパス、おすすめ転職サイトを詳しく紹介します。
+publishDate: '2025-06-24'
+category: job-types
+tags:
+  - Pythonエンジニア
+  - Python転職
+  - Web開発
+  - データサイエンス
+  - 機械学習
+relatedArticles:
+  - data-scientist
+  - ai-engineer-career-trend
+  - backend-engineer-career-path
+  - engineer-salary-up-methods
 ---
 
 # Pythonエンジニアの転職完全ガイド【年収・スキル・キャリアパス】

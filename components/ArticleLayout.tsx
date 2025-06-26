@@ -1,7 +1,7 @@
 import { Service } from '../types';
 import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
-import { Article } from '../utils/articles-client';
+import { Article } from '../utils/articles';
 import { trackAffiliateClick, trackArticleEngagement } from '../lib/analytics';
 import { extractComponentData } from '../utils/markdown-renderer';
 import AffiliateButton from './AffiliateButton';

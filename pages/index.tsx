@@ -1,115 +1,34 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect } from 'react';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
+import { GetStaticProps } from 'next';
 import { Service, TagData, RecommendationResult } from '../types';
 import { recommendServices } from '../utils/recommend';
-import { generateArticles, Article, articleCategories } from '../utils/articles-client';
-import TagSelector from '../components/TagSelector';
+import { Article, articleCategories, getAllArticles } from '../utils/articles';
 import ServiceList from '../components/ServiceList';
 import ArticleList from '../components/ArticleList';
 import CategoryArticleList from '../components/CategoryArticleList';
 import TagSelectionModal from '../components/TagSelectionModal';
 import PopularServicesPreview from '../components/PopularServicesPreview';
+import fs from 'fs';
+import path from 'path';
 
-export default function Home() {
+interface HomeProps {
+  services: Service[];
+  tags: TagData;
+  allArticles: Article[];
+}
+
+export default function Home({ services, tags, allArticles }: HomeProps) {
   const router = useRouter();
-  const [services, setServices] = useState<Service[]>([]);
-  const [tags, setTags] = useState<TagData>({ motiveTags: [], jobTypeTags: [] });
   const [selectedMotiveTags, setSelectedMotiveTags] = useState<string[]>([]);
   const [selectedJobTypeTags, setSelectedJobTypeTags] = useState<string[]>([]);
   const [recommendation, setRecommendation] = useState<RecommendationResult | null>(null);
-  const [articles, setArticles] = useState<Article[]>([]);
-  const [allArticles, setAllArticles] = useState<Article[]>([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
-    const loadData = async () => {
-      try {
-        const [servicesRes, tagsRes] = await Promise.all([
-          fetch('/data/services.json'),
-          fetch('/data/tags.json')
-        ]);
-        
-        if (!servicesRes.ok || !tagsRes.ok) {
-          throw new Error('データの取得に失敗しました');
-        }
-        
-        const servicesData = await servicesRes.json();
-        const tagsData = await tagsRes.json();
-        
-        if (process.env.NODE_ENV === 'development') {
-          console.log('データ読み込み完了:', {
-            servicesCount: servicesData.length,
-            motiveTagsCount: tagsData.motiveTags.length,
-            jobTypeTagsCount: tagsData.jobTypeTags.length
-          });
-        }
-        
-        if (typeof window !== 'undefined' && process.env.NODE_ENV === 'test') {
-          const { act } = await import('@testing-library/react');
-          act(() => {
-            setServices(servicesData);
-            setTags(tagsData);
-          });
-        } else {
-          setServices(servicesData);
-          setTags(tagsData);
-        }
-        
-        // 記事データを生成
-        const articlesData = generateArticles(servicesData);
-        setArticles(articlesData);
-        
-        // 全記事を取得（JSONファイルから）
-        try {
-          const articlesRes = await fetch('/data/articles.json');
-          if (articlesRes.ok) {
-            const allArticlesData = await articlesRes.json();
-            setAllArticles(allArticlesData);
-          } else {
-            console.log('記事データが見つかりません');
-            setAllArticles([]);
-          }
-        } catch (error) {
-          console.log('記事データの読み込みに失敗:', error);
-          setAllArticles([]);
-        }
-      } catch (error) {
-        console.error('データの読み込みに失敗しました:', error);
-        alert('データの読み込みに失敗しました。ページを再読み込みしてください。');
-      }
-    };
-
-    loadData();
-  }, []);
-
-  useEffect(() => {
-    if (process.env.NODE_ENV === 'development') {
-      console.log('レコメンド処理開始:', {
-        servicesCount: services.length,
-        selectedMotiveTags,
-        selectedJobTypeTags
-      });
-      
-      // デバッグ: サービスデータの最初の2件を確認
-      if (services.length > 0) {
-        console.log('サービスデータサンプル:', services.slice(0, 2).map(s => ({
-          name: s.name,
-          motiveTags: s.motiveTags,
-          jobTypeTags: s.jobTypeTags
-        })));
-      }
-    }
-    
     if ((selectedMotiveTags.length > 0 || selectedJobTypeTags.length > 0) && services.length > 0) {
       const result = recommendServices(services, selectedMotiveTags, selectedJobTypeTags);
-      if (process.env.NODE_ENV === 'development') {
-        console.log('レコメンド結果:', {
-          exactMatch: result.exactMatch.length,
-          partialMatch: result.partialMatch.length,
-          others: result.others.length
-        });
-      }
       setRecommendation(result);
     } else {
       setRecommendation(null);
@@ -133,7 +52,6 @@ export default function Home() {
   };
 
   const handleShowResults = () => {
-    // 選択した条件をクエリパラメータとして渡す
     const params = new URLSearchParams();
     if (selectedMotiveTags.length > 0) {
       params.set('motiveTags', selectedMotiveTags.join(','));
@@ -148,6 +66,8 @@ export default function Home() {
     router.push('/services');
   };
 
+  const serviceArticles = allArticles.filter(article => article.category === 'services');
+  const otherArticles = allArticles.filter(article => article.category !== 'services');
 
   return (
     <>
@@ -178,7 +98,6 @@ export default function Home() {
             <span className="font-semibold text-blue-700">最適な転職サービス</span>を見つけましょう
           </p>
           
-          {/* メインCTAボタン */}
           <div className="flex flex-col sm:flex-row gap-4 justify-center max-w-md mx-auto">
             <button
               onClick={() => setIsModalOpen(true)}
@@ -206,31 +125,26 @@ export default function Home() {
         </header>
 
         <div className="max-w-7xl mx-auto">
-          {/* 人気サービスプレビュー */}
           {services.length > 0 && (
             <PopularServicesPreview 
               services={services} 
             />
           )}
           
-          {/* 記事一覧 */}
           <div>
-            {/* サービス記事リスト */}
-            {articles.length > 0 && (
-              <ArticleList articles={articles} />
+            {serviceArticles.length > 0 && (
+              <ArticleList articles={serviceArticles} />
             )}
 
-            {/* カテゴリ別記事リスト */}
-            {allArticles.length > 0 && (
+            {otherArticles.length > 0 && (
               <CategoryArticleList 
                 categories={articleCategories.filter(cat => cat.id !== 'services')} 
-                articles={allArticles.filter(article => article.category !== 'services')} 
+                articles={otherArticles} 
               />
             )}
           </div>
         </div>
         
-        {/* タグ選択モーダル */}
         <TagSelectionModal
           isOpen={isModalOpen}
           onClose={() => setIsModalOpen(false)}
@@ -247,3 +161,20 @@ export default function Home() {
     </>
   );
 }
+
+export const getStaticProps: GetStaticProps = async () => {
+  const servicesPath = path.join(process.cwd(), 'public/data/services.json');
+  const tagsPath = path.join(process.cwd(), 'public/data/tags.json');
+
+  const services = JSON.parse(fs.readFileSync(servicesPath, 'utf-8'));
+  const tags = JSON.parse(fs.readFileSync(tagsPath, 'utf-8'));
+  const allArticles = getAllArticles();
+
+  return {
+    props: {
+      services,
+      tags,
+      allArticles,
+    },
+  };
+};
