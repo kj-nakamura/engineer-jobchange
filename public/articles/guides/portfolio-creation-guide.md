@@ -1,10 +1,18 @@
 ---
-title: "エンジニア転職で差がつくポートフォリオ作成ガイド【採用確率90%アップ】"
-description: "転職で採用される強力なポートフォリオの作成方法を詳しく解説。GitHub活用法、プロジェクト選定、技術スタック、デモサイト構築まで完全ガイドです。"
-publishDate: "2025-06-23"
-category: "guides"
-tags: ["ポートフォリオ", "GitHub", "転職", "プロジェクト", "実績"]
-relatedArticles: ["technical-interview-preparation", "engineer-resume-template", "github-profile-optimization"]
+title: エンジニア転職で差がつくポートフォリオ作成ガイド【採用確率90%アップ】
+description: 転職で採用される強力なポートフォリオの作成方法を詳しく解説。GitHub活用法、プロジェクト選定、技術スタック、デモサイト構築まで完全ガイドです。
+publishDate: '2025-06-23'
+category: guides
+tags:
+  - ポートフォリオ
+  - GitHub
+  - 転職
+  - プロジェクト
+  - 実績
+relatedArticles:
+  - technical-interview-preparation
+  - engineer-resume-template
+  - github-profile-optimization
 ---
 
 # エンジニア転職で差がつくポートフォリオ作成ガイド【採用確率90%アップ】

@@ -1,10 +1,18 @@
 ---
-title: "DevOpsエンジニアの転職完全ガイド【年収・スキル・将来性】"
-description: "DevOpsエンジニアの転職市場を徹底解説。インフラ自動化、CI/CDパイプライン、クラウド技術など求められるスキルと年収相場、転職戦略を詳しく紹介します。"
-publishDate: "2025-06-23"
-category: "job-types"
-tags: ["DevOpsエンジニア", "インフラ", "CI/CD", "クラウド", "転職"]
-relatedArticles: ["backend-engineer-career-path", "cloud-engineer-demand", "sre-engineer-skills"]
+title: DevOpsエンジニアの転職完全ガイド【年収・スキル・将来性】
+description: DevOpsエンジニアの転職市場を徹底解説。インフラ自動化、CI/CDパイプライン、クラウド技術など求められるスキルと年収相場、転職戦略を詳しく紹介します。
+publishDate: '2025-06-23'
+category: job-types
+tags:
+  - DevOpsエンジニア
+  - インフラ
+  - CI/CD
+  - クラウド
+  - 転職
+relatedArticles:
+  - backend-engineer-career-path
+  - cloud-engineer-demand
+  - sre-engineer-skills
 ---
 
 # DevOpsエンジニアの転職完全ガイド【年収・スキル・将来性】

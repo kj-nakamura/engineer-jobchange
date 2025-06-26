@@ -1,49 +1,13 @@
-import { useState, useEffect } from 'react';
+import { GetStaticProps } from 'next';
 import Head from 'next/head';
-import { Article, articleCategories } from '../utils/articles-client';
+import { Article, articleCategories, getAllArticles } from '../utils/articles';
 import CategoryArticleList from '../components/CategoryArticleList';
-import { generateArticles } from '../utils/articles-client';
 
-export default function ArticlesPage() {
-  const [allArticles, setAllArticles] = useState<Article[]>([]);
-  const [isLoading, setIsLoading] = useState(true);
+interface ArticlesPageProps {
+  allArticles: Article[];
+}
 
-  useEffect(() => {
-    const loadArticles = async () => {
-      try {
-        const articlesRes = await fetch('/data/articles.json');
-        if (articlesRes.ok) {
-          const allArticlesData = await articlesRes.json();
-          setAllArticles(allArticlesData);
-        } else {
-          // fallback for when articles.json is not generated
-          const servicesRes = await fetch('/data/services.json');
-          const servicesData = await servicesRes.json();
-          const generatedArticles = generateArticles(servicesData);
-          setAllArticles(generatedArticles);
-        }
-      } catch (error) {
-        console.error('記事データの読み込みに失敗:', error);
-        setAllArticles([]);
-      } finally {
-        setIsLoading(false);
-      }
-    };
-
-    loadArticles();
-  }, []);
-
-  if (isLoading) {
-    return (
-      <div className="min-h-screen flex items-center justify-center">
-        <div className="text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto mb-4"></div>
-          <p className="text-gray-600">記事を読み込み中...</p>
-        </div>
-      </div>
-    );
-  }
-
+export default function ArticlesPage({ allArticles }: ArticlesPageProps) {
   return (
     <>
       <Head>
@@ -71,3 +35,12 @@ export default function ArticlesPage() {
     </>
   );
 }
+
+export const getStaticProps: GetStaticProps = async () => {
+  const allArticles = getAllArticles();
+  return {
+    props: {
+      allArticles,
+    },
+  };
+};

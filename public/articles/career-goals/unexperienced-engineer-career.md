@@ -1,10 +1,20 @@
 ---
-title: "未経験からエンジニア転職の完全ロードマップ【成功率90%の戦略】"
-description: "未経験からエンジニア転職を成功させる完全ガイド。学習方法、ポートフォリオ作成、転職活動の進め方、おすすめプログラミングスクール、転職サイトまで詳しく解説します。"
-publishDate: "2025-06-24"
-category: "career-goals"
-tags: ["未経験転職", "プログラミングスクール", "ポートフォリオ", "学習ロードマップ", "キャリアチェンジ"]
-relatedArticles: ["20s-engineer-career-strategy", "technical-interview-preparation", "portfolio-creation-guide", "engineer-resume-template"]
+title: 未経験からエンジニア転職の完全ロードマップ【成功率90%の戦略】
+description: >-
+  未経験からエンジニア転職を成功させる完全ガイド。学習方法、ポートフォリオ作成、転職活動の進め方、おすすめプログラミングスクール、転職サイトまで詳しく解説します。
+publishDate: '2025-06-24'
+category: career-goals
+tags:
+  - 未経験転職
+  - プログラミングスクール
+  - ポートフォリオ
+  - 学習ロードマップ
+  - キャリアチェンジ
+relatedArticles:
+  - 20s-engineer-career-strategy
+  - technical-interview-preparation
+  - portfolio-creation-guide
+  - engineer-resume-template
 ---
 
 # 未経験からエンジニア転職の完全ロードマップ【成功率90%の戦略】

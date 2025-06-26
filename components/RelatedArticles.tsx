@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { Article } from '../utils/articles-client';
+import { Article } from '../utils/articles';
 
 interface RelatedArticlesProps {
   relatedArticles: Article[];

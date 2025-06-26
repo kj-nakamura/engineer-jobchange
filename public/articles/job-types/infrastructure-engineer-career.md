@@ -1,10 +1,21 @@
 ---
-title: "インフラエンジニアの転職完全ガイド【年収・スキル・キャリアパス】"
-description: "インフラエンジニアの転職市場を徹底解説。クラウド、オンプレミス、SRE、DevOpsなど分野別の年収相場、必要スキル、キャリアパス、おすすめ転職サイトを詳しく紹介します。"
-publishDate: "2025-06-24"
-category: "job-types"
-tags: ["インフラエンジニア", "インフラ転職", "AWS", "Azure", "SRE", "DevOps"]
-relatedArticles: ["devops-engineer", "kubernetes-engineer-demand", "backend-engineer-career-path", "engineer-salary-up-methods"]
+title: インフラエンジニアの転職完全ガイド【年収・スキル・キャリアパス】
+description: >-
+  インフラエンジニアの転職市場を徹底解説。クラウド、オンプレミス、SRE、DevOpsなど分野別の年収相場、必要スキル、キャリアパス、おすすめ転職サイトを詳しく紹介します。
+publishDate: '2025-06-24'
+category: job-types
+tags:
+  - インフラエンジニア
+  - インフラ転職
+  - AWS
+  - Azure
+  - SRE
+  - DevOps
+relatedArticles:
+  - devops-engineer
+  - kubernetes-engineer-demand
+  - backend-engineer-career-path
+  - engineer-salary-up-methods
 ---
 
 # インフラエンジニアの転職完全ガイド【年収・スキル・キャリアパス】

@@ -1,7 +1,10 @@
 ---
-title: "Forkwell Jobsの評判は？口コミから分かる特徴とメリット・デメリット"
-description: "Forkwell Jobsの実際の評判と口コミを徹底調査。エンジニア向け求人サービスの特徴、技術記事投稿でのスカウト獲得、メリット・デメリットを詳しく解説。"
-publishDate: "2025-06-23"
+title: Forkwell Jobsの評判は？口コミから分かる特徴とメリット・デメリット
+description: Forkwell Jobsの実際の評判と口コミを徹底調査。エンジニア向け求人サービスの特徴、技術記事投稿でのスカウト獲得、メリット・デメリットを詳しく解説。
+publishDate: '2025-06-23'
+category: services
+tags: []
+relatedArticles: []
 ---
 
 # Forkwell Jobsの評判は？実際の口コミと特徴を徹底解説

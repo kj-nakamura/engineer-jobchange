@@ -1,10 +1,17 @@
 ---
-title: "AI・機械学習エンジニアの転職市場動向【2025年最新】"
-description: "AI・機械学習エンジニアの転職市場を徹底分析。需要が高い技術スキル、年収相場、キャリアパス、おすすめ転職サイトまで最新トレンドを詳しく解説します。"
-publishDate: "2025-06-23"
-category: "trends"
-tags: ["AI", "機械学習", "データサイエンス", "転職トレンド"]
-relatedArticles: ["data-scientist-job-market", "python-engineer-demand", "engineer-salary-up-methods"]
+title: AI・機械学習エンジニアの転職市場動向【2025年最新】
+description: AI・機械学習エンジニアの転職市場を徹底分析。需要が高い技術スキル、年収相場、キャリアパス、おすすめ転職サイトまで最新トレンドを詳しく解説します。
+publishDate: '2025-06-23'
+category: trends
+tags:
+  - AI
+  - 機械学習
+  - データサイエンス
+  - 転職トレンド
+relatedArticles:
+  - data-scientist-job-market
+  - python-engineer-demand
+  - engineer-salary-up-methods
 ---
 
 # AI・機械学習エンジニアの転職市場動向【2025年最新】

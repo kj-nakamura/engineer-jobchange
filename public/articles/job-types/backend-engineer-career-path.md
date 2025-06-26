@@ -1,10 +1,17 @@
 ---
-title: "バックエンドエンジニアの転職完全ガイド【年収・スキル・キャリアパス】"
-description: "バックエンドエンジニアの転職事情を徹底解説。求められるスキル、平均年収、キャリアパス、おすすめ転職サイトまで網羅的に紹介します。"
-publishDate: "2025-06-23"
-category: "job-types"
-tags: ["バックエンドエンジニア", "サーバーサイド", "API開発", "転職"]
-relatedArticles: ["frontend-engineer-job-sites", "engineer-salary-up-methods", "java-engineer-demand"]
+title: バックエンドエンジニアの転職完全ガイド【年収・スキル・キャリアパス】
+description: バックエンドエンジニアの転職事情を徹底解説。求められるスキル、平均年収、キャリアパス、おすすめ転職サイトまで網羅的に紹介します。
+publishDate: '2025-06-23'
+category: job-types
+tags:
+  - バックエンドエンジニア
+  - サーバーサイド
+  - API開発
+  - 転職
+relatedArticles:
+  - frontend-engineer-job-sites
+  - engineer-salary-up-methods
+  - java-engineer-demand
 ---
 
 # バックエンドエンジニアの転職完全ガイド【年収・スキル・キャリアパス】

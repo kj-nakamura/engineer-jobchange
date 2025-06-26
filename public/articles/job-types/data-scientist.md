@@ -1,10 +1,18 @@
 ---
-title: "データサイエンティストの転職完全ガイド【年収・スキル・将来性】"
-description: "データサイエンティストの転職市場を徹底解説。機械学習、統計解析、ビジネス課題解決に必要なスキルと年収相場、キャリアパスを詳しく紹介します。"
-publishDate: "2025-06-23"
-category: "job-types"
-tags: ["データサイエンティスト", "機械学習", "統計解析", "Python", "転職"]
-relatedArticles: ["ai-engineer-career-trend", "python-engineer-demand", "ml-engineer-skills"]
+title: データサイエンティストの転職完全ガイド【年収・スキル・将来性】
+description: データサイエンティストの転職市場を徹底解説。機械学習、統計解析、ビジネス課題解決に必要なスキルと年収相場、キャリアパスを詳しく紹介します。
+publishDate: '2025-06-23'
+category: job-types
+tags:
+  - データサイエンティスト
+  - 機械学習
+  - 統計解析
+  - Python
+  - 転職
+relatedArticles:
+  - ai-engineer-career-trend
+  - python-engineer-demand
+  - ml-engineer-skills
 ---
 
 # データサイエンティストの転職完全ガイド【年収・スキル・将来性】

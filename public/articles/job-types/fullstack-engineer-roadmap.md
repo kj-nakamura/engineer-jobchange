@@ -1,10 +1,17 @@
 ---
-title: "フルスタックエンジニアになるためのロードマップ【2025年最新】"
-description: "フルスタックエンジニアに必要なスキル、学習順序、転職戦略を詳しく解説。フロントエンドからバックエンド、インフラまで体系的に学べるロードマップを提供します。"
-publishDate: "2025-06-23"
-category: "job-types"
-tags: ["フルスタックエンジニア", "学習ロードマップ", "スキルセット", "転職"]
-relatedArticles: ["frontend-engineer-job-sites", "backend-engineer-career-path", "engineer-skill-roadmap"]
+title: フルスタックエンジニアになるためのロードマップ【2025年最新】
+description: フルスタックエンジニアに必要なスキル、学習順序、転職戦略を詳しく解説。フロントエンドからバックエンド、インフラまで体系的に学べるロードマップを提供します。
+publishDate: '2025-06-23'
+category: job-types
+tags:
+  - フルスタックエンジニア
+  - 学習ロードマップ
+  - スキルセット
+  - 転職
+relatedArticles:
+  - frontend-engineer-job-sites
+  - backend-engineer-career-path
+  - engineer-skill-roadmap
 ---
 
 # フルスタックエンジニアになるためのロードマップ【2025年最新】

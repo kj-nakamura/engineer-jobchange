@@ -1,7 +1,10 @@
 ---
-title: "マイナビIT AGENTの評判は？口コミから分かる特徴とメリット・デメリット"
-description: "マイナビIT AGENTの実際の評判と口コミを徹底調査。IT・Web業界特化型転職エージェントの特徴、メリット・デメリット、おすすめな人を詳しく解説します。"
-publishDate: "2025-06-26"
+title: マイナビIT AGENTの評判は？口コミから分かる特徴とメリット・デメリット
+description: マイナビIT AGENTの実際の評判と口コミを徹底調査。IT・Web業界特化型転職エージェントの特徴、メリット・デメリット、おすすめな人を詳しく解説します。
+publishDate: '2025-06-26'
+category: services
+tags: []
+relatedArticles: []
 ---
 
 # マイナビIT AGENTの評判は？実際の口コミと特徴を徹底解説

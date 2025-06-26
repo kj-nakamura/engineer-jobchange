@@ -2,9 +2,7 @@ import { useState } from 'react';
 import { GetStaticPaths, GetStaticProps } from 'next';
 import Head from 'next/head';
 import Link from 'next/link';
-import fs from 'fs';
-import path from 'path';
-import { Article, ArticleCategory, articleCategories } from '../../utils/articles-client';
+import { Article, ArticleCategory, articleCategories, getAllArticles } from '../../utils/articles';
 
 interface CategoryPageProps {
   category: ArticleCategory;
@@ -286,8 +284,6 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
   const { category: categoryId } = params!;
-
-  // カテゴリ情報を取得
   const category = articleCategories.find(cat => cat.id === categoryId);
 
   if (!category) {
@@ -296,19 +292,8 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
     };
   }
 
-  // 記事データを取得
-  let articles = [];
-  try {
-    const articlesData = JSON.parse(
-      fs.readFileSync(path.join(process.cwd(), 'public/data/articles.json'), 'utf8')
-    );
-    
-    // 指定されたカテゴリの記事のみフィルタリング
-    articles = articlesData.filter((article: any) => article.category === categoryId);
-  } catch (error) {
-    console.error('記事データの読み込みに失敗:', error);
-    articles = [];
-  }
+  const allArticles = getAllArticles();
+  const articles = allArticles.filter(article => article.category === categoryId);
 
   return {
     props: {

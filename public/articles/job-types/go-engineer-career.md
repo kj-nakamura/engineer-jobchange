@@ -1,10 +1,20 @@
 ---
-title: "Go言語エンジニアの転職完全ガイド【年収・スキル・キャリアパス】"
-description: "Go言語エンジニアの転職市場を徹底解説。マイクロサービス、クラウドネイティブ、高性能バックエンド開発の年収相場、必要スキル、キャリアパス、おすすめ転職サイトを詳しく紹介します。"
-publishDate: "2025-06-24"
-category: "job-types"
-tags: ["Go言語", "Golang", "マイクロサービス", "クラウドネイティブ", "バックエンド"]
-relatedArticles: ["backend-engineer-career-path", "python-engineer-career", "kubernetes-engineer-demand", "devops-engineer"]
+title: Go言語エンジニアの転職完全ガイド【年収・スキル・キャリアパス】
+description: >-
+  Go言語エンジニアの転職市場を徹底解説。マイクロサービス、クラウドネイティブ、高性能バックエンド開発の年収相場、必要スキル、キャリアパス、おすすめ転職サイトを詳しく紹介します。
+publishDate: '2025-06-24'
+category: job-types
+tags:
+  - Go言語
+  - Golang
+  - マイクロサービス
+  - クラウドネイティブ
+  - バックエンド
+relatedArticles:
+  - backend-engineer-career-path
+  - python-engineer-career
+  - kubernetes-engineer-demand
+  - devops-engineer
 ---
 
 # Go言語エンジニアの転職完全ガイド【年収・スキル・キャリアパス】
