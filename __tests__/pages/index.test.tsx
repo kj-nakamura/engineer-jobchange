@@ -1,6 +1,17 @@
 import { render, screen, waitFor } from '@testing-library/react';
 import Home from '../../pages/index';
-import { Service, TagData, Article } from '../../types';
+import { Service, TagData } from '../../types';
+
+// Article type for testing (since it's not in main types)
+interface Article {
+  id: string;
+  title: string;
+  description: string;
+  publishDate: string;
+  category: string;
+  tags: string[];
+  relatedArticles: string[];
+}
 
 // Mock data
 const mockServices: Service[] = [
@@ -9,21 +20,15 @@ const mockServices: Service[] = [
     name: 'Test Service 1',
     description: 'Description 1',
     url: 'https://example1.com',
-    tags: [],
+    imageUrl: 'https://example.com/image1.jpg',
     motiveTags: ['high_salary'],
-    jobTypeTags: ['frontend'],
-    features: [],
-    pros: [],
-    cons: [],
-    suitableFor: [],
-    pricing: '',
-    registration: ''
+    jobTypeTags: ['frontend']
   },
 ];
 
 const mockTags: TagData = {
-  motiveTags: [{ id: 'high_salary', name: 'High Salary' }],
-  jobTypeTags: [{ id: 'frontend', name: 'Frontend' }],
+  motiveTags: [{ id: 'high_salary', label: 'High Salary' }],
+  jobTypeTags: [{ id: 'frontend', label: 'Frontend' }],
 };
 
 const mockArticles: Article[] = [

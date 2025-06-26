@@ -33,7 +33,9 @@
       "Bash(curl:*)",
       "Bash(grep:*)",
       "Bash(rg:*)",
-      "Bash(echo:*)"
+      "Bash(echo:*)",
+      "Bash(gh run list:*)",
+      "Bash(gh run view:*)"
     ],
     "deny": [
       "Bash(rm:*)"
