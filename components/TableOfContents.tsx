@@ -54,7 +54,7 @@ export default function TableOfContents({ content }: TableOfContentsProps) {
       
       for (let i = headings.length - 1; i >= 0; i--) {
         const heading = headings[i];
-        if (heading && heading.offsetTop <= window.scrollY + 100) {
+        if (heading && heading.offsetTop <= window.scrollY + 120) {
           setActiveId(heading.id);
           break;
         }
@@ -76,7 +76,7 @@ export default function TableOfContents({ content }: TableOfContentsProps) {
     const element = document.getElementById(id);
     if (element) {
       const elementPosition = element.offsetTop;
-      const offsetPosition = elementPosition - 100; // ヘッダー余白を考慮
+      const offsetPosition = elementPosition - 120; // 固定ヘッダー（80px）+ 余白（40px）を考慮
 
       window.scrollTo({
         top: offsetPosition,
