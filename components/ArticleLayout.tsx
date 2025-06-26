@@ -163,62 +163,11 @@ export default function ArticleLayout({ service, title, publishDate, content, ar
               />
             </div>
             
-            {/* Action Buttons */}
-            <div className="bg-white rounded-2xl shadow-xl p-6">
-              <div className="flex flex-col sm:flex-row gap-4">
-                <a
-                  href={service.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  onClick={() => {
-                    if (articleId && articleCategory) {
-                      trackAffiliateClick({
-                        affiliate_id: service.name.toLowerCase(),
-                        affiliate_url: service.url,
-                        service_name: service.name,
-                        placement: 'article_bottom_cta',
-                        article_category: articleCategory,
-                        article_id: articleId,
-                      });
-                    }
-                  }}
-                  className="group/official relative inline-flex items-center justify-center bg-gradient-to-br from-green-500 via-green-600 to-emerald-600 text-white px-8 py-4 rounded-xl font-semibold shadow-lg shadow-green-500/25 hover:shadow-xl hover:shadow-green-500/40 transition-all duration-300 transform hover:scale-[1.02] active:scale-[0.98] overflow-hidden"
-                >
-                  <div className="absolute inset-0 bg-gradient-to-br from-white/20 to-transparent opacity-0 group-hover/official:opacity-100 transition-opacity duration-300"></div>
-                  <div className="absolute inset-0 -translate-x-full group-hover/official:translate-x-full transition-transform duration-700 bg-gradient-to-r from-transparent via-white/30 to-transparent"></div>
-                  
-                  <span className="relative z-10 flex items-center">
-                    <svg className="w-5 h-5 mr-3 group-hover/official:rotate-12 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9v-9m0-9v9" />
-                    </svg>
-                    {service.name}の公式サイトへ
-                    <svg className="w-4 h-4 ml-3 group-hover/official:translate-x-1 group-hover/official:scale-110 transition-all duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-                    </svg>
-                  </span>
-                </a>
-
-                <Link
-                  href="/"
-                  className="group/home relative inline-flex items-center justify-center bg-gradient-to-br from-gray-500 via-gray-600 to-gray-700 text-white px-8 py-4 rounded-xl font-semibold shadow-lg shadow-gray-500/25 hover:shadow-xl hover:shadow-gray-500/40 transition-all duration-300 transform hover:scale-[1.02] active:scale-[0.98] overflow-hidden"
-                >
-                  <div className="absolute inset-0 bg-gradient-to-br from-white/20 to-transparent opacity-0 group-hover/home:opacity-100 transition-opacity duration-300"></div>
-                  <div className="absolute inset-0 -translate-x-full group-hover/home:translate-x-full transition-transform duration-700 bg-gradient-to-r from-transparent via-white/30 to-transparent"></div>
-                  
-                  <span className="relative z-10 flex items-center">
-                    <svg className="w-5 h-5 mr-3 group-hover/home:rotate-12 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
-                    </svg>
-                    ホームに戻る
-                  </span>
-                </Link>
-              </div>
-            </div>
           </div>
 
           {/* Sidebar */}
           <div className="lg:w-1/3">
-            <div className="lg:sticky lg:top-8 space-y-6">
+            <div className="lg:sticky lg:top-24 space-y-6">
               {/* Table of Contents */}
               <TableOfContents content={content} />
               

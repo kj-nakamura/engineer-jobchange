@@ -53,7 +53,9 @@ export default function App({ Component, pageProps }: AppProps) {
       
       <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50">
         <Header />
-        <Component {...pageProps} />
+        <main className="pt-20">
+          <Component {...pageProps} />
+        </main>
       </div>
     </>
   )

@@ -268,6 +268,7 @@ export default function Services() {
           onMotiveTagToggle={handleMotiveTagToggle}
           onJobTypeTagToggle={handleJobTypeTagToggle}
           onShowResults={handleShowResults}
+          services={services}
         />
       </div>
     </>
