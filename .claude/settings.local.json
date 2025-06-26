@@ -37,8 +37,6 @@
       "Bash(gh run list:*)",
       "Bash(gh run view:*)"
     ],
-    "deny": [
-      "Bash(rm:*)"
-    ]
+    "deny": ["Bash(rm:*)", "Bash(git push:*)"]
   }
 }
