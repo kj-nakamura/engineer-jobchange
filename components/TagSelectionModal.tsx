@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
-import { Tag } from '../types';
+import { Tag, Service } from '../types';
+import { recommendServices } from '../utils/recommend';
 
 interface TagSelectionModalProps {
   isOpen: boolean;
@@ -11,6 +12,7 @@ interface TagSelectionModalProps {
   onMotiveTagToggle: (tagId: string) => void;
   onJobTypeTagToggle: (tagId: string) => void;
   onShowResults: () => void;
+  services: Service[];
 }
 
 export default function TagSelectionModal({
@@ -22,22 +24,20 @@ export default function TagSelectionModal({
   selectedJobTypeTags,
   onMotiveTagToggle,
   onJobTypeTagToggle,
-  onShowResults
+  onShowResults,
+  services
 }: TagSelectionModalProps) {
   const [matchCount, setMatchCount] = useState(0);
 
   useEffect(() => {
-    // リアルタイムでマッチ件数を計算（仮実装）
-    if (selectedMotiveTags.length > 0 || selectedJobTypeTags.length > 0) {
-      // 実際の実装では親コンポーネントから渡すか、ここでサービス数を計算
-      const estimatedCount = Math.max(1, 
-        Math.floor(Math.random() * 10) + selectedMotiveTags.length + selectedJobTypeTags.length
-      );
-      setMatchCount(estimatedCount);
+    // リアルタイムでマッチ件数を計算（exactMatchのみ）
+    if ((selectedMotiveTags.length > 0 || selectedJobTypeTags.length > 0) && services && services.length > 0) {
+      const result = recommendServices(services, selectedMotiveTags, selectedJobTypeTags);
+      setMatchCount(result.exactMatch.length);
     } else {
       setMatchCount(0);
     }
-  }, [selectedMotiveTags, selectedJobTypeTags]);
+  }, [selectedMotiveTags, selectedJobTypeTags, services]);
 
   if (!isOpen) return null;
 
