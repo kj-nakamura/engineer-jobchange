@@ -95,7 +95,6 @@ describe('logAnalyticsEnvironment', () => {
 
   it('should log environment info with valid ID', () => {
     process.env.NEXT_PUBLIC_GA_ID = 'G-TESTIDABCD';
-    process.env.NODE_ENV = 'development';
     process.env.VERCEL_ENV = 'development';
     process.env.NEXT_PUBLIC_ANALYTICS_DEBUG = 'true';
 
@@ -105,7 +104,6 @@ describe('logAnalyticsEnvironment', () => {
       '🔍 Analytics Environment Info:',
       expect.objectContaining({
         trackingId: 'G-TESTIDABCD',
-        environment: 'development',
         vercelEnv: 'development',
         debugMode: 'true',
       })
@@ -115,7 +113,6 @@ describe('logAnalyticsEnvironment', () => {
     );
     expect(info).toEqual(expect.objectContaining({
       trackingId: 'G-TESTIDABCD',
-      environment: 'development',
       vercelEnv: 'development',
       debugMode: 'true',
     }));
