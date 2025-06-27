@@ -4,6 +4,14 @@ const nextConfig = {
   experimental: {
     scrollRestoration: true,
   },
+  async rewrites() {
+    return [
+      {
+        source: '/sitemap.xml',
+        destination: '/api/sitemap',
+      },
+    ];
+  },
   webpack: (config, { isServer }) => {
     // クライアントサイドで Node.js モジュールを使用しないように設定
     if (!isServer) {

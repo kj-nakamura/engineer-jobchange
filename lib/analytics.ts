@@ -189,7 +189,7 @@ async function sendAnalyticsData() {
 }
 
 // Set up periodic sending of analytics data
-if (typeof window !== 'undefined' && ANALYTICS_ENABLED) {
+if (typeof window !== 'undefined' && ANALYTICS_ENABLED && process.env.NODE_ENV !== 'test') {
   // Send data every 5 minutes
   setInterval(sendAnalyticsData, 5 * 60 * 1000);
   
