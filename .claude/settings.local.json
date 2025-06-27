@@ -36,7 +36,10 @@
       "Bash(echo:*)",
       "Bash(gh run list:*)",
       "Bash(gh run view:*)",
-      "WebFetch(domain:zenn.dev)"
+      "WebFetch(domain:zenn.dev)",
+      "Bash(git rm:*)",
+      "Bash(timeout 10s npm start)",
+      "Bash(PORT=3003 timeout 10s npm start)"
     ],
     "deny": [
       "Bash(rm:*)",
