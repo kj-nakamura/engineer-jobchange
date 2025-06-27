@@ -1,5 +1,3 @@
-import { pageview, event, trackAffiliateClick, trackArticleEngagement, trackSearch, GA_TRACKING_ID, ANALYTICS_ENABLED } from '../../lib/analytics';
-
 // Mock gtag function
 const mockGtag = jest.fn();
 
@@ -24,74 +22,82 @@ const sessionStorageMock = (() => {
   };
 })();
 
-Object.defineProperty(window, 'gtag', {
-  value: mockGtag,
-  writable: true,
-});
-
-Object.defineProperty(window, 'localStorage', {
-  value: localStorageMock,
-});
-
-Object.defineProperty(window, 'sessionStorage', {
-  value: sessionStorageMock,
-});
-
 // Mock fetch API
 const mockFetch = jest.spyOn(global, 'fetch');
 
 describe('Analytics Utilities', () => {
   const originalGA_TRACKING_ID = process.env.NEXT_PUBLIC_GA_ID;
-  const originalANALYTICS_ENABLED = ANALYTICS_ENABLED;
+  const originalLocalStorage = Object.getOwnPropertyDescriptor(window, 'localStorage');
+  const originalSessionStorage = Object.getOwnPropertyDescriptor(window, 'sessionStorage');
 
   beforeEach(() => {
+    // Reset mocks and environment variables
     mockGtag.mockClear();
     localStorageMock.clear();
     sessionStorageMock.clear();
     mockFetch.mockClear();
-    jest.useFakeTimers(); // Use fake timers for setInterval
+
+    // Mock window objects
+    Object.defineProperty(window, 'gtag', {
+      value: mockGtag,
+      writable: true,
+      configurable: true,
+    });
+
+    Object.defineProperty(window, 'localStorage', {
+      value: localStorageMock,
+      writable: true,
+      configurable: true,
+    });
+
+    Object.defineProperty(window, 'sessionStorage', {
+      value: sessionStorageMock,
+      writable: true,
+      configurable: true,
+    });
 
     // Reset environment variables for each test
-    process.env.NEXT_PUBLIC_GA_ID = originalGA_TRACKING_ID;
-    Object.defineProperty(require('../../lib/analytics'), 'ANALYTICS_ENABLED', {
-      value: !!process.env.NEXT_PUBLIC_GA_ID,
-      writable: true,
-    });
+    process.env.NEXT_PUBLIC_GA_ID = 'G-TESTID';
+
+    // Reset modules to avoid side effects
+    jest.resetModules();
   });
 
   afterEach(() => {
-    jest.runOnlyPendingTimers(); // Clear any pending timers
-    jest.useRealTimers(); // Restore real timers
     jest.restoreAllMocks();
 
-    // Restore original values
+    // Restore original environment variable
     process.env.NEXT_PUBLIC_GA_ID = originalGA_TRACKING_ID;
-    Object.defineProperty(require('../../lib/analytics'), 'ANALYTICS_ENABLED', {
-      value: originalANALYTICS_ENABLED,
-      writable: true,
-    });
+
+    // Restore original storage
+    if (originalLocalStorage) {
+      Object.defineProperty(window, 'localStorage', originalLocalStorage);
+    }
+    if (originalSessionStorage) {
+      Object.defineProperty(window, 'sessionStorage', originalSessionStorage);
+    }
   });
 
   describe('pageview', () => {
     it('should call gtag config when analytics is enabled', () => {
-      process.env.NEXT_PUBLIC_GA_ID = 'G-TESTID';
-      Object.defineProperty(require('../../lib/analytics'), 'ANALYTICS_ENABLED', { value: true });
+      const { pageview } = require('../../lib/analytics');
       pageview('/test-path');
       expect(mockGtag).toHaveBeenCalledWith('config', 'G-TESTID', { page_location: '/test-path' });
     });
 
     it('should not call gtag config when analytics is disabled', () => {
       process.env.NEXT_PUBLIC_GA_ID = '';
-      Object.defineProperty(require('../../lib/analytics'), 'ANALYTICS_ENABLED', { value: false });
-      pageview('/test-path');
+      jest.resetModules();
+      const { pageview: disabledPageview } = require('../../lib/analytics');
+      
+      disabledPageview('/test-path');
       expect(mockGtag).not.toHaveBeenCalled();
     });
   });
 
   describe('event', () => {
     it('should call gtag event when analytics is enabled', () => {
-      process.env.NEXT_PUBLIC_GA_ID = 'G-TESTID';
-      Object.defineProperty(require('../../lib/analytics'), 'ANALYTICS_ENABLED', { value: true });
+      const { event } = require('../../lib/analytics');
       event({ action: 'test_action', category: 'test_category', label: 'test_label', value: 10 });
       expect(mockGtag).toHaveBeenCalledWith('event', 'test_action', {
         event_category: 'test_category',
@@ -102,14 +108,15 @@ describe('Analytics Utilities', () => {
 
     it('should not call gtag event when analytics is disabled', () => {
       process.env.NEXT_PUBLIC_GA_ID = '';
-      Object.defineProperty(require('../../lib/analytics'), 'ANALYTICS_ENABLED', { value: false });
-      event({ action: 'test_action', category: 'test_category' });
+      jest.resetModules();
+      const { event: disabledEvent } = require('../../lib/analytics');
+      
+      disabledEvent({ action: 'test_action', category: 'test_category' });
       expect(mockGtag).not.toHaveBeenCalled();
     });
 
     it('should include custom parameters', () => {
-      process.env.NEXT_PUBLIC_GA_ID = 'G-TESTID';
-      Object.defineProperty(require('../../lib/analytics'), 'ANALYTICS_ENABLED', { value: true });
+      const { event } = require('../../lib/analytics');
       event({ action: 'test_action', category: 'test_category', custom_parameters: { param1: 'value1' } });
       expect(mockGtag).toHaveBeenCalledWith('event', 'test_action', {
         event_category: 'test_category',
@@ -120,15 +127,16 @@ describe('Analytics Utilities', () => {
 
   describe('trackAffiliateClick', () => {
     const mockData = {
-      affiliate_id: 'aff1',
-      affiliate_url: 'http://example.com',
-      service_name: 'Service A',
-      placement: 'top',
+      affiliate_id: 'test-affiliate',
+      affiliate_url: 'https://example.com',
+      service_name: 'Test Service',
+      placement: 'article',
+      article_category: 'test',
+      article_id: 'test-article',
     };
 
     it('should track affiliate click and store in localStorage when analytics is enabled', () => {
-      process.env.NEXT_PUBLIC_GA_ID = 'G-TESTID';
-      Object.defineProperty(require('../../lib/analytics'), 'ANALYTICS_ENABLED', { value: true });
+      const { trackAffiliateClick } = require('../../lib/analytics');
       trackAffiliateClick(mockData);
 
       expect(mockGtag).toHaveBeenCalledWith('event', 'affiliate_click', expect.any(Object));
@@ -139,39 +147,37 @@ describe('Analytics Utilities', () => {
 
     it('should not track affiliate click when analytics is disabled', () => {
       process.env.NEXT_PUBLIC_GA_ID = '';
-      Object.defineProperty(require('../../lib/analytics'), 'ANALYTICS_ENABLED', { value: false });
-      trackAffiliateClick(mockData);
+      jest.resetModules();
+      const { trackAffiliateClick: disabledTrackAffiliateClick } = require('../../lib/analytics');
+      
+      disabledTrackAffiliateClick(mockData);
 
       expect(mockGtag).not.toHaveBeenCalled();
       expect(localStorageMock.getItem('affiliate_clicks')).toBeNull();
     });
 
     it('should send analytics data when clicks reach threshold', async () => {
-      process.env.NEXT_PUBLIC_GA_ID = 'G-TESTID';
-      Object.defineProperty(require('../../lib/analytics'), 'ANALYTICS_ENABLED', { value: true });
+      const { trackAffiliateClick } = require('../../lib/analytics');
       mockFetch.mockResolvedValueOnce({ ok: true } as Response);
 
       for (let i = 0; i < 10; i++) {
         trackAffiliateClick({ ...mockData, affiliate_id: `aff${i}` });
       }
 
-      // Advance timers to trigger setInterval (if any) and ensure fetch is called
-      jest.runAllTimers();
+      // Wait for async operations
+      await new Promise(resolve => setTimeout(resolve, 0));
 
       expect(mockFetch).toHaveBeenCalledTimes(1);
-      expect(localStorageMock.getItem('affiliate_clicks')).toBeNull(); // Should be cleared after sending
+      expect(localStorageMock.getItem('affiliate_clicks')).toBeNull();
     });
 
     it('should not send analytics data if less than threshold', () => {
-      process.env.NEXT_PUBLIC_GA_ID = 'G-TESTID';
-      Object.defineProperty(require('../../lib/analytics'), 'ANALYTICS_ENABLED', { value: true });
+      const { trackAffiliateClick } = require('../../lib/analytics');
       mockFetch.mockResolvedValueOnce({ ok: true } as Response);
 
       for (let i = 0; i < 9; i++) {
         trackAffiliateClick({ ...mockData, affiliate_id: `aff${i}` });
       }
-
-      jest.runAllTimers();
 
       expect(mockFetch).not.toHaveBeenCalled();
       expect(localStorageMock.getItem('affiliate_clicks')).not.toBeNull();
@@ -180,8 +186,7 @@ describe('Analytics Utilities', () => {
 
   describe('trackArticleEngagement', () => {
     it('should call gtag event for article engagement', () => {
-      process.env.NEXT_PUBLIC_GA_ID = 'G-TESTID';
-      Object.defineProperty(require('../../lib/analytics'), 'ANALYTICS_ENABLED', { value: true });
+      const { trackArticleEngagement } = require('../../lib/analytics');
       trackArticleEngagement('article-1', 'category-a', 'start_reading');
       expect(mockGtag).toHaveBeenCalledWith('event', 'article_start_reading', {
         event_category: 'engagement',
@@ -190,19 +195,36 @@ describe('Analytics Utilities', () => {
         article_id: 'article-1',
       });
     });
+
+    it('should not track when analytics is disabled', () => {
+      process.env.NEXT_PUBLIC_GA_ID = '';
+      jest.resetModules();
+      const { trackArticleEngagement: disabledTrackArticleEngagement } = require('../../lib/analytics');
+      
+      disabledTrackArticleEngagement('article-1', 'category-a', 'start_reading');
+      expect(mockGtag).not.toHaveBeenCalled();
+    });
   });
 
   describe('trackSearch', () => {
-    it('should call gtag event for search behavior', () => {
-      process.env.NEXT_PUBLIC_GA_ID = 'G-TESTID';
-      Object.defineProperty(require('../../lib/analytics'), 'ANALYTICS_ENABLED', { value: true });
-      trackSearch('test query', 5, 'jobs');
+    it('should call gtag event for search', () => {
+      const { trackSearch } = require('../../lib/analytics');
+      trackSearch('test query', 5, 'test-category');
       expect(mockGtag).toHaveBeenCalledWith('event', 'search', {
         event_category: 'site_search',
         event_label: 'test query',
         value: 5,
-        search_category: 'jobs',
+        search_category: 'test-category',
       });
+    });
+
+    it('should not track when analytics is disabled', () => {
+      process.env.NEXT_PUBLIC_GA_ID = '';
+      jest.resetModules();
+      const { trackSearch: disabledTrackSearch } = require('../../lib/analytics');
+      
+      disabledTrackSearch('test query', 5, 'test-category');
+      expect(mockGtag).not.toHaveBeenCalled();
     });
   });
 });

@@ -35,3 +35,11 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
+# SWC
+.swc/
+
+# App Router (if temporary or build output)
+/app_router_future/
+
+# Generated sitemap
+/public/sitemap.xml

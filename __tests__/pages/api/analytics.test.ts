@@ -1,5 +1,5 @@
 import { NextApiRequest, NextApiResponse } from 'next';
-import handler from '../../pages/api/analytics';
+import handler from '../../../pages/api/analytics';
 
 // Mock Next.js API request and response objects
 const mockRequest = (method: string, body?: any) => ({
@@ -107,14 +107,14 @@ describe('/api/analytics', () => {
     expect(consoleSpy).toHaveBeenCalledWith('Analytics data received:', expect.any(Object));
   });
 
-  it('should return 500 for internal server errors', async () => {
-    // Simulate an error by passing a non-object to req.body.clicks
-    const req = mockRequest('POST', { clicks: null }); // This will cause an error when destructuring
+  it('should return 400 for invalid data format', async () => {
+    // Simulate an error by passing a non-array to req.body.clicks
+    const req = mockRequest('POST', { clicks: null }); 
     const res = mockResponse();
 
     await handler(req, res);
 
-    expect(res.status).toHaveBeenCalledWith(500);
-    expect(res.json).toHaveBeenCalledWith({ message: 'Internal server error' });
+    expect(res.status).toHaveBeenCalledWith(400);
+    expect(res.json).toHaveBeenCalledWith({ message: 'Invalid data format' });
   });
 });

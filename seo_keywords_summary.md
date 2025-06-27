@@ -68,9 +68,6 @@
 | `public/articles/services/mynavi-it.md` | マイナビIT AGENTの評判は？口コミから分かる特徴とメリット・デメリット | `マイナビIT AGENT 評判`, `IT 転職エージェント`, `20代 転職`, `サポート` |
 | `public/articles/services/doda.md` | dodaの評判は？エンジニア転職での口コミから分かるメリット・デメリット | `doda 評判`, `エンジニア 転職`, `転職サイト`, `転職エージェント` |
 
-
-## 今後作成するべき記事案
-
 | カテゴリ | ファイルパス案 | タイトル案 | 予測SEOキーワード案 |
 | :--- | :--- | :--- | :--- |
 | `career-goals` | `sier-to-web-career-change.md` | SIerからWeb系への転職を成功させる完全ガイド【後悔しないための全知識】 | `SIer Web系 違い`, `SIer やめたい`, `Web業界 転職`, `SIer スキル` |

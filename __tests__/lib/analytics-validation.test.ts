@@ -33,13 +33,13 @@ describe('checkAnalyticsHealth', () => {
   it('should return isValid: true and isReachable: true for a valid ID and reachable script', async () => {
     mockFetch.mockResolvedValueOnce({ ok: true } as Response);
 
-    const result = await checkAnalyticsHealth('G-VALIDID123');
+    const result = await checkAnalyticsHealth('G-ABCDEFGHIJ');
     expect(result).toEqual({
       isValid: true,
       isReachable: true,
     });
     expect(mockFetch).toHaveBeenCalledWith(
-      'https://www.googletagmanager.com/gtag/js?id=G-VALIDID123',
+      'https://www.googletagmanager.com/gtag/js?id=G-ABCDEFGHIJ',
       { method: 'HEAD', mode: 'no-cors' }
     );
   });
@@ -57,7 +57,7 @@ describe('checkAnalyticsHealth', () => {
   it('should return isValid: true and isReachable: false if script is not reachable', async () => {
     mockFetch.mockRejectedValueOnce(new Error('Network error'));
 
-    const result = await checkAnalyticsHealth('G-VALIDID123');
+    const result = await checkAnalyticsHealth('G-ABCDEFGHIJ');
     expect(result).toEqual({
       isValid: true,
       isReachable: false,
@@ -70,11 +70,11 @@ describe('checkAnalyticsHealth', () => {
       throw new Error('Unexpected error');
     });
 
-    const result = await checkAnalyticsHealth('G-VALIDID123');
+    const result = await checkAnalyticsHealth('G-ABCDEFGHIJ');
     expect(result).toEqual({
-      isValid: false,
+      isValid: true,
       isReachable: false,
-      error: 'Health check failed: Error: Unexpected error',
+      error: 'Could not verify reachability: Error: Unexpected error',
     });
   });
 });
@@ -94,7 +94,7 @@ describe('logAnalyticsEnvironment', () => {
   });
 
   it('should log environment info with valid ID', () => {
-    process.env.NEXT_PUBLIC_GA_ID = 'G-TESTID123';
+    process.env.NEXT_PUBLIC_GA_ID = 'G-TESTIDABCD';
     process.env.NODE_ENV = 'development';
     process.env.VERCEL_ENV = 'development';
     process.env.NEXT_PUBLIC_ANALYTICS_DEBUG = 'true';
@@ -104,7 +104,7 @@ describe('logAnalyticsEnvironment', () => {
     expect(consoleSpy).toHaveBeenCalledWith(
       '🔍 Analytics Environment Info:',
       expect.objectContaining({
-        trackingId: 'G-TESTID123',
+        trackingId: 'G-TESTIDABCD',
         environment: 'development',
         vercelEnv: 'development',
         debugMode: 'true',
@@ -114,7 +114,7 @@ describe('logAnalyticsEnvironment', () => {
       '📊 Analytics ID Format: ✅ Valid'
     );
     expect(info).toEqual(expect.objectContaining({
-      trackingId: 'G-TESTID123',
+      trackingId: 'G-TESTIDABCD',
       environment: 'development',
       vercelEnv: 'development',
       debugMode: 'true',
@@ -126,6 +126,12 @@ describe('logAnalyticsEnvironment', () => {
 
     logAnalyticsEnvironment();
 
+    expect(consoleSpy).toHaveBeenCalledWith(
+      '🔍 Analytics Environment Info:',
+      expect.objectContaining({
+        trackingId: 'INVALID',
+      })
+    );
     expect(consoleSpy).toHaveBeenCalledWith(
       '📊 Analytics ID Format: ❌ Invalid'
     );

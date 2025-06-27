@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "node scripts/generate-sitemap.js && next dev",
-    "build": "node scripts/generate-articles.js && next build && node scripts/generate-sitemap.js",
+    "dev": "next dev",
+    "build": "node scripts/generate-articles.js && next build",
     "generate-sitemap": "node scripts/generate-sitemap.js",
     "start": "next start",
     "lint": "next lint",

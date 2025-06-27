@@ -1,0 +1,16 @@
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://job.tabmac.site/sitemap.xml
+
+# Disallow admin and internal directories
+Disallow: /admin/
+Disallow: /api/
+Disallow: /_next/
+Disallow: /public/
+
+# Allow specific important paths
+Allow: /articles/
+Allow: /categories/
+Allow: /services/

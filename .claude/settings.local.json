@@ -35,8 +35,12 @@
       "Bash(rg:*)",
       "Bash(echo:*)",
       "Bash(gh run list:*)",
-      "Bash(gh run view:*)"
+      "Bash(gh run view:*)",
+      "WebFetch(domain:zenn.dev)"
     ],
-    "deny": ["Bash(rm:*)", "Bash(git push:*)"]
+    "deny": [
+      "Bash(rm:*)",
+      "Bash(git push:*)"
+    ]
   }
 }
