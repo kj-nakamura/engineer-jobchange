@@ -34,10 +34,10 @@ describe('AllArticlesList', () => {
   test('記事一覧が正しく表示される', () => {
     render(<AllArticlesList articles={mockArticles} />);
     
-    // 記事タイトルが表示されているか確認（PCとモバイル両方で表示されるため、複数要素を期待）
-    expect(screen.getAllByText('Javaエンジニアのテスト記事')).toHaveLength(2);
-    expect(screen.getAllByText('20代エンジニアのテスト記事')).toHaveLength(2);
-    expect(screen.getAllByText('レバテックキャリアのテスト記事')).toHaveLength(2);
+    // 記事タイトルが表示されているか確認（カードレイアウトでは1つずつ表示される）
+    expect(screen.getByText('Javaエンジニアのテスト記事')).toBeInTheDocument();
+    expect(screen.getByText('20代エンジニアのテスト記事')).toBeInTheDocument();
+    expect(screen.getByText('レバテックキャリアのテスト記事')).toBeInTheDocument();
     
     // 記事数が表示されているか確認
     expect(screen.getByText('3件の記事')).toBeInTheDocument();
@@ -52,7 +52,7 @@ describe('AllArticlesList', () => {
     fireEvent.change(searchInput, { target: { value: 'Java' } });
     
     // Java関連の記事のみ表示されているか確認
-    expect(screen.getAllByText('Javaエンジニアのテスト記事')).toHaveLength(2);
+    expect(screen.getByText('Javaエンジニアのテスト記事')).toBeInTheDocument();
     expect(screen.queryByText('20代エンジニアのテスト記事')).not.toBeInTheDocument();
     expect(screen.queryByText('レバテックキャリアのテスト記事')).not.toBeInTheDocument();
     
@@ -70,7 +70,7 @@ describe('AllArticlesList', () => {
     fireEvent.change(categorySelect, { target: { value: 'job-types' } });
     
     // job-types カテゴリの記事のみ表示されているか確認
-    expect(screen.getAllByText('Javaエンジニアのテスト記事')).toHaveLength(2);
+    expect(screen.getByText('Javaエンジニアのテスト記事')).toBeInTheDocument();
     expect(screen.queryByText('20代エンジニアのテスト記事')).not.toBeInTheDocument();
     expect(screen.queryByText('レバテックキャリアのテスト記事')).not.toBeInTheDocument();
     
@@ -87,9 +87,9 @@ describe('AllArticlesList', () => {
     fireEvent.change(sortSelect, { target: { value: 'oldest' } });
     
     // 記事が表示されていることを確認（順序の詳細チェックは複雑なので基本的な表示のみ）
-    expect(screen.getAllByText('Javaエンジニアのテスト記事')).toHaveLength(2);
-    expect(screen.getAllByText('20代エンジニアのテスト記事')).toHaveLength(2);
-    expect(screen.getAllByText('レバテックキャリアのテスト記事')).toHaveLength(2);
+    expect(screen.getByText('Javaエンジニアのテスト記事')).toBeInTheDocument();
+    expect(screen.getByText('20代エンジニアのテスト記事')).toBeInTheDocument();
+    expect(screen.getByText('レバテックキャリアのテスト記事')).toBeInTheDocument();
   });
 
   test('フィルタークリア機能が動作する', () => {
@@ -110,9 +110,9 @@ describe('AllArticlesList', () => {
     fireEvent.click(clearButton);
     
     // すべての記事が再び表示されているか確認
-    expect(screen.getAllByText('Javaエンジニアのテスト記事')).toHaveLength(2);
-    expect(screen.getAllByText('20代エンジニアのテスト記事')).toHaveLength(2);
-    expect(screen.getAllByText('レバテックキャリアのテスト記事')).toHaveLength(2);
+    expect(screen.getByText('Javaエンジニアのテスト記事')).toBeInTheDocument();
+    expect(screen.getByText('20代エンジニアのテスト記事')).toBeInTheDocument();
+    expect(screen.getByText('レバテックキャリアのテスト記事')).toBeInTheDocument();
     
     // 検索ボックスとカテゴリ選択がリセットされているか確認
     expect(searchInput).toHaveValue('');
@@ -133,17 +133,17 @@ describe('AllArticlesList', () => {
   test('タグが正しく表示される', () => {
     render(<AllArticlesList articles={mockArticles} />);
     
-    // タグが表示されているか確認（PCとモバイル両方で表示されるため、最低1つは表示される）
-    expect(screen.getAllByText('Java').length).toBeGreaterThanOrEqual(1);
-    expect(screen.getAllByText('エンジニア').length).toBeGreaterThanOrEqual(1);
-    expect(screen.getAllByText('20代').length).toBeGreaterThanOrEqual(1);
-    expect(screen.getAllByText('キャリア').length).toBeGreaterThanOrEqual(1);
+    // タグが表示されているか確認（カードレイアウトでは各記事に1つずつ表示）
+    expect(screen.getByText('Java')).toBeInTheDocument();
+    expect(screen.getByText('エンジニア')).toBeInTheDocument();
+    expect(screen.getByText('20代')).toBeInTheDocument();
+    expect(screen.getByText('キャリア')).toBeInTheDocument();
   });
 
   test('カテゴリバッジが正しく表示される', () => {
     render(<AllArticlesList articles={mockArticles} />);
     
-    // カテゴリバッジが表示されているか確認（PCとモバイル両方で表示されるため、最低1つは表示される）
+    // カテゴリバッジが表示されているか確認（カードとセレクトボックス両方に表示されるため、getAllByTextを使用）
     expect(screen.getAllByText('職種別転職ガイド').length).toBeGreaterThanOrEqual(1);
     expect(screen.getAllByText('転職動機別戦略').length).toBeGreaterThanOrEqual(1);
     expect(screen.getAllByText('転職サービス評判').length).toBeGreaterThanOrEqual(1);
