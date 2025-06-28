@@ -30,7 +30,7 @@ export default function Header() {
               サービス一覧
             </Link>
             <Link href="/articles" className="text-gray-600 hover:text-blue-600 transition-colors duration-200 font-medium">
-              記事一覧
+              全記事一覧
             </Link>
           </nav>
           
@@ -75,7 +75,7 @@ export default function Header() {
                 onClick={() => setIsMenuOpen(false)}
                 className="block px-3 py-2 rounded-md text-gray-600 hover:text-blue-600 hover:bg-gray-100 transition-colors duration-200 font-medium"
               >
-                記事一覧
+                全記事一覧
               </Link>
             </nav>
           </div>
