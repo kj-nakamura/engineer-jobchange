@@ -24,6 +24,39 @@ interface ArticlePageProps {
 
 export default function ArticlePage({ service, title, description, publishDate, content, articleCategory, services, articleId, relatedArticles }: ArticlePageProps) {
   const pageTitle = `${title} | エンジニア転職ナビ`;
+  const currentUrl = `https://job.tabmac.site/articles/${articleId}`;
+  
+  // 構造化データ（JSON-LD）の生成
+  const structuredData = {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": title,
+    "description": description,
+    "url": currentUrl,
+    "datePublished": publishDate,
+    "dateModified": publishDate,
+    "author": {
+      "@type": "Organization",
+      "name": "エンジニア転職ナビ",
+      "url": "https://job.tabmac.site"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "エンジニア転職ナビ",
+      "url": "https://job.tabmac.site",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://job.tabmac.site/favicon.svg"
+      }
+    },
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": currentUrl
+    },
+    "articleSection": articleCategory,
+    "keywords": "",
+    "inLanguage": "ja"
+  };
 
   useEffect(() => {
     trackArticleEngagement(articleId, articleCategory || 'general', 'start_reading');
@@ -55,12 +88,22 @@ export default function ArticlePage({ service, title, description, publishDate, 
         <meta property="og:title" content={pageTitle} />
         <meta property="og:description" content={description} />
         <meta property="og:type" content="article" />
+        <meta property="og:url" content={currentUrl} />
+        <meta property="og:site_name" content="エンジニア転職ナビ" />
         <meta property="article:published_time" content={publishDate} />
+        <meta property="article:section" content={articleCategory} />
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content={pageTitle} />
         <meta name="twitter:description" content={description} />
+        <meta name="twitter:url" content={currentUrl} />
         <link rel="icon" href="/favicon.ico" />
-        <link rel="canonical" href={`https://engineer-jobchange.vercel.app/articles/${service.id}`} />
+        <link rel="canonical" href={currentUrl} />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(structuredData),
+          }}
+        />
       </Head>
       <ArticleLayout
         service={service}
