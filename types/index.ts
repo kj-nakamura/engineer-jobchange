@@ -6,6 +6,8 @@ export interface Service {
   imageUrl: string;
   motiveTags: string[];
   jobTypeTags: string[];
+  features: string[];
+  popularity: number;
 }
 
 export interface Tag {
