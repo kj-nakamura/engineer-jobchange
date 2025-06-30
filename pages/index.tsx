@@ -2,14 +2,13 @@ import { useState, useEffect } from 'react';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { GetStaticProps } from 'next';
-import { Service, TagData, RecommendationResult, UserConditions } from '../types';
-import { recommendServices, advancedRecommendServices } from '../utils/recommend';
+import { Service, TagData, RecommendationResult } from '../types';
+import { recommendServices } from '../utils/recommend';
 import { Article, articleCategories, getAllArticles } from '../utils/articles';
 import ServiceList from '../components/ServiceList';
 import ArticleList from '../components/ArticleList';
 import CategoryArticleList from '../components/CategoryArticleList';
 import TagSelectionModal from '../components/TagSelectionModal';
-import AdvancedTagSelectionModal from '../components/AdvancedTagSelectionModal';
 import PopularServicesPreview from '../components/PopularServicesPreview';
 import fs from 'fs';
 import path from 'path';
@@ -26,7 +25,6 @@ export default function Home({ services, tags, allArticles }: HomeProps) {
   const [selectedJobTypeTags, setSelectedJobTypeTags] = useState<string[]>([]);
   const [recommendation, setRecommendation] = useState<RecommendationResult | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [isAdvancedModalOpen, setIsAdvancedModalOpen] = useState(false);
 
   useEffect(() => {
     if ((selectedMotiveTags.length > 0 || selectedJobTypeTags.length > 0) && services.length > 0) {
@@ -68,13 +66,6 @@ export default function Home({ services, tags, allArticles }: HomeProps) {
     router.push('/services');
   };
 
-  const handleAdvancedResults = (conditions: UserConditions) => {
-    // URLパラメータに詳細条件を含める
-    const params = new URLSearchParams();
-    params.set('advanced', 'true');
-    params.set('conditions', encodeURIComponent(JSON.stringify(conditions)));
-    router.push(`/services?${params.toString()}`);
-  };
 
   const serviceArticles = allArticles.filter(article => article.category === 'services');
   const otherArticles = allArticles.filter(article => article.category !== 'services');
@@ -108,7 +99,7 @@ export default function Home({ services, tags, allArticles }: HomeProps) {
             <span className="font-semibold text-blue-700">最適な転職サービス</span>を見つけましょう
           </p>
           
-          <div className="flex flex-col sm:flex-row gap-4 justify-center max-w-3xl mx-auto">
+          <div className="flex flex-col sm:flex-row gap-4 justify-center max-w-2xl mx-auto">
             <button
               onClick={() => setIsModalOpen(true)}
               className="flex-1 bg-gradient-to-r from-blue-600 to-indigo-600 text-white px-6 py-4 rounded-2xl font-bold text-lg shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300"
@@ -117,18 +108,7 @@ export default function Home({ services, tags, allArticles }: HomeProps) {
                 <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                 </svg>
-                簡単検索
-              </div>
-            </button>
-            <button
-              onClick={() => setIsAdvancedModalOpen(true)}
-              className="flex-1 bg-gradient-to-r from-purple-600 to-pink-600 text-white px-6 py-4 rounded-2xl font-bold text-lg shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300"
-            >
-              <div className="flex items-center justify-center">
-                <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 100 4m0-4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 100 4m0-4v2m0-6V4" />
-                </svg>
-                詳細検索
+                転職サービス検索
               </div>
             </button>
             <button
@@ -139,7 +119,7 @@ export default function Home({ services, tags, allArticles }: HomeProps) {
                 <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
                 </svg>
-                全サービス
+                全サービス一覧
               </div>
             </button>
           </div>
@@ -179,13 +159,6 @@ export default function Home({ services, tags, allArticles }: HomeProps) {
           services={services}
         />
         
-        <AdvancedTagSelectionModal
-          isOpen={isAdvancedModalOpen}
-          onClose={() => setIsAdvancedModalOpen(false)}
-          tags={tags}
-          onShowResults={handleAdvancedResults}
-          services={services}
-        />
       </div>
     </>
   );

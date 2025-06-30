@@ -1,22 +1,17 @@
-import { Service, ServiceWithScore } from '../types';
+import { Service } from '../types';
 import { useState } from 'react';
 import Link from 'next/link';
 import { trackAffiliateClick } from '../lib/analytics';
 
 interface ServiceCardProps {
-  service: Service | ServiceWithScore;
+  service: Service;
   placement?: string;
   articleCategory?: string;
   articleId?: string;
-  showScore?: boolean;
 }
 
-export default function ServiceCard({ service, placement = 'service_card', articleCategory, articleId, showScore = false }: ServiceCardProps) {
+export default function ServiceCard({ service, placement = 'service_card', articleCategory, articleId }: ServiceCardProps) {
   const [imageError, setImageError] = useState(false);
-  
-  // スコア情報がある場合はServiceWithScoreとして扱う
-  const serviceWithScore = service as ServiceWithScore;
-  const hasScore = showScore && 'matchScore' in service;
   
   const handleAffiliateClick = () => {
     trackAffiliateClick({
@@ -33,18 +28,9 @@ export default function ServiceCard({ service, placement = 'service_card', artic
     <div className="group bg-white rounded-2xl border border-gray-100 p-6 hover:shadow-2xl hover:shadow-blue-500/10 transition-all duration-300 transform hover:-translate-y-1">
       <div className="flex items-start justify-between mb-4">
         <div className="flex-1">
-          <div className="flex items-center justify-between mb-2">
-            <h3 className="text-xl font-bold text-gray-900">
-              {service.name}
-            </h3>
-            {hasScore && (
-              <div className="ml-3">
-                <div className="bg-gradient-to-r from-blue-500 to-purple-600 text-white px-3 py-1 rounded-full text-sm font-bold">
-                  {serviceWithScore.matchScore.total}%
-                </div>
-              </div>
-            )}
-          </div>
+          <h3 className="text-xl font-bold text-gray-900 mb-2">
+            {service.name}
+          </h3>
           <div className="w-12 h-1 bg-gradient-to-r from-blue-500 to-indigo-500 rounded-full mb-3"></div>
         </div>
         <div className="flex-shrink-0 w-12 h-12 bg-gradient-to-br from-blue-100 to-indigo-100 rounded-xl flex items-center justify-center">
@@ -63,47 +49,7 @@ export default function ServiceCard({ service, placement = 'service_card', artic
         </div>
       </div>
       
-      <p className="text-gray-600 mb-4 leading-relaxed line-clamp-3">{service.description}</p>
-      
-      {/* スコア詳細と推薦理由 */}
-      {hasScore && (
-        <div className="mb-6 p-4 bg-gradient-to-r from-blue-50 to-purple-50 rounded-xl border border-blue-100">
-          <h4 className="text-sm font-semibold text-gray-800 mb-2">推薦理由</h4>
-          <div className="space-y-1">
-            {serviceWithScore.matchScore.reasoning.map((reason, index) => (
-              <div key={index} className="flex items-center text-xs text-gray-600">
-                <svg className="w-3 h-3 text-green-500 mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                </svg>
-                {reason}
-              </div>
-            ))}
-          </div>
-          
-          {/* スコア詳細（オプション：hover時に表示） */}
-          <details className="mt-2">
-            <summary className="text-xs text-blue-600 cursor-pointer hover:text-blue-800">詳細スコアを表示</summary>
-            <div className="mt-2 grid grid-cols-2 gap-2 text-xs">
-              <div className="flex justify-between">
-                <span>転職動機:</span>
-                <span>{Math.round(serviceWithScore.matchScore.breakdown.motivation)}%</span>
-              </div>
-              <div className="flex justify-between">
-                <span>職種:</span>
-                <span>{Math.round(serviceWithScore.matchScore.breakdown.jobType)}%</span>
-              </div>
-              <div className="flex justify-between">
-                <span>年収:</span>
-                <span>{Math.round(serviceWithScore.matchScore.breakdown.salary)}%</span>
-              </div>
-              <div className="flex justify-between">
-                <span>勤務地:</span>
-                <span>{Math.round(serviceWithScore.matchScore.breakdown.location)}%</span>
-              </div>
-            </div>
-          </details>
-        </div>
-      )}
+      <p className="text-gray-600 mb-6 leading-relaxed line-clamp-3">{service.description}</p>
       
       <div className="space-y-3">
         <a

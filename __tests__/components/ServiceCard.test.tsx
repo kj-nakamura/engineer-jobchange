@@ -1,7 +1,7 @@
 import { render, screen, fireEvent } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import ServiceCard from '../../components/ServiceCard';
-import { Service, ServiceWithScore } from '../../types';
+import { Service } from '../../types';
 
 // モックデータ
 const mockService: Service = {
@@ -11,36 +11,7 @@ const mockService: Service = {
   url: 'https://test-service.com',
   imageUrl: 'https://test-service.com/logo.png',
   motiveTags: ['high_salary', 'career_up'],
-  jobTypeTags: ['frontend', 'backend'],
-  salaryRange: { min: 400, max: 1200 },
-  workLocation: ['tokyo', 'remote'],
-  companySize: ['startup', 'medium'],
-  industries: ['web', 'fintech'],
-  techStack: ['react', 'typescript'],
-  experienceLevel: ['mid', 'senior'],
-  benefits: ['flexible_hours', 'remote_work']
-};
-
-const mockServiceWithScore: ServiceWithScore = {
-  ...mockService,
-  matchScore: {
-    total: 85,
-    breakdown: {
-      motivation: 90,
-      jobType: 100,
-      salary: 75,
-      location: 80,
-      companySize: 70,
-      industry: 85,
-      techStack: 95,
-      benefits: 80
-    },
-    reasoning: [
-      '転職動機にマッチしています',
-      '希望職種に対応しています',
-      '希望技術スタックを扱えます'
-    ]
-  }
+  jobTypeTags: ['frontend', 'backend']
 };
 
 // アナリティクス関数をモック
@@ -73,48 +44,6 @@ describe('ServiceCard', () => {
     expect(detailLink).toHaveAttribute('href', '/articles/test-service');
   });
 
-  describe('スコア表示機能', () => {
-    test('showScore=trueの場合、マッチスコアが表示される', () => {
-      render(<ServiceCard service={mockServiceWithScore} showScore={true} />);
-      
-      expect(screen.getByText('85%')).toBeInTheDocument();
-      expect(screen.getByText('推薦理由')).toBeInTheDocument();
-    });
-
-    test('推薦理由が正しく表示される', () => {
-      render(<ServiceCard service={mockServiceWithScore} showScore={true} />);
-      
-      expect(screen.getByText('転職動機にマッチしています')).toBeInTheDocument();
-      expect(screen.getByText('希望職種に対応しています')).toBeInTheDocument();
-      expect(screen.getByText('希望技術スタックを扱えます')).toBeInTheDocument();
-    });
-
-    test('詳細スコアが展開できる', () => {
-      render(<ServiceCard service={mockServiceWithScore} showScore={true} />);
-      
-      const detailsButton = screen.getByText('詳細スコアを表示');
-      fireEvent.click(detailsButton);
-      
-      expect(screen.getByText('転職動機:')).toBeInTheDocument();
-      expect(screen.getByText('90%')).toBeInTheDocument();
-      expect(screen.getByText('職種:')).toBeInTheDocument();
-      expect(screen.getByText('100%')).toBeInTheDocument();
-    });
-
-    test('showScore=falseまたはスコアなしの場合、スコア情報は表示されない', () => {
-      render(<ServiceCard service={mockService} showScore={false} />);
-      
-      expect(screen.queryByText('推薦理由')).not.toBeInTheDocument();
-      expect(screen.queryByText('%')).not.toBeInTheDocument();
-    });
-
-    test('通常のServiceオブジェクトでshowScore=trueでもスコア情報は表示されない', () => {
-      render(<ServiceCard service={mockService} showScore={true} />);
-      
-      expect(screen.queryByText('推薦理由')).not.toBeInTheDocument();
-      expect(screen.queryByText('%')).not.toBeInTheDocument();
-    });
-  });
 
   describe('画像表示', () => {
     test('画像が正しく表示される', () => {
@@ -239,19 +168,5 @@ describe('ServiceCard', () => {
       expect(screen.getByText('テストサービス')).toBeInTheDocument();
     });
 
-    test('スコアデータが不完全でもエラーにならない', () => {
-      const incompleteScoreService = {
-        ...mockService,
-        matchScore: {
-          total: 75,
-          breakdown: {} as any,
-          reasoning: []
-        }
-      } as ServiceWithScore;
-      
-      expect(() => {
-        render(<ServiceCard service={incompleteScoreService} showScore={true} />);
-      }).not.toThrow();
-    });
   });
 });

@@ -11,14 +11,7 @@ export default function Services() {
   const [services, setServices] = useState<Service[]>([]);
   const [tags, setTags] = useState<TagData>({ 
     motiveTags: [], 
-    jobTypeTags: [],
-    salaryRanges: [],
-    workLocations: [],
-    companySizes: [],
-    industries: [],
-    techStacks: [],
-    experienceLevels: [],
-    benefits: []
+    jobTypeTags: []
   });
   const [selectedMotiveTags, setSelectedMotiveTags] = useState<string[]>([]);
   const [selectedJobTypeTags, setSelectedJobTypeTags] = useState<string[]>([]);
