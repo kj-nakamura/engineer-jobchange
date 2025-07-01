@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "next dev",
+    "dev": "next dev -p 3100",
     "build": "node scripts/generate-articles.js && next build",
     "generate-sitemap": "node scripts/generate-sitemap.js",
     "start": "next start",

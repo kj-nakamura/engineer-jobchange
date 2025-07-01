@@ -1,181 +1,172 @@
-import { render, screen, fireEvent } from '@testing-library/react'
-import ServiceCard from '../../components/ServiceCard'
-import { Service } from '../../types'
+import { render, screen, fireEvent } from '@testing-library/react';
+import '@testing-library/jest-dom';
+import ServiceCard from '../../components/ServiceCard';
+import { Service } from '../../types';
+
+// モックデータ
+const mockService: Service = {
+  id: 'test-service',
+  name: 'テストサービス',
+  description: 'これはテスト用のサービスです。詳細な説明がここに入ります。',
+  url: 'https://test-service.com',
+  imageUrl: 'https://test-service.com/logo.png',
+  motiveTags: ['high_salary', 'career_up'],
+  jobTypeTags: ['frontend', 'backend']
+};
+
+// アナリティクス関数をモック
+jest.mock('../../lib/analytics', () => ({
+  trackAffiliateClick: jest.fn()
+}));
 
 describe('ServiceCard', () => {
-  const mockService: Service = {
-    id: 'test-service',
-    name: 'テスト転職サービス',
-    description: 'これはテスト用の転職サービスの説明文です。エンジニア向けの求人を多数扱っています。',
-    url: 'https://example.com',
-    imageUrl: 'https://example.com/favicon.ico',
-    motiveTags: ['high_salary', 'career_up'],
-    jobTypeTags: ['frontend', 'backend']
-  }
+  test('基本的なサービス情報が正しく表示される', () => {
+    render(<ServiceCard service={mockService} />);
+    
+    expect(screen.getByText('テストサービス')).toBeInTheDocument();
+    expect(screen.getByText('これはテスト用のサービスです。詳細な説明がここに入ります。')).toBeInTheDocument();
+    expect(screen.getByText('公式サイトへ')).toBeInTheDocument();
+  });
 
-  describe('レンダリング', () => {
-    it('サービス名が正しく表示される', () => {
-      render(<ServiceCard service={mockService} />)
-      
-      expect(screen.getByText('テスト転職サービス')).toBeInTheDocument()
-    })
+  test('公式サイトリンクが正しく設定される', () => {
+    render(<ServiceCard service={mockService} />);
+    
+    const link = screen.getByRole('link', { name: /公式サイトへ/ });
+    expect(link).toHaveAttribute('href', 'https://test-service.com');
+    expect(link).toHaveAttribute('target', '_blank');
+    expect(link).toHaveAttribute('rel', 'noopener noreferrer');
+  });
 
-    it('サービス説明が正しく表示される', () => {
-      render(<ServiceCard service={mockService} />)
-      
-      expect(screen.getByText(mockService.description)).toBeInTheDocument()
-    })
+  test('詳細記事リンクが正しく表示される', () => {
+    render(<ServiceCard service={mockService} />);
+    
+    const detailLink = screen.getByRole('link', { name: /詳細を見る/ });
+    expect(detailLink).toHaveAttribute('href', '/articles/test-service');
+  });
 
-    it('公式サイトリンクが正しく設定される', () => {
-      render(<ServiceCard service={mockService} />)
-      
-      const link = screen.getByRole('link', { name: /公式サイトへ/ })
-      expect(link).toHaveAttribute('href', 'https://example.com')
-      expect(link).toHaveAttribute('target', '_blank')
-      expect(link).toHaveAttribute('rel', 'noopener noreferrer')
-    })
 
-    it('詳細記事リンクが正しく設定される', () => {
-      render(<ServiceCard service={mockService} />)
+  describe('画像表示', () => {
+    test('画像が正しく表示される', () => {
+      render(<ServiceCard service={mockService} />);
       
-      const link = screen.getByRole('link', { name: /詳細を見る/ })
-      expect(link).toHaveAttribute('href', '/articles/test-service')
-    })
+      const image = screen.getByAltText('テストサービス logo');
+      expect(image).toHaveAttribute('src', 'https://test-service.com/logo.png');
+    });
 
-    it('サービス画像が表示される', () => {
-      render(<ServiceCard service={mockService} />)
+    test('画像読み込み失敗時にフォールバックアイコンが表示される', () => {
+      const { container } = render(<ServiceCard service={mockService} />);
       
-      const image = screen.getByRole('img', { name: /テスト転職サービス logo/ })
-      expect(image).toBeInTheDocument()
-      expect(image).toHaveAttribute('src', 'https://example.com/favicon.ico')
-      expect(image).toHaveAttribute('alt', 'テスト転職サービス logo')
-    })
+      const image = screen.getByAltText('テストサービス logo');
+      
+      // 画像読み込み失敗をシミュレート
+      fireEvent.error(image);
+      
+      // SVGが表示されることを確認
+      const svg = container.querySelector('svg');
+      expect(svg).toBeInTheDocument();
+    });
+  });
 
-    it('画像読み込みエラー時にフォールバックSVGが表示される', () => {
-      render(<ServiceCard service={mockService} />)
+  describe('アナリティクス', () => {
+    test('公式サイトリンククリック時にアナリティクスが送信される', async () => {
+      const { trackAffiliateClick } = require('../../lib/analytics');
       
-      const image = screen.getByRole('img', { name: /テスト転職サービス logo/ })
+      render(<ServiceCard service={mockService} placement="test_placement" />);
       
-      // 画像エラーをシミュレート
-      fireEvent.error(image)
+      const link = screen.getByRole('link', { name: /公式サイトへ/ });
+      fireEvent.click(link);
       
-      // SVGフォールバックが表示されることを確認
-      const svgElements = document.querySelectorAll('svg')
-      expect(svgElements.length).toBeGreaterThan(0)
-    })
-  })
+      expect(trackAffiliateClick).toHaveBeenCalledWith({
+        affiliate_id: 'test-service',
+        affiliate_url: 'https://test-service.com',
+        service_name: 'テストサービス',
+        placement: 'test_placement',
+        article_category: undefined,
+        article_id: undefined
+      });
+    });
 
-  describe('スタイリング', () => {
-    it('カードに適切なCSSクラスが適用される', () => {
-      render(<ServiceCard service={mockService} />)
-      
-      // カードのルートdivを取得
-      const card = document.querySelector('.group.bg-white.rounded-2xl')
-      expect(card).toBeInTheDocument()
-    })
-
-    it('詳細ボタンに適切なCSSクラスが適用される', () => {
-      render(<ServiceCard service={mockService} />)
-      
-      const button = screen.getByRole('link', { name: /詳細を見る/ })
-      expect(button).toHaveClass('bg-gradient-to-br', 'from-blue-500')
-    })
-
-    it('公式サイトボタンに適切なCSSクラスが適用される', () => {
-      render(<ServiceCard service={mockService} />)
-      
-      const button = screen.getByRole('link', { name: /公式サイトへ/ })
-      expect(button).toHaveClass('bg-gradient-to-br', 'from-green-500')
-    })
-  })
-
-  describe('アクセシビリティ', () => {
-    it('リンクに適切なaria-labelが設定される', () => {
-      render(<ServiceCard service={mockService} />)
-      
-      const link = screen.getByRole('link', { name: /詳細を見る/ })
-      expect(link).toBeInTheDocument()
-    })
-
-    it('フォーカス可能な要素が存在する', () => {
-      render(<ServiceCard service={mockService} />)
-      
-      const links = screen.getAllByRole('link')
-      expect(links).toHaveLength(2) // 公式サイトと詳細の2つのリンク
-      links.forEach(link => {
-        expect(link).toBeVisible()
-      })
-    })
-  })
-
-  describe('境界値テスト', () => {
-    it('長いサービス名でも正しく表示される', () => {
-      const longNameService: Service = {
-        ...mockService,
-        name: 'とても長いサービス名の転職エージェントサービス株式会社'
-      }
-      
-      render(<ServiceCard service={longNameService} />)
-      
-      expect(screen.getByText(longNameService.name)).toBeInTheDocument()
-    })
-
-    it('長い説明文でも正しく表示される', () => {
-      const longDescService: Service = {
-        ...mockService,
-        description: 'これは非常に長い説明文です。'.repeat(10)
-      }
-      
-      render(<ServiceCard service={longDescService} />)
-      
-      expect(screen.getByText(longDescService.description)).toBeInTheDocument()
-    })
-
-    it('空の説明文でもエラーが発生しない', () => {
-      const emptyDescService: Service = {
-        ...mockService,
-        description: ''
-      }
-      
-      expect(() => {
-        render(<ServiceCard service={emptyDescService} />)
-      }).not.toThrow()
-    })
-
-    it('無効なURLでもエラーが発生しない', () => {
-      const invalidUrlService: Service = {
-        ...mockService,
-        url: 'invalid-url'
-      }
-      
-      expect(() => {
-        render(<ServiceCard service={invalidUrlService} />)
-      }).not.toThrow()
-      
-      const officialLink = screen.getByRole('link', { name: /公式サイトへ/ })
-      expect(officialLink).toHaveAttribute('href', 'invalid-url')
-    })
-  })
-
-  describe('複数インスタンス', () => {
-    it('複数のServiceCardが同時にレンダリングできる', () => {
-      const services = [
-        mockService,
-        { ...mockService, id: 'service2', name: 'サービス2' },
-        { ...mockService, id: 'service3', name: 'サービス3' }
-      ]
+    test('記事コンテキスト情報が正しく送信される', () => {
+      const { trackAffiliateClick } = require('../../lib/analytics');
       
       render(
-        <div>
-          {services.map(service => (
-            <ServiceCard key={service.id} service={service} />
-          ))}
-        </div>
-      )
+        <ServiceCard 
+          service={mockService} 
+          articleCategory="services"
+          articleId="test-article"
+        />
+      );
       
-      services.forEach(service => {
-        expect(screen.getByText(service.name)).toBeInTheDocument()
-      })
-    })
-  })
-})
+      const link = screen.getByRole('link', { name: /公式サイトへ/ });
+      fireEvent.click(link);
+      
+      expect(trackAffiliateClick).toHaveBeenCalledWith({
+        affiliate_id: 'test-service',
+        affiliate_url: 'https://test-service.com',
+        service_name: 'テストサービス',
+        placement: 'service_card',
+        article_category: 'services',
+        article_id: 'test-article'
+      });
+    });
+  });
+
+  describe('レスポンシブデザイン', () => {
+    test('カードコンポーネントが適切なCSS classを持つ', () => {
+      const { container } = render(<ServiceCard service={mockService} />);
+      
+      const card = container.firstChild as HTMLElement;
+      expect(card).toHaveClass('group', 'bg-white', 'rounded-2xl');
+    });
+
+    test('ホバー効果のためのCSS classが設定されている', () => {
+      const { container } = render(<ServiceCard service={mockService} />);
+      
+      const card = container.firstChild as HTMLElement;
+      expect(card).toHaveClass('hover:shadow-2xl', 'transition-all', 'transform', 'hover:-translate-y-1');
+    });
+  });
+
+  describe('アクセシビリティ', () => {
+    test('適切なaria-labelが設定されている', () => {
+      render(<ServiceCard service={mockService} />);
+      
+      const link = screen.getByRole('link', { name: /公式サイトへ/ });
+      expect(link).toBeInTheDocument();
+    });
+
+    test('画像にalt属性が正しく設定されている', () => {
+      render(<ServiceCard service={mockService} />);
+      
+      const image = screen.getByAltText('テストサービス logo');
+      expect(image).toBeInTheDocument();
+    });
+
+    test('キーボードナビゲーションに対応している', () => {
+      render(<ServiceCard service={mockService} />);
+      
+      const link = screen.getByRole('link', { name: /公式サイトへ/ });
+      
+      // フォーカス可能であることを確認
+      link.focus();
+      expect(link).toHaveFocus();
+    });
+  });
+
+  describe('エラーハンドリング', () => {
+    test('不完全なサービスデータでもエラーにならない', () => {
+      const incompleteService = {
+        ...mockService,
+        imageUrl: '',
+        description: ''
+      };
+      
+      expect(() => {
+        render(<ServiceCard service={incompleteService} />);
+      }).not.toThrow();
+      
+      expect(screen.getByText('テストサービス')).toBeInTheDocument();
+    });
+
+  });
+});

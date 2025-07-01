@@ -9,7 +9,10 @@ import ServiceList from '../components/ServiceList';
 export default function Services() {
   const router = useRouter();
   const [services, setServices] = useState<Service[]>([]);
-  const [tags, setTags] = useState<TagData>({ motiveTags: [], jobTypeTags: [] });
+  const [tags, setTags] = useState<TagData>({ 
+    motiveTags: [], 
+    jobTypeTags: []
+  });
   const [selectedMotiveTags, setSelectedMotiveTags] = useState<string[]>([]);
   const [selectedJobTypeTags, setSelectedJobTypeTags] = useState<string[]>([]);
   const [recommendation, setRecommendation] = useState<RecommendationResult | null>(null);

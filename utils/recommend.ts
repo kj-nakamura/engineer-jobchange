@@ -1,35 +1,29 @@
 import { Service, RecommendationResult } from '../types';
 
+// レガシー関数（後方互換性のため）
 export function recommendServices(
   allServices: Service[],
   motiveTags: string[],
   jobTypeTags: string[]
 ): RecommendationResult {
+  if (!allServices || !Array.isArray(allServices)) {
+    return { exactMatch: [], partialMatch: [], others: [] };
+  }
+
   const exactMatch: Service[] = [];
   const partialMatch: Service[] = [];
   const others: Service[] = [];
 
-  if (!allServices || !Array.isArray(allServices)) {
-    return { exactMatch, partialMatch, others };
-  }
-
   allServices.forEach(service => {
-    // AND検索: 選択された全てのタグにマッチするかチェック
-    const motivesMatch = motiveTags.length === 0 || motiveTags.every(tag => service.motiveTags.includes(tag));
-    const jobTypesMatch = jobTypeTags.length === 0 || jobTypeTags.every(tag => service.jobTypeTags.includes(tag));
+    const hasMotiveMatch = motiveTags.length > 0 && motiveTags.some(tag => service.motiveTags.includes(tag));
+    const hasJobTypeMatch = jobTypeTags.length > 0 && jobTypeTags.some(tag => service.jobTypeTags.includes(tag));
 
-    if (motivesMatch && jobTypesMatch && (motiveTags.length > 0 || jobTypeTags.length > 0)) {
+    if (hasMotiveMatch && hasJobTypeMatch) {
       exactMatch.push(service);
+    } else if (hasMotiveMatch || hasJobTypeMatch) {
+      partialMatch.push(service);
     } else {
-      // 部分マッチ: 選択されたタグの一部にマッチ
-      const hasAnyMotiveMatch = motiveTags.length > 0 && motiveTags.some(tag => service.motiveTags.includes(tag));
-      const hasAnyJobTypeMatch = jobTypeTags.length > 0 && jobTypeTags.some(tag => service.jobTypeTags.includes(tag));
-      
-      if (hasAnyMotiveMatch || hasAnyJobTypeMatch) {
-        partialMatch.push(service);
-      } else {
-        others.push(service);
-      }
+      others.push(service);
     }
   });
 
@@ -39,3 +33,4 @@ export function recommendServices(
     others
   };
 }
+

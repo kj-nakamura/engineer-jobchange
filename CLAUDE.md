@@ -56,7 +56,6 @@
 | mobile | モバイルアプリエンジニア |
 | infra | インフラ・SRE・DevOps |
 | pm | プロジェクトマネージャー |
-| ml | 機械学習・AIエンジニア |
 | generalist | フルスタック         |
 | unexp | 未経験・実務なし      |
 
