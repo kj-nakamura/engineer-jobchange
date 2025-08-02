@@ -18,7 +18,9 @@ describe('ServiceList', () => {
       url: 'https://example1.com',
       imageUrl: 'https://example1.com/favicon.ico',
       motiveTags: ['high_salary'],
-      jobTypeTags: ['frontend']
+      jobTypeTags: ['frontend'],
+      features: [],
+      popularity: 0
     },
     {
       id: 'service2',
@@ -27,7 +29,9 @@ describe('ServiceList', () => {
       url: 'https://example2.com',
       imageUrl: 'https://example2.com/favicon.ico',
       motiveTags: ['remote_work'],
-      jobTypeTags: ['backend']
+      jobTypeTags: ['backend'],
+      features: [],
+      popularity: 0
     }
   ]
 

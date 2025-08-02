@@ -11,7 +11,9 @@ const mockService: Service = {
   url: 'https://test-service.com',
   imageUrl: 'https://test-service.com/logo.png',
   motiveTags: ['high_salary', 'career_up'],
-  jobTypeTags: ['frontend', 'backend']
+  jobTypeTags: ['frontend', 'backend'],
+  features: [],
+  popularity: 0
 };
 
 // アナリティクス関数をモック
@@ -123,7 +125,7 @@ describe('ServiceCard', () => {
       const { container } = render(<ServiceCard service={mockService} />);
       
       const card = container.firstChild as HTMLElement;
-      expect(card).toHaveClass('hover:shadow-2xl', 'transition-all', 'transform', 'hover:-translate-y-1');
+      expect(card).toHaveClass('hover:shadow-lg', 'transition-all', 'duration-300', 'transform', 'hover:-translate-y-1');
     });
   });
 

@@ -12,7 +12,9 @@ const mockServices: Service[] = [
     url: 'https://paiza.jp/career',
     imageUrl: 'https://paiza.jp/favicon.ico',
     motiveTags: ['high_salary', 'career_up'],
-    jobTypeTags: ['frontend', 'backend', 'generalist']
+    jobTypeTags: ['frontend', 'backend', 'generalist'],
+    features: [],
+    popularity: 0
   },
   {
     id: 'findy',
@@ -21,7 +23,9 @@ const mockServices: Service[] = [
     url: 'https://findy-code.io/',
     imageUrl: 'https://findy-code.io/favicon.ico',
     motiveTags: ['high_salary', 'career_up'],
-    jobTypeTags: ['frontend', 'backend', 'mobile']
+    jobTypeTags: ['frontend', 'backend', 'mobile'],
+    features: [],
+    popularity: 0
   },
   {
     id: 'rikunabi',
@@ -30,7 +34,9 @@ const mockServices: Service[] = [
     url: 'https://next.rikunabi.com/',
     imageUrl: 'https://next.rikunabi.com/favicon.ico',
     motiveTags: ['change_domain', 'restart', 'stable_env'],
-    jobTypeTags: ['unexp', 'generalist', 'pm']
+    jobTypeTags: ['unexp', 'generalist', 'pm'],
+    features: [],
+    popularity: 0
   }
 ];
 

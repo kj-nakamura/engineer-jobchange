@@ -10,7 +10,9 @@ describe('ArticleLayout', () => {
     url: 'https://example.com',
     imageUrl: 'https://example.com/favicon.ico',
     motiveTags: ['high_salary', 'career_up'],
-    jobTypeTags: ['frontend', 'backend']
+    jobTypeTags: ['frontend', 'backend'],
+    features: [],
+    popularity: 0
   }
 
   const mockProps = {
