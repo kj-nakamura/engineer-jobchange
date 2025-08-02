@@ -66,6 +66,7 @@ export default function Home({ services, tags, allArticles }: HomeProps) {
     router.push('/services');
   };
 
+
   const serviceArticles = allArticles.filter(article => article.category === 'services');
   const otherArticles = allArticles.filter(article => article.category !== 'services');
 
@@ -98,21 +99,21 @@ export default function Home({ services, tags, allArticles }: HomeProps) {
             <span className="font-semibold text-blue-700">最適な転職サービス</span>を見つけましょう
           </p>
           
-          <div className="flex flex-col sm:flex-row gap-4 justify-center max-w-md mx-auto">
+          <div className="flex flex-col sm:flex-row gap-4 justify-center max-w-2xl mx-auto">
             <button
               onClick={() => setIsModalOpen(true)}
-              className="flex-1 bg-gradient-to-r from-blue-600 to-indigo-600 text-white px-8 py-4 rounded-2xl font-bold text-lg shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300"
+              className="flex-1 bg-gradient-to-r from-blue-600 to-indigo-600 text-white px-6 py-4 rounded-2xl font-bold text-lg shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300"
             >
               <div className="flex items-center justify-center">
                 <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                 </svg>
-                条件から探す
+                転職サービス検索
               </div>
             </button>
             <button
               onClick={handleViewAllServices}
-              className="flex-1 bg-white text-blue-600 px-8 py-4 rounded-2xl font-bold text-lg border-2 border-blue-600 hover:bg-blue-50 transition-all duration-300"
+              className="flex-1 bg-white text-blue-600 px-6 py-4 rounded-2xl font-bold text-lg border-2 border-blue-600 hover:bg-blue-50 transition-all duration-300"
             >
               <div className="flex items-center justify-center">
                 <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -157,6 +158,7 @@ export default function Home({ services, tags, allArticles }: HomeProps) {
           onShowResults={handleShowResults}
           services={services}
         />
+        
       </div>
     </>
   );

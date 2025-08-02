@@ -29,11 +29,83 @@
   {
     "id": "levtech",
     "name": "レバテックキャリア",
-    "description": "IT・Web業界のエンジニア・クリエイター専門の転職エージェント",
+    "description": "ITエンジニア・クリエイター専門の転職エージェント",
     "url": "https://career.levtech.jp/",
     "imageUrl": "https://career.levtech.jp/favicon.ico",
     "motiveTags": ["high_salary", "career_up", "management"],
     "jobTypeTags": ["frontend", "backend", "mobile", "infra", "pm"]
+  },
+  {
+    "id": "mynavi",
+    "name": "マイナビIT AGENT",
+    "description": "マイナビのIT・Webエンジニア転職支援",
+    "url": "https://mynavi-agent.jp/it/",
+    "imageUrl": "https://mynavi-agent.jp/favicon.ico",
+    "motiveTags": ["career_up", "stable_env"],
+    "jobTypeTags": ["frontend", "backend", "pm", "generalist"]
+  },
+  {
+    "id": "rikunabi",
+    "name": "リクナビNEXT",
+    "description": "様々な業界・職種の求人が揃う大手転職サイト",
+    "url": "https://next.rikunabi.com/",
+    "imageUrl": "https://next.rikunabi.com/favicon.ico",
+    "motiveTags": ["change_domain", "restart", "stable_env"],
+    "jobTypeTags": ["unexp", "generalist", "pm"]
+  },
+  {
+    "id": "doda",
+    "name": "doda",
+    "description": "転職サイト・エージェントサービスを提供",
+    "url": "https://doda.jp/",
+    "imageUrl": "https://doda.jp/favicon.ico",
+    "motiveTags": ["career_up", "stable_env", "change_domain"],
+    "jobTypeTags": ["frontend", "backend", "pm", "generalist"]
+  },
+  {
+    "id": "wantedly",
+    "name": "Wantedly",
+    "description": "「共感」でつながるビジネスSNS型転職サービス",
+    "url": "https://www.wantedly.com/",
+    "imageUrl": "https://www.wantedly.com/favicon.ico",
+    "motiveTags": ["career_up", "remote_work", "side_project"],
+    "jobTypeTags": ["frontend", "backend", "pm", "generalist"]
+  },
+  {
+    "id": "switch",
+    "name": "Switch",
+    "description": "Facebook運営のITエンジニア向け転職サービス",
+    "url": "https://www.switch-jobs.com/",
+    "imageUrl": "https://www.switch-jobs.com/favicon.ico",
+    "motiveTags": ["high_salary", "career_up"],
+    "jobTypeTags": ["frontend", "backend", "mobile", "infra"]
+  },
+  {
+    "id": "bizreach",
+    "name": "ビズリーチ",
+    "description": "ハイクラス向けの会員制転職サイト",
+    "url": "https://www.bizreach.jp/",
+    "imageUrl": "https://www.bizreach.jp/favicon.ico",
+    "motiveTags": ["high_salary", "management", "career_up"],
+    "jobTypeTags": ["pm", "generalist", "backend", "frontend"]
+  },
+  {
+    "id": "direct",
+    "name": "DIRECT",
+    "description": "ITエンジニア特化のダイレクトスカウト転職サイト",
+    "url": "https://direct-type.jp/",
+    "imageUrl": "https://direct-type.jp/favicon.ico",
+    "motiveTags": ["high_salary", "career_up"],
+    "jobTypeTags": ["frontend", "backend", "mobile", "infra"]
+  },
+  {
+    "id": "recruitagent",
+    "name": "リクルートエージェント",
+    "description": "業界最大級の転職エージェントサービス",
+    "url": "https://www.r-agent.com/",
+    "imageUrl": "https://www.r-agent.com/favicon.ico",
+    "motiveTags": ["career_up", "stable_env", "change_domain"],
+    "jobTypeTags": ["frontend", "backend", "pm", "generalist", "unexp"]
   },
   {
     "id": "geekly",
@@ -41,70 +113,25 @@
     "description": "IT・Web・ゲーム業界専門の転職エージェント",
     "url": "https://www.geekly.co.jp/",
     "imageUrl": "https://www.geekly.co.jp/favicon.ico",
-    "motiveTags": ["high_salary", "career_up", "change_domain"],
-    "jobTypeTags": ["frontend", "backend", "mobile", "pm", "generalist"]
-  },
-  {
-    "id": "bizreach",
-    "name": "ビズリーチ",
-    "description": "ハイクラス転職サイト。年収600万円以上の求人が豊富",
-    "url": "https://www.bizreach.jp/",
-    "imageUrl": "https://www.bizreach.jp/favicon.ico",
-    "motiveTags": ["high_salary", "management", "stable_env"],
-    "jobTypeTags": ["pm", "infra", "generalist"]
-  },
-  {
-    "id": "rikunabi",
-    "name": "リクナビNEXT",
-    "description": "業界最大級の転職サイト。未経験歓迎の求人も多数",
-    "url": "https://next.rikunabi.com/",
-    "imageUrl": "https://next.rikunabi.com/favicon.ico",
-    "motiveTags": ["change_domain", "restart", "stable_env"],
-    "jobTypeTags": ["unexp", "generalist", "pm"]
-  },
-  {
-    "id": "lapras",
-    "name": "LAPRAS SCOUT",
-    "description": "AI技術でエンジニアのスキルを可視化する転職サービス",
-    "url": "https://scout.lapras.com/",
-    "imageUrl": "https://scout.lapras.com/favicon.ico",
     "motiveTags": ["high_salary", "career_up"],
-    "jobTypeTags": ["ml", "backend", "infra"]
+    "jobTypeTags": ["frontend", "backend", "mobile", "pm"]
   },
   {
-    "id": "wantedly",
-    "name": "Wantedly",
-    "description": "「やりがい」でつながる転職サービス。スタートアップ企業が多い",
-    "url": "https://www.wantedly.com/",
-    "imageUrl": "https://www.wantedly.com/favicon.ico",
-    "motiveTags": ["career_up", "change_domain", "side_project", "remote_work"],
-    "jobTypeTags": ["frontend", "backend", "mobile", "generalist"]
+    "id": "workport",
+    "name": "ワークポート",
+    "description": "IT・Web・ゲーム業界に強い転職エージェント",
+    "url": "https://www.workport.co.jp/",
+    "imageUrl": "https://www.workport.co.jp/favicon.ico",
+    "motiveTags": ["career_up", "change_domain"],
+    "jobTypeTags": ["frontend", "backend", "mobile", "generalist", "unexp"]
   },
   {
-    "id": "forkwell",
-    "name": "Forkwell Jobs",
-    "description": "エンジニア向けの求人サービス。技術記事の投稿でスカウトを受けられる",
-    "url": "https://jobs.forkwell.com/",
-    "imageUrl": "https://jobs.forkwell.com/favicon.ico",
-    "motiveTags": ["career_up", "high_salary"],
-    "jobTypeTags": ["frontend", "backend", "mobile", "infra"]
-  },
-  {
-    "id": "doda",
-    "name": "doda",
-    "description": "豊富な求人数を誇る大手転職サイト。ITエンジニア向けの専門サイトも用意されている。",
-    "url": "https://doda.jp/",
-    "imageUrl": "https://doda.jp/favicon.ico",
-    "motiveTags": ["career_up", "stable_env", "change_domain"],
-    "jobTypeTags": ["frontend", "backend", "pm", "generalist", "unexp"]
-  },
-  {
-    "id": "mynavi-it",
-    "name": "マイナビIT AGENT",
-    "description": "大手マイナビが運営するIT・Web業界専門の転職エージェント。",
-    "url": "https://mynavi-agent.jp/it/",
-    "imageUrl": "https://mynavi-agent.jp/it/img/common/favicon.ico",
-    "motiveTags": ["career_up", "stable_env", "restart"],
-    "jobTypeTags": ["frontend", "backend", "mobile", "infra", "pm"]
+    "id": "type",
+    "name": "type転職エージェント",
+    "description": "一人ひとりにフィットする転職をサポート",
+    "url": "https://type.career-agent.jp/",
+    "imageUrl": "https://type.career-agent.jp/favicon.ico",
+    "motiveTags": ["career_up", "stable_env"],
+    "jobTypeTags": ["frontend", "backend", "pm", "generalist"]
   }
 ]

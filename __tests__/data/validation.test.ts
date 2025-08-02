@@ -163,7 +163,7 @@ describe('データ検証テスト', () => {
     
     const expectedJobTypeTags = [
       'frontend', 'backend', 'mobile', 'infra',
-      'pm', 'ml', 'generalist', 'unexp'
+      'pm', 'generalist', 'unexp'
     ]
 
     it('CLAUDE.mdで定義された動機タグが全て存在する', () => {

@@ -15,7 +15,6 @@
     { "id": "mobile", "label": "モバイルアプリエンジニア" },
     { "id": "infra", "label": "インフラ・SRE・DevOps" },
     { "id": "pm", "label": "プロジェクトマネージャー" },
-    { "id": "ml", "label": "機械学習・AIエンジニア" },
     { "id": "generalist", "label": "フルスタック" },
     { "id": "unexp", "label": "未経験・実務なし" }
   ]

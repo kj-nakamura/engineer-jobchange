@@ -22,7 +22,9 @@ const mockServices: Service[] = [
     url: 'https://example1.com',
     imageUrl: 'https://example.com/image1.jpg',
     motiveTags: ['high_salary'],
-    jobTypeTags: ['frontend']
+    jobTypeTags: ['frontend'],
+    features: [],
+    popularity: 0
   },
 ];
 

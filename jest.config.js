@@ -1,31 +1,26 @@
 const nextJest = require('next/jest')
 
 const createJestConfig = nextJest({
-  // Provide the path to your Next.js app to load next.config.js and .env files
+  // Next.js アプリのディレクトリパスを指定
   dir: './',
 })
 
-// Add any custom config to be passed to Jest
+// Jest の追加設定
 const customJestConfig = {
   setupFilesAfterEnv: ['<rootDir>/jest.setup.js'],
-  testEnvironment: 'jsdom',
   moduleNameMapper: {
-    '^@/(.*)$' : '<rootDir>/$1',
-    '^pages/api/(.*)$' : '<rootDir>/pages/api/$1.ts',
+    // エイリアスがある場合のパスマッピング
+    '^@/components/(.*)$': '<rootDir>/components/$1',
+    '^@/pages/(.*)$': '<rootDir>/pages/$1',
+    '^@/utils/(.*)$': '<rootDir>/utils/$1',
+    '^@/types/(.*)$': '<rootDir>/types/$1',
+    '^@/lib/(.*)$': '<rootDir>/lib/$1',
   },
-  collectCoverageFrom: [
-    'components/**/*.{js,jsx,ts,tsx}',
-    'pages/**/*.{js,jsx,ts,tsx}',
-    'utils/**/*.{js,jsx,ts,tsx}',
-    '!pages/_app.tsx',
-    '!pages/_document.tsx',
-    '!**/*.d.ts',
-  ],
-  testTimeout: 30000,
-  maxWorkers: process.env.CI ? 2 : '50%',
-  coverageDirectory: 'coverage',
-  coverageReporters: ['text', 'lcov', 'html'],
+  testEnvironment: 'jest-environment-jsdom',
+  testEnvironmentOptions: {
+    customExportConditions: [''],
+  },
 }
 
-// createJestConfig is exported this way to ensure that next/jest can load the Next.js config which is async
+// createJestConfig は Next.js の設定を含む Jest 設定を作成する非同期関数
 module.exports = createJestConfig(customJestConfig)
